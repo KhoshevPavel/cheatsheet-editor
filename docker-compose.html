@@ -1,0 +1,463 @@
+<!DOCTYPE HTML>
+
+<html class="scrollbar" lang="en" translate="no"><head><meta charset="utf-8"/><meta content="IE=Edge,chrome=1" http-equiv="X-UA-Compatible"/><meta content="en" http-equiv="content-language"/><meta content="en" name="language"/><meta content="webkit" name="renderer"/><meta content="width=device-width,initial-scale=1,maximum-scale=1" name="viewport"/><meta content="/" name="app:pageurl"/><title>Docker Compose Cheat Sheet &amp; Quick Reference</title><meta content="cheat,sheet,cheatsheets,reference,docker,compose,containers,devops,orchestration" name="keywords"/><meta content="Краткая шпаргалка по Docker Compose с наиболее полезными командами и примерами docker-compose.yml." name="description"/><meta content="Fechin" name="author"/><meta content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" name="robots"/><meta content="CheatSheets.html" name="article:author"/><meta content="2026-03-17T12:00:00.000Z" name="article:published_time"/><meta content="2026-03-17T12:00:00.000Z" name="article:modified_time"/><meta content="Programming" name="article:section"/><meta content="container" name="article:tag"/><meta content="docker-compose.html" property="og:url"/><meta content="Docker Compose Cheat Sheet &amp; Quick Reference" property="og:title"/><meta content="CheatSheets.html" property="og:site_name"/><meta content="Краткая шпаргалка по Docker Compose с наиболее полезными командами и примерами docker-compose.yml." property="og:description"/><meta content="assets/image/docker-previewc6bd.png?v=wtbg9" property="og:image"/><meta content="2276" property="og:image:width"/><meta content="1240" property="og:image:height"/><meta content="Docker Compose Cheat Sheet &amp; Quick Reference" property="og:image:alt"/><meta content="article" property="og:type"/><meta content="en_US" property="og:locale"/><meta content="summary_large_image" name="twitter:card"/><meta content="Docker Compose Cheat Sheet &amp; Quick Reference" name="twitter:title"/><meta content="@Fechin" name="twitter:site"/><meta content="@Fechin" name="twitter:creator"/><meta content="Краткая шпаргалка по Docker Compose с наиболее полезными командами и примерами docker-compose.yml." name="twitter:description"/><meta content="assets/image/docker-preview60f4.png?v=9ruvt" name="twitter:image"/><meta content="Docker Compose Cheat Sheet &amp; Quick Reference" name="twitter:image:alt"/><link href="images/favicon3860.png?v=1" rel="icon"/><link href="images/favicon3860.png?v=1" rel="icon shortcut" type="image/png"/><link href="docker-compose.html" rel="canonical"/><link href="css/stylea454.css?_v=1769244903599" rel="stylesheet"/><script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            let html = document.documentElement.classList;
+            html.toggle('dark')
+        }
+    </script></head><body class="bg-slate-100 dark:bg-slate-900"><header class="relative z-10"><div class="max-container z-20 relative"></div></header><div class="mx-auto flex flex-wrap md:py-5 flex-col md:flex-row items-center"><div class="flex flex-col w-full mx-auto items-center text-center my-8"><div class="max-container w-full"><h1 class="text-5xl mb-4"> <span class="text-slate-700 dark:text-slate-300 font-light">Docker Compose</span> <span class="text-slate-400 dark:text-slate-500 font-extralight hidden md:inline">cheatsheet</span></h1><div class="lg:w-3/5 mx-auto intro leading-relaxed text-slate-600"><p>Краткая шпаргалка по Docker Compose с часто используемыми командами и конфигурациями.</p></div><div class="pt-5" id="carbon_container"></div></div></div><div class="mdLayout w-full max-container" id="mdLayout">
+<div class="h2-wrap cols-2">
+<h2 id="getting-started"><a class="h-anchor" href="#getting-started">#</a>Начало работы</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="basic-workflow"><a class="h-anchor" href="#basic-workflow">#</a>Базовый цикл</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose down</span>
+</code></pre>
+<hr/>
+<ul class="marker-none">
+<li><code>up</code> — запуск всех сервисов из <code>docker-compose.yml</code></li>
+<li><code>up -d</code> — запуск в фоне (detached mode)</li>
+<li><code>down</code> — остановка и удаление сети/контейнеров проекта</li>
+</ul>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="project-files"><a class="h-anchor" href="#project-files">#</a>Файлы проекта</h3>
+<div class="section">
+<table>
+<thead>
+<tr>
+<th>Файл</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docker-compose.yml</code></td>
+<td>Основная конфигурация сервисов</td>
+</tr>
+<tr>
+<td><code>docker-compose.override.yml</code></td>
+<td>Локальные переопределения (автоподхват)</td>
+</tr>
+<tr>
+<td><code>.env</code></td>
+<td>Переменные окружения для compose-файла</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap cols-2">
+<h2 id="compose-file"><a class="h-anchor" href="#compose-file">#</a>docker-compose.yml</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap row-span-2">
+<h3 id="minimal-example"><a class="h-anchor" href="#minimal-example">#</a>Минимальный пример</h3>
+<div class="section">
+<pre><code class="hljs hljs language-yaml"><span class="hljs-attr">services:</span>
+  <span class="hljs-attr">web:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">nginx:alpine</span>
+    <span class="hljs-attr">ports:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">"8080:80"</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">./site:/usr/share/nginx/html:ro</span>
+
+  <span class="hljs-attr">db:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">postgres:16</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">POSTGRES_DB:</span> <span class="hljs-string">app</span>
+      <span class="hljs-attr">POSTGRES_USER:</span> <span class="hljs-string">app</span>
+      <span class="hljs-attr">POSTGRES_PASSWORD:</span> <span class="hljs-string">secret</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">pgdata:/var/lib/postgresql/data</span>
+
+<span class="hljs-attr">volumes:</span>
+  <span class="hljs-attr">pgdata:</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="key-sections"><a class="h-anchor" href="#key-sections">#</a>Ключевые секции</h3>
+<div class="section">
+<table>
+<thead>
+<tr>
+<th>Секция</th>
+<th>Для чего</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>services</code></td>
+<td>Описывает контейнеры приложения</td>
+</tr>
+<tr>
+<td><code>ports</code></td>
+<td>Проброс портов <em>host:container</em></td>
+</tr>
+<tr>
+<td><code>volumes</code></td>
+<td>Постоянное хранение данных</td>
+</tr>
+<tr>
+<td><code>environment</code></td>
+<td>Переменные окружения сервиса</td>
+</tr>
+<tr>
+<td><code>depends_on</code></td>
+<td>Порядок старта сервисов</td>
+</tr>
+<tr>
+<td><code>networks</code></td>
+<td>Пользовательские сети между сервисами</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap cols-2">
+<h2 id="service-management"><a class="h-anchor" href="#service-management">#</a>Управление сервисами</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="commands"><a class="h-anchor" href="#commands">#</a>Команды</h3>
+<div class="section">
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docker compose ps</code></td>
+<td>Список сервисов и их статус</td>
+</tr>
+<tr>
+<td><code>docker compose logs -f</code></td>
+<td>Логи всех сервисов в реальном времени</td>
+</tr>
+<tr>
+<td><code>docker compose logs -f web</code></td>
+<td>Логи конкретного сервиса</td>
+</tr>
+<tr>
+<td><code>docker compose stop</code></td>
+<td>Остановить сервисы без удаления</td>
+</tr>
+<tr>
+<td><code>docker compose start</code></td>
+<td>Запустить ранее остановленные сервисы</td>
+</tr>
+<tr>
+<td><code>docker compose restart web</code></td>
+<td>Перезапустить конкретный сервис</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="exec-run"><a class="h-anchor" href="#exec-run">#</a>Выполнение команд</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose exec web sh</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose exec db psql -U app -d app</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose run --rm web npm test</span>
+</code></pre>
+<p><code>exec</code> выполняет команду в уже запущенном контейнере, <code>run</code> создаёт временный контейнер для одноразовой задачи.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap cols-2">
+<h2 id="build-and-deploy"><a class="h-anchor" href="#build-and-deploy">#</a>Сборка и публикация</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="build-pull-push"><a class="h-anchor" href="#build-pull-push">#</a>Образы</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose build</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose build --no-cache</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose pull</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose push</span>
+</code></pre>
+<ul class="marker-none">
+<li><code>build</code> — собрать образы из секции <code>build:</code> в compose-файле</li>
+<li><code>--no-cache</code> — игнорировать слой кэша при сборке</li>
+<li><code>pull</code> — скачать актуальные версии образов из registry</li>
+<li><code>push</code> — отправить собранные образы в registry</li>
+</ul>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="config-validation"><a class="h-anchor" href="#config-validation">#</a>Проверка конфигурации</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose config</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose config --services</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose config --volumes</span>
+</code></pre>
+<p>Команда <code>config</code> разворачивает итоговый YAML и помогает проверить ошибки до запуска.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap cols-2">
+<h2 id="scaling-profiles"><a class="h-anchor" href="#scaling-profiles">#</a>Масштабирование и профили</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="scaling"><a class="h-anchor" href="#scaling">#</a>Масштабирование</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up --scale web=3 -d</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose ps</span>
+</code></pre>
+<p>Удобно для горизонтального масштабирования stateless-сервисов.</p>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="profiles"><a class="h-anchor" href="#profiles">#</a>Профили</h3>
+<div class="section">
+<pre><code class="hljs hljs language-yaml"><span class="hljs-attr">services:</span>
+  <span class="hljs-attr">mailhog:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">mailhog/mailhog</span>
+    <span class="hljs-attr">profiles:</span> [<span class="hljs-string">"dev"</span>]
+</code></pre>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose --profile dev up -d</span>
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap cols-2">
+<h2 id="cleanup"><a class="h-anchor" href="#cleanup">#</a>Очистка</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="project-cleanup"><a class="h-anchor" href="#project-cleanup">#</a>Очистка проекта</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose down</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose down -v</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose down --rmi local</span>
+</code></pre>
+<ul class="marker-none">
+<li><code>-v</code> — удалить тома проекта</li>
+<li><code>--rmi local</code> — удалить локально собранные образы</li>
+</ul>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="system-cleanup"><a class="h-anchor" href="#system-cleanup">#</a>Очистка Docker</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker system prune</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker volume prune</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker image prune -a</span>
+</code></pre>
+<ul class="marker-none">
+<li><code>system prune</code> — удалить неиспользуемые контейнеры/сети/кэш сборки</li>
+<li><code>volume prune</code> — удалить неиспользуемые тома</li>
+<li><code>image prune -a</code> — удалить неиспользуемые образы (включая без dangling-тега)</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap cols-2">
+<h2 id="advanced-compose"><a class="h-anchor" href="#advanced-compose">#</a>Продвинутая конфигурация</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap row-span-2">
+<h3 id="healthcheck-depends-on"><a class="h-anchor" href="#healthcheck-depends-on">#</a>Healthcheck + depends_on</h3>
+<div class="section">
+<pre><code class="hljs hljs language-yaml"><span class="hljs-attr">services:</span>
+  <span class="hljs-attr">db:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">postgres:16</span>
+    <span class="hljs-attr">healthcheck:</span>
+      <span class="hljs-attr">test:</span> [<span class="hljs-string">"CMD-SHELL"</span>, <span class="hljs-string">"pg_isready -U app"</span>]
+      <span class="hljs-attr">interval:</span> <span class="hljs-string">5s</span>
+      <span class="hljs-attr">timeout:</span> <span class="hljs-string">3s</span>
+      <span class="hljs-attr">retries:</span> <span class="hljs-number">10</span>
+
+  <span class="hljs-attr">api:</span>
+    <span class="hljs-attr">build:</span> <span class="hljs-string">.</span>
+    <span class="hljs-attr">depends_on:</span>
+      <span class="hljs-attr">db:</span>
+        <span class="hljs-attr">condition:</span> <span class="hljs-string">service_healthy</span>
+</code></pre>
+<p>Это убирает гонку, когда API стартует раньше готовности базы.</p>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="env-files"><a class="h-anchor" href="#env-files">#</a>Переменные и env-файлы</h3>
+<div class="section">
+<pre><code class="hljs hljs language-yaml"><span class="hljs-attr">services:</span>
+  <span class="hljs-attr">web:</span>
+    <span class="hljs-attr">env_file:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">.env</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">.env.local</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">APP_ENV:</span> <span class="hljs-string">production</span>
+      <span class="hljs-attr">APP_PORT:</span> <span class="hljs-string">"8080"</span>
+</code></pre>
+<ul class="marker-none">
+<li><code>env_file</code> — загрузить переменные из файла(ов)</li>
+<li><code>environment</code> — задать/переопределить переменные точечно</li>
+<li><code>.env.local</code> обычно добавляют в <code>.gitignore</code> для локальных секретов</li>
+</ul>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="secrets-configs"><a class="h-anchor" href="#secrets-configs">#</a>Secrets и configs</h3>
+<div class="section">
+<pre><code class="hljs hljs language-yaml"><span class="hljs-attr">services:</span>
+  <span class="hljs-attr">app:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">my-app:latest</span>
+    <span class="hljs-attr">secrets:</span> [<span class="hljs-string">db_password</span>]
+    <span class="hljs-attr">configs:</span> [<span class="hljs-string">app_config</span>]
+
+<span class="hljs-attr">secrets:</span>
+  <span class="hljs-attr">db_password:</span>
+    <span class="hljs-attr">file:</span> <span class="hljs-string">./secrets/db_password.txt</span>
+
+<span class="hljs-attr">configs:</span>
+  <span class="hljs-attr">app_config:</span>
+    <span class="hljs-attr">file:</span> <span class="hljs-string">./config/app.yml</span>
+</code></pre>
+<ul class="marker-none">
+<li><code>secrets</code> — передают чувствительные данные отдельно от переменных окружения</li>
+<li><code>configs</code> — удобно для неизменяемых конфигов, общих для сервисов</li>
+<li>Оба объекта монтируются в контейнер как файлы</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap cols-2">
+<h2 id="project-lifecycle"><a class="h-anchor" href="#project-lifecycle">#</a>Жизненный цикл проекта</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="project-ops"><a class="h-anchor" href="#project-ops">#</a>Операции проекта</h3>
+<div class="section">
+<table>
+<thead>
+<tr><th>Команда</th><th>Задача</th></tr>
+</thead>
+<tbody>
+<tr><td><code>docker compose ls</code></td><td>Список compose-проектов</td></tr>
+<tr><td><code>docker compose top</code></td><td>Процессы внутри сервисов</td></tr>
+<tr><td><code>docker compose images</code></td><td>Какие образы использует проект</td></tr>
+<tr><td><code>docker compose events</code></td><td>Поток событий по сервисам</td></tr>
+<tr><td><code>docker compose cp web:/app/log.txt ./</code></td><td>Копирование файлов из контейнера</td></tr>
+<tr><td><code>docker compose rm -fsv</code></td><td>Удаление stopped-сервисов + томов</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="recreate-orphans"><a class="h-anchor" href="#recreate-orphans">#</a>Пересоздание и orphan-сервисы</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d --build --force-recreate</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose down --remove-orphans</span>
+</code></pre>
+<ul class="marker-none">
+<li><code>--build</code> — пересобрать образы перед запуском</li>
+<li><code>--force-recreate</code> — пересоздать контейнеры даже без изменений конфигурации</li>
+<li><code>--remove-orphans</code> — удалить контейнеры сервисов, которых больше нет в compose</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap cols-2">
+<h2 id="dev-prod-patterns"><a class="h-anchor" href="#dev-prod-patterns">#</a>Dev/Prod паттерны</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="multiple-files"><a class="h-anchor" href="#multiple-files">#</a>Несколько compose-файлов</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose -f compose.yml -f compose.dev.yml up -d</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose -f compose.yml -f compose.prod.yml up -d</span>
+</code></pre>
+<ul class="marker-none">
+<li><code>-f</code> — подключить дополнительный compose-файл</li>
+<li>Параметры из второго файла перекрывают значения из первого</li>
+<li>Удобно разделять dev/prod, не дублируя базовую конфигурацию</li>
+</ul>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="profiles-tip"><a class="h-anchor" href="#profiles-tip">#</a>Профили для локальных сервисов</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose --profile dev up -d</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose --profile tooling up -d</span>
+</code></pre>
+<p>Отдельно включайте Mailhog, Adminer, Grafana и другие dev-инструменты.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap cols-2">
+<h2 id="compose-troubleshooting-faq"><a class="h-anchor" href="#compose-troubleshooting-faq">#</a>Troubleshooting FAQ</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap col-span-2">
+<h3 id="compose-faq-10"><a class="h-anchor" href="#compose-faq-10">#</a>10 типовых проблем и диагностика</h3>
+<div class="section">
+<table>
+<thead>
+<tr><th>Проблема</th><th>Команды диагностики / решение</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>1)</strong> Сервис не стартует</td><td><code>docker compose ps</code><br/><code>docker compose logs -f &lt;service&gt;</code><br/><code>docker compose config</code></td></tr>
+<tr><td><strong>2)</strong> Контейнер постоянно перезапускается</td><td><code>docker inspect -f '{{.State.RestartCount}}' &lt;container&gt;</code><br/><code>docker compose logs --tail=200 &lt;service&gt;</code></td></tr>
+<tr><td><strong>3)</strong> Порт уже занят</td><td><code>ss -ltnp | rg ':8080'</code><br/><code>docker compose ps</code><br/>Смените mapping в <code>ports</code></td></tr>
+<tr><td><strong>4)</strong> Изменения в compose не применились</td><td><code>docker compose up -d --build --force-recreate</code><br/><code>docker compose down --remove-orphans</code></td></tr>
+<tr><td><strong>5)</strong> Проблемы DNS между сервисами</td><td><code>docker compose exec web getent hosts db</code><br/><code>docker network ls</code><br/><code>docker network inspect &lt;project&gt;_default</code></td></tr>
+<tr><td><strong>6)</strong> Не подхватились переменные окружения</td><td><code>docker compose config</code><br/><code>docker compose exec &lt;service&gt; env | rg 'APP_|DB_'</code><br/>Проверьте <code>.env</code>/<code>env_file</code></td></tr>
+<tr><td><strong>7)</strong> Том «старый», данные не те</td><td><code>docker volume ls</code><br/><code>docker volume inspect &lt;volume&gt;</code><br/><code>docker compose down -v</code> (осторожно: удалит данные)</td></tr>
+<tr><td><strong>8)</strong> Образ не обновляется</td><td><code>docker compose pull</code><br/><code>docker compose build --no-cache</code><br/><code>docker compose up -d --build</code></td></tr>
+<tr><td><strong>9)</strong> Healthcheck всегда unhealthy</td><td><code>docker inspect -f '{{json .State.Health}}' &lt;container&gt;</code><br/><code>docker compose logs -f &lt;service&gt;</code><br/>Проверьте команду <code>test</code> и таймауты</td></tr>
+<tr><td><strong>10)</strong> Остались orphan-контейнеры после рефакторинга</td><td><code>docker compose down --remove-orphans</code><br/><code>docker compose rm -f</code><br/><code>docker ps -a | rg &lt;project_name&gt;</code></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div></div><div class="toc-container" id="toc-container"><nav aria-label="Table of Contents" class="toc-list" id="toc-list" role="navigation"></nav></div><script>window.addEventListener("DOMContentLoaded",function(){"function"==typeof window.initTOC&&window.initTOC()})</script><div class="z-50 fixed inset-0 flex justify-center bg-slate-600/80 dark:bg-slate-900/90 items-start text-sm z-50 overflow-hidden lg:pt-16 lg:pb-20 hidden" id="mysearch"><div class="lg:max-w-screen-lg w-full flex flex-col justify-between bg-white dark:bg-slate-700 shadow-3xl dark:shadow-3xl lg:rounded-lg lg:max-h-832 min-h-320 h-full" id="mysearch-box"><div class="flex items-center h-16 flex-none border-b border-slate-200 dark:border-slate-700"><div class="w-full h-full"><form class="flex items-center w-full h-full outline-none rounded-tl-lg"><label class="h-full w-14 mt-1 ml-1 px-4 flex items-center justify-center transition-colors duration-200 ease-in-out text-indigo-200" for="mysearch-input" id="mysearch-label"><div class="text-2xl text-indigo-500"> <svg fill="currentColor" height="1em" viewbox="0 0 1024 1024" width="1em" xmlns="http://www.w3.org/2000/svg"> <path d="M942.14826666 878.7968l-200.56746667-229.92213333C795.37493333 583.8848 827.73333333 500.5312 827.73333333 409.6 827.73333333 202.27413333 659.59253333 34.13333333 452.26666666 34.13333333 244.87253333 34.13333333 76.79999999 202.27413333 76.79999999 409.6S244.87253333 785.06666667 452.26666666 785.06666667c77.14133333 0 148.82133333-23.3472 208.41813333-63.21493334l199.33866667 228.5568c19.72906667 22.7328 54.272 24.91733333 76.8 5.25653334C959.62453333 935.86773333 961.87733333 901.46133333 942.14826666 878.7968zM179.19999999 409.6c0-150.59626667 122.4704-273.06666667 273.06666667-273.06666667 150.59626667 0 273.06666667 122.4704 273.06666667 273.06666667s-122.4704 273.06666667-273.06666667 273.06666667C301.67039999 682.66666667 179.19999999 560.19626667 179.19999999 409.6z"></path>
+</svg>
+</div></label><div class="relative flex-1"> <input autocapitalize="off" autocomplete="off" autocorrect="off" class="flex-1 font-light h-full bg-transparent focus:text-slate-900 text-slate-500 dark:text-slate-300 placeholder-slate-400 placeholder-opacity-80 shadow-none outline-none truncate text-lg sm:text-2xl caret-color-indigo-400 leading-normalized w-full appearance-none rounded-none transition-colors duration-200 ease-in-out" enterkeyhint="go" id="mysearch-input" maxlength="128" placeholder="Search for cheatsheet" spellcheck="false" type="text"/></div> <button class="items-center justify-center h-full w-14 px-4 text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-100 opacity-75 fill-current cursor-pointer transition-fast-out flex" id="mysearch-clear" type="reset"><i class="icon icon-close text-xs font-bold"></i></button></form></div><div class="w-px h-8 bg-slate-100 dark:bg-slate-400/20 flex-none"></div> <button class="cancel mr-1 px-4 h-full text-slate-500 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-300"> Cancel</button></div><div class="flex flex-grow overflow-hidden lg:rounded-br-lg"><div class="relative w-full flex-none overflow-y-auto lg:w-1/2"><ul id="mysearch-list"></ul></div><div class="preview-panel shadow-inner bg-slate-100 dark:bg-slate-800 lg:block w-1/2 flex-none overflow-y-auto"></div></div></div></div>
+<script src="js/maina454.js?_v=1769244903599"></script><script>
+        // Получить все элементы pre > code
+        const codeBlocks = document.querySelectorAll('pre > code');
+        const initInnerHTML = '<svg height="1em" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path> </svg>';
+        const successInnerHTML = '<svg height="1em" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg>';
+        codeBlocks.forEach(function (codeBlock) {
+            // Создать кнопку копирования
+            const copyButton = document.createElement('button');
+            copyButton.className = 'opacity-90 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 p-2 text-white shadow-xl rounded-lg flex items-center absolute top-2 right-2 transition-all duration-200 backdrop-blur-sm';
+            copyButton.innerHTML = initInnerHTML;
+            copyButton.style.opacity = "0";
+            const parent = codeBlock.parentNode;
+
+            parent.style = "position: relative;"
+            parent.insertBefore(copyButton, codeBlock);
+
+            // Обработчик клика по кнопке копирования
+            copyButton.addEventListener('click', () => {
+                navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+                    copyButton.innerHTML = successInnerHTML;
+                    setTimeout(() => {
+                        copyButton.innerHTML = initInnerHTML;
+                    }, 1000);
+                });
+            });
+
+            parent.addEventListener('mouseenter', () => {
+                copyButton.style.opacity = "1";
+            });
+            parent.addEventListener('mouseleave', () => {
+                copyButton.style.opacity = "0";
+            });
+        });
+    </script> </body></html>

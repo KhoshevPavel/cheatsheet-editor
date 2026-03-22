@@ -1,0 +1,496 @@
+<header class="relative z-10">
+<div class="max-container z-20 relative"> </div>
+</header>
+<div class="mx-auto flex flex-wrap md:py-5 flex-col md:flex-row items-center">
+<div class="flex flex-col w-full mx-auto items-center text-center my-8">
+<div class="max-container w-full">
+<h1 class="text-5xl mb-4"><span class="text-slate-700 dark:text-slate-300 font-light">Chmod</span> <span class="text-slate-400 dark:text-slate-500 font-extralight hidden md:inline">cheatsheet</span></h1>
+<div class="lg:w-3/5 mx-auto intro leading-relaxed text-slate-600">
+<p>Краткая шпаргалка по правам доступа к файлам и команде chmod.</p>
+</div>
+<div class="pt-5" id="carbon_container"></div>
+</div>
+</div>
+<div class="mdLayout w-full max-container" id="mdLayout">
+<div class="h2-wrap">
+<h2 id="getting-started"><a class="h-anchor" href="#getting-started">#</a>Начало работы</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="syntax"><a class="h-anchor" href="#syntax">#</a>Синтаксис</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> [options] &lt;permissions&gt; &lt;file&gt;</span>
+</code></pre>
+<h4 id="example"><a class="h-anchor" href="#example">#</a>Пример</h4>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> 755 foo.txt</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> +x cheatsheets.py</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> u-x cheatsheets.py</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> u=rwx,g=rx,o= cheatsheets.sh</span>
+</code></pre>
+<h4 id="change-files-and-directories-recursively"><a class="h-anchor" href="#change-files-and-directories-recursively">#</a>Change files and directories recursively</h4>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> -R 755 my_directory</span>
+</code></pre>
+<p>Команда <code>chmod</code> означает «change mode» (изменить режим доступа)</p>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="chmod-generator"><a class="h-anchor" href="#chmod-generator">#</a>Генератор Chmod</h3>
+<div class="section">
+<div class="mb-3 mt-8 flex items-center justify-center">
+<div class="w-1/3 px-2">
+<p class="text-right font-medium">Permissions:</p>
+</div>
+<div class="w-1/3 px-2"><input class="bg-grey-lighter text-grey-darker border-red block w-full appearance-none rounded border px-3 py-2 focus:border-indigo-500 focus:outline-none dark:bg-slate-800" id="num" maxlength="3" placeholder="777" type="text"/></div>
+<div class="w-1/3 px-2"><input class="bg-grey-lighter dark-bg-slate-800 text-grey-darker border-grey-lighter block w-full appearance-none rounded border px-3 py-2 focus:border-indigo-500 focus:outline-none" id="let" maxlength="9" placeholder="rwxrwxrwx" type="text"/></div>
+</div>
+<table class="show-header center-text">
+<thead>
+<tr>
+<th> </th>
+<th>Владелец</th>
+<th>Группа</th>
+<th>Остальные</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">Чтение</td>
+<td><input checked="checked" id="1" type="checkbox"/></td>
+<td><input checked="checked" id="4" type="checkbox"/></td>
+<td><input checked="checked" id="7" type="checkbox"/></td>
+</tr>
+<tr>
+<td style="text-align: right;">Write</td>
+<td><input checked="checked" id="2" type="checkbox"/></td>
+<td><input checked="checked" id="5" type="checkbox"/></td>
+<td><input checked="checked" id="8" type="checkbox"/></td>
+</tr>
+<tr>
+<td style="text-align: right;">Выполнить</td>
+<td><input checked="checked" id="3" type="checkbox"/></td>
+<td><input checked="checked" id="6" type="checkbox"/></td>
+<td><input checked="checked" id="9" type="checkbox"/></td>
+</tr>
+</tbody>
+</table>
+<p>Chmod Generator позволяет быстро и наглядно задавать права доступа в числовом и символьном виде.</p>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="common-permissions"><a class="h-anchor" href="#common-permissions">#</a>Общие разрешения</h3>
+<div class="section">
+<table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>s</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>400</code></td>
+<td>r--------</td>
+<td>Readable by owner only</td>
+</tr>
+<tr>
+<td><code>500</code></td>
+<td>r-x------</td>
+<td>Avoid Changing</td>
+</tr>
+<tr>
+<td><code>600</code></td>
+<td>rw-------</td>
+<td>Changeable by user</td>
+</tr>
+<tr>
+<td><code>644</code></td>
+<td>rw-r--r--</td>
+<td>Read and change by user</td>
+</tr>
+<tr>
+<td><code>660</code></td>
+<td>rw-rw----</td>
+<td>Changeable by user and group</td>
+</tr>
+<tr>
+<td><code>700</code></td>
+<td>rwx------</td>
+<td>Only user has full access</td>
+</tr>
+<tr>
+<td><code>755</code></td>
+<td>rwxr-xr-x</td>
+<td>Only changeable by user</td>
+</tr>
+<tr>
+<td><code>775</code></td>
+<td>rwxrwxr-x</td>
+<td>Sharing mode for a group</td>
+</tr>
+<tr>
+<td><code>777</code></td>
+<td>rwxrwxrwx</td>
+<td>Everybody can do everything</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="explains"><a class="h-anchor" href="#explains">#</a>Объясняет</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">ls</span> -l</span>
+-rw-r--r--  1 root root 3 Jun 29 15:35 a.log
+drwxr-xr-x  2 root root 2 Jun 30 18:06 dir
+</code></pre>
+<h4 id="permission-analysis-of-dir"><a class="h-anchor" href="#permission-analysis-of-dir">#</a>Permission analysis of "dir"</h4>
+<pre><code class="hljs hljs language-text">d  rwx  r-x  r-x
+┬  ─┬─  ─┬─  ─┬─
+│   │    │    │
+│   │    │    └─ 4. Other｜5 (4+0+1)
+│   │    └────── 3. Group｜5 (4+0+1)
+│   └─────────── 2. User ｜7 (4+2+1)
+└─────────────── 1. File Type | directory
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap col-span-2">
+<h3 id="permission-modes"><a class="h-anchor" href="#permission-modes">#</a>Режимы разрешений</h3>
+<div class="section">
+<table class="show-header">
+<thead>
+<tr>
+<th>Право</th>
+<th>Описание</th>
+<th>Восьмеричный</th>
+<th>Десятичный</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>---</code></td>
+<td>No Permission</td>
+<td>000</td>
+<td>0 (0+0+0)</td>
+</tr>
+<tr>
+<td><code>--x</code></td>
+<td>Выполнить</td>
+<td>001</td>
+<td>1 (0+0+1)</td>
+</tr>
+<tr>
+<td><code>-w-</code></td>
+<td>Write</td>
+<td>010</td>
+<td>2 (0+2+0)</td>
+</tr>
+<tr>
+<td><code>-wx</code></td>
+<td>Execute and Write</td>
+<td>011</td>
+<td>3 (0+2+1)</td>
+</tr>
+<tr>
+<td><code>r--</code></td>
+<td>Чтение</td>
+<td>100</td>
+<td>4 (4+0+0)</td>
+</tr>
+<tr>
+<td><code>r-x</code></td>
+<td>Read and Execute</td>
+<td>101</td>
+<td>5 (4+0+1)</td>
+</tr>
+<tr>
+<td><code>rw-</code></td>
+<td>Read and Write</td>
+<td>110</td>
+<td>6 (4+2+0)</td>
+</tr>
+<tr>
+<td><code>rwx</code></td>
+<td>Read, Write and Execute</td>
+<td>111</td>
+<td>7 (4+2+1)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="objects"><a class="h-anchor" href="#objects">#</a>Объекты</h3>
+<div class="section">
+<table class="show-header">
+<thead>
+<tr>
+<th>Кто (сокр.)</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>u</code></td>
+<td><code>U</code>ser</td>
+</tr>
+<tr>
+<td><code>g</code></td>
+<td><code>G</code>roup</td>
+</tr>
+<tr>
+<td><code>o</code></td>
+<td><code>O</code>thers</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><code>A</code>ll, same as ugo</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="permissions"><a class="h-anchor" href="#permissions">#</a>Разрешения</h3>
+<div class="section">
+<table class="show-header">
+<thead>
+<tr>
+<th>Сокращение</th>
+<th>Право</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>r</code></td>
+<td><code>R</code>ead</td>
+<td>4</td>
+</tr>
+<tr>
+<td><code>w</code></td>
+<td><code>W</code>rite</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>x</code></td>
+<td>E<code>x</code>ecute</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>No permission</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="file-types"><a class="h-anchor" href="#file-types">#</a>Типы файлов</h3>
+<div class="section">
+<table class="show-header">
+<thead>
+<tr>
+<th>Сокращение</th>
+<th>File Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>d</code></td>
+<td><code>D</code>irectory</td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>Regular file</td>
+</tr>
+<tr>
+<td><code>l</code></td>
+<td>Symbolic <code>L</code>ink</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap">
+<h2 id="chmod-examples"><a class="h-anchor" href="#chmod-examples">#</a>Примеры chmod</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="operators"><a class="h-anchor" href="#operators">#</a>Операторы</h3>
+<div class="section">
+<table>
+<thead>
+<tr>
+<th>Символ</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>+</code></td>
+<td>Добавить</td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>Remove</td>
+</tr>
+<tr>
+<td><code>=</code></td>
+<td>Set</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="chmod-600"><a class="h-anchor" href="#chmod-600">#</a>chmod 600</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> 600 example.txt</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> u=rw,g=,o= example.txt</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> a+rwx,u-x,g-rwx,o-rwx example.txt</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="chmod-664"><a class="h-anchor" href="#chmod-664">#</a>chmod 664</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> 664 example.txt</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> u=rw,g=rw,o=r example.txt</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> a+rwx,u-x,g-x,o-wx example.txt</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="chmod-777"><a class="h-anchor" href="#chmod-777">#</a>chmod 777</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> 777 example.txt</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> u=rwx,g=rwx,o=rwx example.txt</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> a=rwx example.txt</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap row-span-3">
+<h3 id="symbolic-mode"><a class="h-anchor" href="#symbolic-mode">#</a>Символический режим</h3>
+<div class="section">
+<p>Запретить выполнение для всех.</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> a-x chmodExampleFile.txt</span>
+</code></pre>
+<p>Разрешить чтение для всех.</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> a+r chmodExampleFile.txt</span>
+</code></pre>
+<p>Сделать файл читаемым и записываемым для группы и остальных.</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> go+rw chmodExampleFile.txt</span>
+</code></pre>
+<p>Сделать shell-скрипт исполняемым для владельца.</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> u+x chmodExampleScript.sh</span>
+</code></pre>
+<p>Разрешить всем читать, писать и выполнять файл и включить set group-ID.</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> =rwx,g+s chmodExampleScript.sh</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap row-span-3">
+<h3 id="removing-permissions"><a class="h-anchor" href="#removing-permissions">#</a>Удаление разрешений</h3>
+<div class="section">
+<p>Чтобы снять права на чтение и запись у файла, используйте следующий синтаксис:</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> o-rw example.txt</span>
+</code></pre>
+<p>Для файла example.txt можно снять права на чтение и запись для группы командой:</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span>  g-rx example.txt</span>
+</code></pre>
+<p>Чтобы снять права на чтение и запись у группы и добавить их для остальных, используйте:</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> g-rx, o+rx example.txt</span>
+</code></pre>
+<p>Чтобы снять все права для группы и остальных, используйте go=:</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> go= example.txt</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="executable"><a class="h-anchor" href="#executable">#</a>Исполняемый файл</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> +x ~/example.py</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> u+x ~/example.py</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> a+x ~/example.py</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="chmod-754"><a class="h-anchor" href="#chmod-754">#</a>chmod 754</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> 754 foo.sh</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> u=rwx,g=rx,o=r foo.sh</span>
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap">
+<h2 id="chmod-practices"><a class="h-anchor" href="#chmod-practices">#</a>Практики chmod</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="ssh-permissions"><a class="h-anchor" href="#ssh-permissions">#</a>SSH-разрешения</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> 700 ~/.ssh</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> 600 ~/.ssh/authorized_keys</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> 600 ~/.ssh/id_rsa</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> 600 ~/.ssh/id_rsa.pub</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> 400 /path/to/access_key.pem</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="web-permissions"><a class="h-anchor" href="#web-permissions">#</a>Веб-разрешения</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> -R 644 /var/www/html/</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> 644 .htaccess</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> 644 robots.txt</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> 755 /var/www/uploads/</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">find /var/www/html -<span class="hljs-built_in">type</span> d -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">chmod</span> 755 {} \;</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="batch-change"><a class="h-anchor" href="#batch-change">#</a>Пакетное изменение</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">chmod</span> -R 644 /your_path</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">find /path -<span class="hljs-built_in">type</span> d -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">chmod</span> 755 {} \;</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">find /path -<span class="hljs-built_in">type</span> f -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">chmod</span> 644 {} \;</span>
+</code></pre>
+<p>См.: <a href="https://tldp.org/LDP/abs/html/commandsub.html" rel="noopener external nofollow noreferrer" target="_blank">Подстановка команд</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap">
+<h2 id="also-see"><a class="h-anchor" href="#also-see">#</a>Смотрите также</h2>
+<div class="h3-wrap-list">
+<ul>
+<li><a href="https://www.linode.com/docs/guides/modify-file-permissions-with-chmod/" rel="noopener external nofollow noreferrer" target="_blank">Modify File Permissions with chmod</a> <em>(linode.com)</em></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="toc-container" id="toc-container"><nav aria-label="Table of Contents" class="toc-list" id="toc-list" role="navigation"></nav></div>
+<div class="z-50 fixed inset-0 flex justify-center bg-slate-600/80 dark:bg-slate-900/90 items-start text-sm z-50 overflow-hidden lg:pt-16 lg:pb-20 hidden" id="mysearch">
+<div class="lg:max-w-screen-lg w-full flex flex-col justify-between bg-white dark:bg-slate-700 shadow-3xl dark:shadow-3xl lg:rounded-lg lg:max-h-832 min-h-320 h-full" id="mysearch-box">
+<div class="flex items-center h-16 flex-none border-b border-slate-200 dark:border-slate-700">
+<div class="w-full h-full"><form class="flex items-center w-full h-full outline-none rounded-tl-lg">
+<div class="text-2xl text-indigo-500"> </div>
+<label class="h-full w-14 mt-1 ml-1 px-4 flex items-center justify-center transition-colors duration-200 ease-in-out text-indigo-200" for="mysearch-input" id="mysearch-label"></label>
+<div class="relative flex-1"><input autocomplete="off" class="flex-1 font-light h-full bg-transparent focus:text-slate-900 text-slate-500 dark:text-slate-300 placeholder-slate-400 placeholder-opacity-80 shadow-none outline-none truncate text-lg sm:text-2xl caret-color-indigo-400 leading-normalized w-full appearance-none rounded-none transition-colors duration-200 ease-in-out" id="mysearch-input" maxlength="128" placeholder="Search for cheatsheet" spellcheck="false" type="text"/></div>
+<button class="items-center justify-center h-full w-14 px-4 text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-100 opacity-75 fill-current cursor-pointer transition-fast-out flex" id="mysearch-clear" type="reset"></button></form></div>
+<div class="w-px h-8 bg-slate-100 dark:bg-slate-400/20 flex-none"> </div>
+<button class="cancel mr-1 px-4 h-full text-slate-500 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-300"> Cancel</button></div>
+<div class="flex flex-grow overflow-hidden lg:rounded-br-lg">
+<div class="relative w-full flex-none overflow-y-auto lg:w-1/2">
+<ul id="mysearch-list"></ul>
+</div>
+<div class="preview-panel shadow-inner bg-slate-100 dark:bg-slate-800 lg:block w-1/2 flex-none overflow-y-auto"> </div>
+</div>
+</div>
+</div>

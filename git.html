@@ -1,0 +1,447 @@
+<!DOCTYPE HTML>
+<html class="scrollbar" lang="en" translate="no"> <head><meta charset="utf-8"/><meta content="IE=Edge,chrome=1" http-equiv="X-UA-Compatible"/><meta content="en" http-equiv="content-language"/><meta content="en" name="language"/><meta content="webkit" name="renderer"/><meta content="width=device-width,initial-scale=1,maximum-scale=1" name="viewport"/><meta content="/" name="app:pageurl"/><title>Git Command Cheat Sheet &amp; Quick Reference</title><meta content="cheat,sheet,cheatsheets,reference,programming,code table,snippets,linux,command,shortcuts,developers,github,gitlab,version,VCS" name="keywords"/><meta content="This cheat sheet summarizes commonly used Git command line instructions for quick reference. " name="description"/><meta content="Fechin" name="author"/><meta content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" name="robots"/><meta content="CheatSheets.html" name="article:author"/><meta content="2020-11-25T18:28:43.000Z" name="article:published_time"/><meta content="2020-11-25T18:28:43.000Z" name="article:modified_time"/><meta content="Linux Command" name="article:section"/><meta content="github" name="article:tag"/><meta content="gitlab" name="article:tag"/><meta content="version" name="article:tag"/><meta content="VCS" name="article:tag"/><meta content="git.html" property="og:url"/><meta content="Git Command Cheat Sheet &amp; Quick Reference" property="og:title"/><meta content="CheatSheets.html" property="og:site_name"/><meta content="This cheat sheet summarizes commonly used Git command line instructions for quick reference. " property="og:description"/><meta content="assets/image/git-previewaba0.png?v=h16jt" property="og:image"/><meta content="2276" property="og:image:width"/><meta content="1240" property="og:image:height"/><meta content="Git Command Cheat Sheet &amp; Quick Reference - " property="og:image:alt"/><meta content="article" property="og:type"/><meta content="en_US" property="og:locale"/><meta content="2020-11-25T18:28:43.000Z" property="article:published_time"/><meta content="2020-11-25T18:28:43.000Z" property="article:modified_time"/><meta content="CheatSheets.html" property="article:author"/><meta content="Linux Command" property="article:section"/><meta content="github" property="article:tag"/><meta content="gitlab" property="article:tag"/><meta content="version" property="article:tag"/><meta content="VCS" property="article:tag"/><meta content="summary_large_image" name="twitter:card"/><meta content="Git Command Cheat Sheet &amp; Quick Reference" name="twitter:title"/><meta content="@Fechin" name="twitter:site"/><meta content="@Fechin" name="twitter:creator"/><meta content="This cheat sheet summarizes commonly used Git command line instructions for quick reference. " name="twitter:description"/><meta content="assets/image/git-previewd9ca.png?v=s0w9n" name="twitter:image"/><meta content="Git Command Cheat Sheet &amp; Quick Reference - " name="twitter:image:alt"/><link href="images/favicon3860.png?v=1" rel="icon"/><link href="images/favicon3860.png?v=1" rel="icon shortcut" type="image/png"/><link href="git.html" rel="canonical"/><link href="css/stylea454.css?_v=1769244903599" rel="stylesheet"/><script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            let html = document.documentElement.classList;
+            html.toggle('dark')
+        }
+    </script></head><body class="bg-slate-100 dark:bg-slate-900"><header class="relative z-10"><div class="max-container z-20 relative"></div></header><div class="mx-auto flex flex-wrap md:py-5 flex-col md:flex-row items-center"><div class="flex flex-col w-full mx-auto items-center text-center my-8"><div class="max-container w-full"><h1 class="text-5xl mb-4"> <span class="text-slate-700 dark:text-slate-300 font-light">Git</span> <span class="text-slate-400 dark:text-slate-500 font-extralight hidden md:inline">cheatsheet</span></h1><div class="lg:w-3/5 mx-auto intro leading-relaxed text-slate-600"><p>Шпаргалка с часто используемыми командами Git для быстрого доступа.</p></div><div class="pt-5" id="carbon_container"></div></div></div><div class="mdLayout w-full max-container" id="mdLayout"> <div class="h2-wrap">
+<h2 id="getting-started"><a class="h-anchor" href="#getting-started">#</a>Начало работы</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="create-a-repository"><a class="h-anchor" href="#create-a-repository">#</a>Создать репозиторий</h3>
+<div class="section">
+<p>Создать новый локальный репозиторий</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git init [project name]</span>
+</code></pre>
+<p>Клонировать репозиторий</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">clone</span> git_url</span>
+</code></pre>
+<p>Клонировать репозиторий в указанную директорию</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">clone</span> git_url my_directory</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap row-span-2">
+<h3 id="make-a-change"><a class="h-anchor" href="#make-a-change">#</a>Создание коммита</h3>
+<div class="section">
+<p>Показать изменённые файлы в рабочей директории, подготовленные к коммиту</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git status</span>
+</code></pre>
+<p>Добавить файл в индекс, подготовить к коммиту</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git add [file]</span>
+</code></pre>
+<p>Добавить все изменённые файлы в индекс</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git add .</span>
+</code></pre>
+<p>Создать коммит со всеми файлами из индекса</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git commit -m <span class="hljs-string">"commit message"</span></span>
+</code></pre>
+<p>Создать коммит со всеми отслеживаемыми файлами</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git commit -am <span class="hljs-string">"commit message"</span></span>
+</code></pre>
+<p>Отменить изменения в рабочей директории (не в индексе)</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git restore [file]</span>
+</code></pre>
+<p>Убрать файл из индекса</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git restore --staged [file]</span>
+</code></pre>
+<p>Убрать файл из индекса, сохранив изменения</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git reset [file]</span>
+</code></pre>
+<p>Откатить всё к последнему коммиту</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git reset --hard</span>
+</code></pre>
+<p>Различия изменённого, но не добавленного в индекс</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git diff</span>
+</code></pre>
+<p>Различия добавленного в индекс, но ещё не закоммиченного</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git diff --staged</span>
+</code></pre>
+<p>Применить коммиты текущей ветки, опережающие указанную</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git rebase [branch]</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="configuration"><a class="h-anchor" href="#configuration">#</a>Конфигурация</h3>
+<div class="section">
+<p>Установить имя для коммитов и тегов</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git config --global user.name <span class="hljs-string">"name"</span></span>
+</code></pre>
+<p>Установить email для коммитов и тегов</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git config --global user.email <span class="hljs-string">"email"</span></span>
+</code></pre>
+<p>Включить цветной вывод Git</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git config --global color.ui auto</span>
+</code></pre>
+<p>Открыть глобальный конфиг в редакторе</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git config --global --edit</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="working-with-branches"><a class="h-anchor" href="#working-with-branches">#</a>Работа с ветками</h3>
+<div class="section">
+<p>Список всех локальных веток</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git branch</span>
+</code></pre>
+<p>Список всех веток (локальных и удалённых)</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git branch -av</span>
+</code></pre>
+<p>Переключиться на my_branch и обновить рабочую директорию</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git checkout my_branch</span>
+</code></pre>
+<p>Создать новую ветку new_branch</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git checkout -b new_branch</span>
+</code></pre>
+<p>Удалить ветку my_branch</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git branch -d my_branch</span>
+</code></pre>
+<p>Слить branchA в branchB</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git checkout branchB</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">git merge branchA</span>
+</code></pre>
+<p>Создать тег на текущем коммите</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git tag my_tag</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="observe-your-repository"><a class="h-anchor" href="#observe-your-repository">#</a>Мониторинг репозитория</h3>
+<div class="section">
+<p>История коммитов текущей ветки</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">log</span></span>
+</code></pre>
+<p>Коммиты в branchA, которых нет в branchB</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">log</span> branchB..branchA</span>
+</code></pre>
+<p>Коммиты, изменившие файл (включая переименования)</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">log</span> --follow [file]</span>
+</code></pre>
+<p>Различия branchA относительно branchB</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git diff branchB...branchA</span>
+</code></pre>
+<p>Показать любой объект Git в читаемом формате</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git show [SHA]</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="synchronize"><a class="h-anchor" href="#synchronize">#</a>Синхронизация</h3>
+<div class="section">
+<p>Загрузить все ветки с удалённого репозитория</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git fetch [<span class="hljs-built_in">alias</span>]</span>
+</code></pre>
+<p>Слить удалённую ветку в текущую для обновления</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git merge [<span class="hljs-built_in">alias</span>]/[branch]</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">No fast-forward</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">git merge --no-ff [<span class="hljs-built_in">alias</span>]/[branch]</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">Only fast-forward</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">git merge --ff-only [<span class="hljs-built_in">alias</span>]/[branch]</span>
+</code></pre>
+<p>Отправить коммиты локальной ветки в удалённый репозиторий</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git push [<span class="hljs-built_in">alias</span>] [branch]</span>
+</code></pre>
+<p>Загрузить и слить коммиты из отслеживаемой удалённой ветки</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git pull</span>
+</code></pre>
+<p>Слить один конкретный коммит из другой ветки в текущую</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git cherry-pick [commit_id]</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="remote"><a class="h-anchor" href="#remote">#</a>Удалённый репозиторий</h3>
+<div class="section">
+<p>Добавить URL git как алиас</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git remote add [<span class="hljs-built_in">alias</span>] [url]</span>
+</code></pre>
+<p>Показать имена настроенных удалённых репозиториев</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git remote</span>
+</code></pre>
+<p>Показать имена и URL удалённых репозиториев</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git remote -v</span>
+</code></pre>
+<p>Удалить удалённый репозиторий</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git remote <span class="hljs-built_in">rm</span> [remote repo name]</span>
+</code></pre>
+<p>Изменить URL git-репозитория</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git remote set-url origin [git_url]</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="temporary-commits"><a class="h-anchor" href="#temporary-commits">#</a>Временные коммиты (stash)</h3>
+<div class="section">
+<p>Сохранить изменённые и добавленные в индекс файлы</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git stash</span>
+</code></pre>
+<p>Показать стек сохранённых изменений</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git stash list</span>
+</code></pre>
+<p>Применить изменения с вершины стека stash</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git stash pop</span>
+</code></pre>
+<p>Отменить изменения с вершины стека stash</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git stash drop</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="tracking-path-changes"><a class="h-anchor" href="#tracking-path-changes">#</a>Отслеживание изменений путей</h3>
+<div class="section">
+<p>Удалить файл из проекта и добавить удаление в индекс</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">rm</span> [file]</span>
+</code></pre>
+<p>Переименовать файл и добавить изменение в индекс</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">mv</span> [existing-path] [new-path]</span>
+</code></pre>
+<p>Показать все коммиты с указанием переименованных путей</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">log</span> --<span class="hljs-built_in">stat</span> -M</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="ignoring-files"><a class="h-anchor" href="#ignoring-files">#</a>Игнорирование файлов</h3>
+<div class="section">
+<pre><code class="hljs">/logs/*
+
+# "!" means don't ignore
+!logs/.gitkeep
+
+/# Ignore Mac system files
+.DS_store
+
+# Ignore node_modules folder
+node_modules
+
+# Ignore SASS config files
+.sass-cache
+</code></pre>
+<p>A <code>.gitignore</code> file specifies intentionally untracked files that Git should ignore</p>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap">
+<h2 id="git-tricks"><a class="h-anchor" href="#git-tricks">#</a>Трюки Git</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="rename-branch"><a class="h-anchor" href="#rename-branch">#</a>Переименовать ветку</h3>
+<div class="section">
+<ul>
+<li>
+<h4 id="renamed-to-new-name"><a class="h-anchor" href="#renamed-to-new-name">#</a><strong>Renamed</strong> to <code>new_name</code></h4>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git branch -m &lt;new_name&gt;</span>
+</code></pre>
+</li>
+<li>
+<h4 id="push-and-reset"><a class="h-anchor" href="#push-and-reset">#</a><strong>Push</strong> and reset</h4>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git push origin -u &lt;new_name&gt;</span>
+</code></pre>
+</li>
+<li>
+<h4 id="delete-remote-branch"><a class="h-anchor" href="#delete-remote-branch">#</a><strong>Удалить</strong> remote branch</h4>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git push origin --delete &lt;old&gt;</span>
+</code></pre>
+</li>
+</ul>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="log"><a class="h-anchor" href="#log">#</a>Лог (log)</h3>
+<div class="section">
+<p>Поиск изменений по содержимому</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">log</span> -S<span class="hljs-string">'&lt;a term in the source&gt;'</span></span>
+</code></pre>
+<p>Показать историю изменений конкретного файла</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">log</span> -p &lt;file_name&gt;</span>
+</code></pre>
+<p>Вывести наглядную визуализацию лога</p>
+<pre><code class="hljs wrap hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">log</span> --pretty=oneline --graph --decorate --all</span>
+</code></pre>
+<p>Список файлов, изменённых в коммите</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">log</span> --name-only &lt;commit-id&gt;</span>
+</code></pre>
+<p>Список файлов, изменённых в коммитах (без слияний)</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">log</span> --no-merges --name-only</span>
+</code></pre>
+<p>Ограничить коммиты последними N записями</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">log</span> -&lt;number&gt;</span>
+</code></pre>
+<p>Ограничить коммиты последними N записями (альтернативный синтаксис)</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">log</span> -n &lt;number&gt;</span>
+</code></pre>
+<p>Ограничить коммиты максимум N записями</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">log</span> --max-count=&lt;number&gt;</span>
+</code></pre>
+<p>Показать коммиты новее указанной даты</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">log</span> --after=<span class="hljs-string">"YYYY-MM-DD HH:MM:SS ±HHMM"</span></span>
+</code></pre>
+<p>Показать коммиты старше указанной даты</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">log</span> --before=<span class="hljs-string">"YYYY-MM-DD HH:MM:SS ±HHMM"</span></span>
+</code></pre>
+<p>Фильтровать коммиты по автору (по шаблону)</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">log</span> --author=&lt;pattern&gt;</span>
+</code></pre>
+<p>Фильтровать коммиты по сообщению (по шаблону)</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">log</span> --grep=&lt;pattern&gt;</span>
+</code></pre>
+<p>Показать граф коммитов текущей ветки с декорациями ссылок</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">log</span> --graph --decorate</span>
+</code></pre>
+<p>Показать граф коммитов указанной ветки без переключения на неё</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">log</span> --graph --decorate &lt;branch&gt;</span>
+</code></pre>
+<p>Показать граф коммитов из одной ветки, отсутствующих в другой</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">log</span> --graph --decorate &lt;branchB&gt;..&lt;branchA&gt;</span>
+</code></pre>
+<p>Показать граф коммитов всех веток</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">log</span> --graph --decorate --all</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap row-span-2">
+<h3 id="branch"><a class="h-anchor" href="#branch">#</a>Ветка (branch)</h3>
+<div class="section">
+<p>Список всех веток и их вышестоящих веток</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git branch -vv</span>
+</code></pre>
+<p>Быстро переключиться на предыдущую ветку</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git checkout -</span>
+</code></pre>
+<p>Получить только удалённые ветки</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git branch -r</span>
+</code></pre>
+<p>Восстановить один файл из другой ветки</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git checkout &lt;branch&gt; -- &lt;file&gt;</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="rewriting-history"><a class="h-anchor" href="#rewriting-history">#</a>Перезапись истории</h3>
+<div class="section">
+<p>Переписать сообщение последнего коммита</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git commit --amend -m <span class="hljs-string">"new message"</span></span>
+</code></pre>
+<p>Изменить последний коммит без изменения сообщения.</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git commit --amend --no-edit</span>
+</code></pre>
+<p>См. также: <a href="https://www.atlassian.com/git/tutorials/rewriting-history" rel="noopener external nofollow noreferrer" target="_blank">Переписывание истории</a></p>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="git-aliases"><a class="h-anchor" href="#git-aliases">#</a>Псевдонимы Git</h3>
+<div class="section">
+<pre><code class="hljs hljs language-cmd">git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.ci commit
+git config --global alias.st status
+</code></pre>
+<p>См. также: <a href="https://gist.github.com/johnpolacek/69604a1f6861129ef088" rel="noopener external nofollow noreferrer" target="_blank">Дополнительные алиасы</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap">
+<h2 id="advanced-git"><a class="h-anchor" href="#advanced-git">#</a>Продвинутый Git</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="worktrees"><a class="h-anchor" href="#worktrees">#</a>Рабочие деревья</h3>
+<div class="section">
+<p>Создать новое рабочее дерево по указанному пути. Если указана ветка — выполняется checkout этой ветки. Если ветка не указана — создаётся новая на основе HEAD с именем по имени новой директории.</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git worktree add &lt;path&gt; [&lt;branch&gt;]</span>
+</code></pre>
+<p>Список всех активных рабочих деревьев репозитория.</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git worktree list</span>
+</code></pre>
+<p>Удалить указанное рабочее дерево.</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git worktree remove &lt;path&gt;</span>
+</code></pre>
+<p>Очистить устаревшие или вручную удалённые рабочие деревья.</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git worktree prune</span>
+</code></pre>
+<p>Переместить рабочее дерево по новому пути.</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"> git worktree move &lt;old_path&gt; &lt;new_path&gt;</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="submodules"><a class="h-anchor" href="#submodules">#</a>Субмодули (submodules)</h3>
+<div class="section">
+<p>Добавить новый субмодуль в репозиторий:</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git submodule add &lt;repository_url&gt; &lt;path&gt;</span>
+</code></pre>
+<p>Клонировать репозиторий и инициализировать его субмодули:</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">clone</span> --recursive &lt;repository_url&gt;</span>
+</code></pre>
+<p>Обновить все субмодули до последнего коммита их веток:</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git submodule update</span>
+</code></pre>
+<p>Получить последние изменения из удалённых репозиториев субмодулей и обновить их в основном репозитории:</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git submodule update --remote</span>
+</code></pre>
+<p>Удалить субмодуль из репозитория:</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git submodule deinit &lt;path&gt;</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">rm</span> &lt;path&gt;</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">git commit -m <span class="hljs-string">"Removed submodule"</span></span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="cherry-picking"><a class="h-anchor" href="#cherry-picking">#</a>Cherry-pick</h3>
+<div class="section">
+<p>Cherry-pick позволяет применить конкретный коммит из одной ветки в другую.</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git cherry-pick &lt;commit_hash&gt;</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="reflog"><a class="h-anchor" href="#reflog">#</a>Reflog</h3>
+<div class="section">
+<p>Показать reflog — историю перемещений HEAD и веток:</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git reflog</span>
+</code></pre>
+<p>Найти хеш потерянного коммита или ветки через reflog и выполнить checkout к этому хешу для восстановления:</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git checkout &lt;commit_or_branch_hash&gt;</span>
+</code></pre>
+</div>
+</div>
+</div>
+</div> </div></div><div class="toc-container" id="toc-container"><nav aria-label="Table of Contents" class="toc-list" id="toc-list" role="navigation"></nav></div><script>window.addEventListener("DOMContentLoaded",function(){"function"==typeof window.initTOC&&window.initTOC()})</script><div class="z-50 fixed inset-0 flex justify-center bg-slate-600/80 dark:bg-slate-900/90 items-start text-sm z-50 overflow-hidden lg:pt-16 lg:pb-20 hidden" id="mysearch"><div class="lg:max-w-screen-lg w-full flex flex-col justify-between bg-white dark:bg-slate-700 shadow-3xl dark:shadow-3xl lg:rounded-lg lg:max-h-832 min-h-320 h-full" id="mysearch-box"><div class="flex items-center h-16 flex-none border-b border-slate-200 dark:border-slate-700"><div class="w-full h-full"><form class="flex items-center w-full h-full outline-none rounded-tl-lg"><label class="h-full w-14 mt-1 ml-1 px-4 flex items-center justify-center transition-colors duration-200 ease-in-out text-indigo-200" for="mysearch-input" id="mysearch-label"><div class="text-2xl text-indigo-500"> <svg fill="currentColor" height="1em" viewbox="0 0 1024 1024" width="1em" xmlns="http://www.w3.org/2000/svg"> <path d="M942.14826666 878.7968l-200.56746667-229.92213333C795.37493333 583.8848 827.73333333 500.5312 827.73333333 409.6 827.73333333 202.27413333 659.59253333 34.13333333 452.26666666 34.13333333 244.87253333 34.13333333 76.79999999 202.27413333 76.79999999 409.6S244.87253333 785.06666667 452.26666666 785.06666667c77.14133333 0 148.82133333-23.3472 208.41813333-63.21493334l199.33866667 228.5568c19.72906667 22.7328 54.272 24.91733333 76.8 5.25653334C959.62453333 935.86773333 961.87733333 901.46133333 942.14826666 878.7968zM179.19999999 409.6c0-150.59626667 122.4704-273.06666667 273.06666667-273.06666667 150.59626667 0 273.06666667 122.4704 273.06666667 273.06666667s-122.4704 273.06666667-273.06666667 273.06666667C301.67039999 682.66666667 179.19999999 560.19626667 179.19999999 409.6z"></path>
+</svg>
+</div></label><div class="relative flex-1"> <input autocapitalize="off" autocomplete="off" autocorrect="off" class="flex-1 font-light h-full bg-transparent focus:text-slate-900 text-slate-500 dark:text-slate-300 placeholder-slate-400 placeholder-opacity-80 shadow-none outline-none truncate text-lg sm:text-2xl caret-color-indigo-400 leading-normalized w-full appearance-none rounded-none transition-colors duration-200 ease-in-out" enterkeyhint="go" id="mysearch-input" maxlength="128" placeholder="Search for cheatsheet" spellcheck="false" type="text"/></div> <button class="items-center justify-center h-full w-14 px-4 text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-100 opacity-75 fill-current cursor-pointer transition-fast-out flex" id="mysearch-clear" type="reset"><i class="icon icon-close text-xs font-bold"></i></button></form></div><div class="w-px h-8 bg-slate-100 dark:bg-slate-400/20 flex-none"></div> <button class="cancel mr-1 px-4 h-full text-slate-500 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-300"> Cancel</button></div><div class="flex flex-grow overflow-hidden lg:rounded-br-lg"><div class="relative w-full flex-none overflow-y-auto lg:w-1/2"><ul id="mysearch-list"></ul></div><div class="preview-panel shadow-inner bg-slate-100 dark:bg-slate-800 lg:block w-1/2 flex-none overflow-y-auto"></div></div></div></div>
+</body><script src="js/maina454.js?_v=1769244903599"></script><script>
+        // Получить все элементы pre > code
+        const codeBlocks = document.querySelectorAll('pre > code');
+        const initInnerHTML = '<svg height="1em" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path> </svg>';
+        const successInnerHTML = '<svg height="1em" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg>';
+        codeBlocks.forEach(function (codeBlock) {
+            // Создать кнопку копирования
+            const copyButton = document.createElement('button');
+            copyButton.className = 'opacity-90 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 p-2 text-white shadow-xl rounded-lg flex items-center absolute top-2 right-2 transition-all duration-200 backdrop-blur-sm';
+            copyButton.innerHTML = initInnerHTML;
+            copyButton.style.opacity = "0";
+            const parent = codeBlock.parentNode;
+
+            parent.style = "position: relative;"
+            parent.insertBefore(copyButton, codeBlock);
+
+            // Обработчик клика по кнопке копирования
+            copyButton.addEventListener('click', () => {
+                navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+                    copyButton.innerHTML = successInnerHTML;
+                    setTimeout(() => {
+                        copyButton.innerHTML = initInnerHTML;
+                    }, 1000);
+                });
+            });
+
+            parent.addEventListener('mouseenter', () => {
+                copyButton.style.opacity = "1";
+            });
+            parent.addEventListener('mouseleave', () => {
+                copyButton.style.opacity = "0";
+            });
+        });
+    </script> </html>

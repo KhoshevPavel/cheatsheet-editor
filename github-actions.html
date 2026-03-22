@@ -1,0 +1,392 @@
+<!DOCTYPE HTML>
+
+<html class="scrollbar" lang="en" translate="no"> <head><meta charset="utf-8"/><meta content="IE=Edge,chrome=1" http-equiv="X-UA-Compatible"/><meta content="en" http-equiv="content-language"/><meta content="en" name="language"/><meta content="webkit" name="renderer"/><meta content="width=device-width,initial-scale=1,maximum-scale=1" name="viewport"/><meta content="/" name="app:pageurl"/><title>Github Actions Cheat Sheet &amp; Quick Reference</title><meta content="cheat,sheet,cheatsheets,reference,programming,code table,snippets,linux,command,shortcuts,developers,Github,CICD" name="keywords"/><meta content="A quick reference to Github Actions for the automation of software workflows, allowing developers to build, te" name="description"/><meta content="Fechin" name="author"/><meta content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" name="robots"/><meta content="CheatSheets.html" name="article:author"/><meta content="2023-11-28T00:00:00.000Z" name="article:published_time"/><meta content="2023-11-28T00:00:00.000Z" name="article:modified_time"/><meta content="Toolkit" name="article:section"/><meta content="Github" name="article:tag"/><meta content="CICD" name="article:tag"/><meta content="github-actions.html" property="og:url"/><meta content="Github Actions Cheat Sheet &amp; Quick Reference" property="og:title"/><meta content="CheatSheets.html" property="og:site_name"/><meta content="A quick reference to Github Actions for the automation of software workflows, allowing developers to build, te" property="og:description"/><meta content="assets/image/github-actions-preview6b60.png?v=rro3n" property="og:image"/><meta content="2276" property="og:image:width"/><meta content="1240" property="og:image:height"/><meta content="Github Actions Cheat Sheet &amp; Quick Reference - " property="og:image:alt"/><meta content="article" property="og:type"/><meta content="en_US" property="og:locale"/><meta content="2023-11-28T00:00:00.000Z" property="article:published_time"/><meta content="2023-11-28T00:00:00.000Z" property="article:modified_time"/><meta content="CheatSheets.html" property="article:author"/><meta content="Toolkit" property="article:section"/><meta content="Github" property="article:tag"/><meta content="CICD" property="article:tag"/><meta content="summary_large_image" name="twitter:card"/><meta content="Github Actions Cheat Sheet &amp; Quick Reference" name="twitter:title"/><meta content="@Fechin" name="twitter:site"/><meta content="@Fechin" name="twitter:creator"/><meta content="A quick reference to Github Actions for the automation of software workflows, allowing developers to build, te" name="twitter:description"/><meta content="assets/image/github-actions-preview85ba.png?v=lnhj8" name="twitter:image"/><meta content="Github Actions Cheat Sheet &amp; Quick Reference - " name="twitter:image:alt"/><link href="images/favicon3860.png?v=1" rel="icon"/><link href="images/favicon3860.png?v=1" rel="icon shortcut" type="image/png"/><link href="github-actions.html" rel="canonical"/><link href="css/stylea454.css?_v=1769244903599" rel="stylesheet"/><script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            let html = document.documentElement.classList;
+            html.toggle('dark')
+        }
+    </script></head><body class="bg-slate-100 dark:bg-slate-900"><header class="relative z-10"><div class="max-container z-20 relative"></div></header><div class="mx-auto flex flex-wrap md:py-5 flex-col md:flex-row items-center"><div class="flex flex-col w-full mx-auto items-center text-center my-8"><div class="max-container w-full"><h1 class="text-5xl mb-4"> <span class="text-slate-700 dark:text-slate-300 font-light">Github Actions</span> <span class="text-slate-400 dark:text-slate-500 font-extralight hidden md:inline">cheatsheet</span></h1><div class="lg:w-3/5 mx-auto intro leading-relaxed text-slate-600"><p>Краткая шпаргалка по GitHub Actions — инструменту автоматизации рабочих процессов: сборка, тестирование и развёртывание прямо из репозитория.</p></div><div class="pt-5" id="carbon_container"></div></div></div><div class="mdLayout w-full max-container" id="mdLayout"> <div class="h2-wrap">
+<h2 id="getting-started"><a class="h-anchor" href="#getting-started">#</a>Начало работы</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="introduction"><a class="h-anchor" href="#introduction">#</a>Введение</h3>
+<div class="section">
+<p><a href="https://docs.github.com/en/actions" rel="noopener external nofollow noreferrer" target="_blank">GitHub Actions</a>— платформа CI/CD для автоматизации рабочих процессов: сборка, тестирование и развёртывание прямо из репозитория.</p>
+<hr/>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="workflow-files"><a class="h-anchor" href="#workflow-files">#</a>Файлы рабочего процесса</h3>
+<div class="section">
+<p>Workflow GitHub Actions задаются в YAML-файлах, обычно в каталоге .github/workflows репозитория.</p>
+<pre><code class="hljs hljs language-yaml"><span class="hljs-attr">name:</span> <span class="hljs-string">hello-world</span>
+<span class="hljs-attr">on:</span> <span class="hljs-string">push</span>
+<span class="hljs-attr">jobs:</span> <span class="hljs-attr">hello-world-job:</span> <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span> <span class="hljs-attr">steps:</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Hello</span> <span class="hljs-string">World</span> <span class="hljs-attr">run:</span> <span class="hljs-string">echo</span> <span class="hljs-string">"Hello World!"</span>
+</code></pre>
+<p><strong>Просмотр запусков workflow</strong></p>
+<ul>
+<li>На GitHub.com откройте главную страницу репозитория.</li>
+<li>Под названием репозитория нажмите<code>Actions</code>.</li>
+<li>В левой панели выберите нужный workflow (в примере — hello-world).</li>
+</ul>
+<hr/>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="workflow-syntax"><a class="h-anchor" href="#workflow-syntax">#</a>Синтаксис рабочего процесса</h3>
+<div class="section">
+<pre><code class="hljs hljs language-yaml"><span class="hljs-attr">name:</span> <span class="hljs-string">learn-github-actions</span>
+<span class="hljs-attr">run-name:</span> <span class="hljs-string">${{ github.actor }}</span> <span class="hljs-string">is</span> <span class="hljs-string">learning</span> <span class="hljs-string">GitHub</span> <span class="hljs-string">Actions</span>
+<span class="hljs-attr">on:</span> [<span class="hljs-string">push</span>]
+<span class="hljs-attr">jobs:</span> <span class="hljs-attr">check-bats-version:</span> <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span> <span class="hljs-attr">steps:</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v4</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/setup-node@v3</span> <span class="hljs-attr">with:</span> <span class="hljs-attr">node-version:</span> <span class="hljs-string">'14'</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">run:</span> <span class="hljs-string">npm</span> <span class="hljs-string">install</span> <span class="hljs-string">-g</span> <span class="hljs-string">bats</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">run:</span> <span class="hljs-string">bats</span> <span class="hljs-string">-v</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="workflow-syntax-descriptions"><a class="h-anchor" href="#workflow-syntax-descriptions">#</a>Описание синтаксиса рабочего процесса</h3>
+<div class="section">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Линия</th>
+<th style="text-align:left">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>name:</code></td>
+<td style="text-align:left">Задаёт имя workflow. Метка для идентификации в репозитории.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>run-name:</code></td>
+<td style="text-align:left">Задаёт имя запуска с контекстом ${{ github.actor }} — пользователь, инициировавший запуск.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>on:</code></td>
+<td style="text-align:left">Событие, запускающее workflow. Здесь — любой push в репозиторий.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>jobs:</code></td>
+<td style="text-align:left">Определяет группу заданий workflow. Каждое задание выполняется независимо.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>check-bats-version:</code></td>
+<td style="text-align:left">Идентификатор задания в workflow. В примере — check-bats-version.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>runs-on:</code></td>
+<td style="text-align:left">Указывает тип машины для выполнения. Здесь — последняя версия Ubuntu.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>steps:</code></td>
+<td style="text-align:left">Содержит последовательность шагов, выполняемых в рамках задания.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>uses:</code></td>
+<td style="text-align:left">Подключает action к шагу. actions/checkout@v4 — клонирование репо, actions/setup-node@v3 — настройка Node.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>with:</code></td>
+<td style="text-align:left">Дополнительные параметры action. Используется вместе с uses.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>node-version:</code></td>
+<td style="text-align:left">Параметр under with — версия Node.js для setup-node. В примере — '14'.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="events"><a class="h-anchor" href="#events">#</a>События</h3>
+<div class="section">
+<pre><code class="hljs hljs language-yaml"><span class="hljs-attr">name:</span> <span class="hljs-string">Event-trigger-on-push-example</span> <span class="hljs-attr">on:</span> [<span class="hljs-string">push</span>] <span class="hljs-comment"># здесь определяется событие</span> <span class="hljs-attr">jobs:</span> <span class="hljs-attr">build:</span> <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span> <span class="hljs-attr">steps:</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v2</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Run</span> <span class="hljs-string">a</span> <span class="hljs-string">script</span> <span class="hljs-attr">run:</span> <span class="hljs-string">echo</span> <span class="hljs-string">"This workflow runs on every push to the repository."</span>
+</code></pre>
+<p><strong>Триггеры событий</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Событие</th>
+<th style="text-align:left">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>push</code></td>
+<td style="text-align:left">Срабатывает при push в репозиторий.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>pull_request</code></td>
+<td style="text-align:left">Срабатывает при событиях pull request.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>pull_request_review</code></td>
+<td style="text-align:left">Срабатывает при ревью pull request.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>pull_request_review_comment</code></td>
+<td style="text-align:left">Срабатывает при комментариях к ревью.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>pull_request_target</code></td>
+<td style="text-align:left">Для workflow в форках репозитория.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>fork</code></td>
+<td style="text-align:left">Срабатывает при форке репозитория.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>issue_comment</code></td>
+<td style="text-align:left">Срабатывает при комментариях к issue и PR.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>issues</code></td>
+<td style="text-align:left">Срабатывает при событиях issue.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>label</code></td>
+<td style="text-align:left">Срабатывает при событиях меток.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>milestone</code></td>
+<td style="text-align:left">Срабатывает при событиях этапов.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>deployment</code></td>
+<td style="text-align:left">Срабатывает при деплое.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>deployment_status</code></td>
+<td style="text-align:left">Срабатывает при обновлении статуса деплоя.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>public</code></td>
+<td style="text-align:left">Срабатывает при смене репо с приватного на публичный.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>repository_dispatch</code></td>
+<td style="text-align:left">Срабатывает при пользовательском событии репозитория.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>schedule</code></td>
+<td style="text-align:left">Срабатывает по расписанию.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>workflow_dispatch</code></td>
+<td style="text-align:left">Позволяет запускать workflow вручную.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>workflow_run</code></td>
+<td style="text-align:left">Срабатывает после завершения другого workflow.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>create</code></td>
+<td style="text-align:left">Срабатывает при создании ветки или тега.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>delete</code></td>
+<td style="text-align:left">Срабатывает при удалении ветки или тега.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>page_build</code></td>
+<td style="text-align:left">Срабатывает при сборке GitHub Pages.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>release</code></td>
+<td style="text-align:left">Срабатывает при релизах.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>watch</code></td>
+<td style="text-align:left">Срабатывает при добавлении звезды репозиторию.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>registry_package</code></td>
+<td style="text-align:left">Срабатывает при событиях пакетов реестра.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>status</code></td>
+<td style="text-align:left">Срабатывает при обновлении статуса коммита.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>project</code></td>
+<td style="text-align:left">Срабатывает при событиях доски проекта.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>project_card</code></td>
+<td style="text-align:left">Срабатывает при событиях карточек проекта.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>project_column</code></td>
+<td style="text-align:left">Срабатывает при событиях колонок проекта.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>member</code></td>
+<td style="text-align:left">Срабатывает при событиях участников.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gollum</code></td>
+<td style="text-align:left">Срабатывает при обновлении страниц вики.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="jobs"><a class="h-anchor" href="#jobs">#</a>Задания (jobs)</h3>
+<div class="section">
+<p>Одно задание:</p>
+<pre><code class="hljs hljs language-yaml"><span class="hljs-attr">name:</span> <span class="hljs-string">Single</span> <span class="hljs-string">Job</span>
+<span class="hljs-attr">on:</span> [<span class="hljs-string">push</span>]
+<span class="hljs-attr">jobs:</span> <span class="hljs-attr">build:</span> <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span> <span class="hljs-attr">steps:</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v2</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Run</span> <span class="hljs-string">a</span> <span class="hljs-string">build</span> <span class="hljs-string">script</span> <span class="hljs-attr">run:</span> <span class="hljs-string">script/build</span>
+</code></pre>
+<p>Несколько заданий:</p>
+<pre><code class="hljs hljs language-yaml"><span class="hljs-attr">name:</span> <span class="hljs-string">CI</span> <span class="hljs-string">Workflow</span> <span class="hljs-attr">on:</span> [<span class="hljs-string">push</span>]
+
+<span class="hljs-attr">jobs:</span> <span class="hljs-attr">job-1:</span> <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span> <span class="hljs-attr">steps:</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v2</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Runs</span> <span class="hljs-string">job</span> <span class="hljs-number">1</span> <span class="hljs-attr">run:</span> <span class="hljs-string">echo</span> <span class="hljs-string">"Running Job 1"</span> <span class="hljs-attr">job-2:</span> <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span> <span class="hljs-attr">steps:</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v2</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Runs</span> <span class="hljs-string">job</span> <span class="hljs-number">2</span> <span class="hljs-attr">run:</span> <span class="hljs-string">echo</span> <span class="hljs-string">"Running Job 2"</span> <span class="hljs-attr">job-3:</span> <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span> <span class="hljs-attr">steps:</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v2</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Runs</span> <span class="hljs-string">job</span> <span class="hljs-number">3</span> <span class="hljs-attr">run:</span> <span class="hljs-string">echo</span> <span class="hljs-string">"Running Job 3"</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="steps"><a class="h-anchor" href="#steps">#</a>Шаги</h3>
+<div class="section">
+<pre><code class="hljs hljs language-yaml"><span class="hljs-attr">jobs:</span> <span class="hljs-attr">build:</span> <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span> <span class="hljs-attr">steps:</span> <span class="hljs-comment"># шаг 1</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Check</span> <span class="hljs-string">out</span> <span class="hljs-string">repository</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v2</span> <span class="hljs-comment"># шаг 2</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Set</span> <span class="hljs-string">up</span> <span class="hljs-string">Node.js</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/setup-node@v2</span> <span class="hljs-attr">with:</span> <span class="hljs-attr">node-version:</span> <span class="hljs-string">'14'</span> <span class="hljs-comment"># шаг 3</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Install</span> <span class="hljs-string">dependencies</span> <span class="hljs-attr">run:</span> <span class="hljs-string">npm</span> <span class="hljs-string">install</span> <span class="hljs-comment"># шаг 4</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Run</span> <span class="hljs-string">tests</span> <span class="hljs-attr">run:</span> <span class="hljs-string">npm</span> <span class="hljs-string">test</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="github-runners-self-hosted-runners"><a class="h-anchor" href="#github-runners-self-hosted-runners">#</a>GitHub Runners и self-hosted runners</h3>
+<div class="section">
+<p><a href="https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners" rel="noopener external nofollow noreferrer" target="_blank">Раннер GitHub</a>:</p>
+<pre><code class="hljs hljs language-yaml"><span class="hljs-attr">name:</span> <span class="hljs-string">Workflow</span>
+<span class="hljs-attr">on:</span> [<span class="hljs-string">push</span>]
+<span class="hljs-attr">jobs:</span> <span class="hljs-attr">build:</span> <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span> <span class="hljs-comment"># раннер по умолчанию</span> <span class="hljs-attr">steps:</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v2</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Run</span> <span class="hljs-string">a</span> <span class="hljs-string">script</span> <span class="hljs-attr">run:</span> <span class="hljs-string">echo</span> <span class="hljs-string">"Hello, world!"</span>
+</code></pre>
+<p><a href="https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners" rel="noopener external nofollow noreferrer" target="_blank">Собственный раннер</a></p>
+<pre><code class="hljs hljs language-yaml"><span class="hljs-attr">name:</span> <span class="hljs-string">Workflow</span> <span class="hljs-string">with</span> <span class="hljs-string">Self-Hosted</span> <span class="hljs-string">Runner</span>
+<span class="hljs-attr">on:</span> [<span class="hljs-string">push</span>]
+<span class="hljs-attr">jobs:</span> <span class="hljs-attr">build:</span> <span class="hljs-attr">runs-on:</span> <span class="hljs-string">self-hosted</span> <span class="hljs-attr">steps:</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v2</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Run</span> <span class="hljs-string">a</span> <span class="hljs-string">script</span> <span class="hljs-attr">run:</span> <span class="hljs-string">echo</span> <span class="hljs-string">"Hello from self-hosted runner!"</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="environment-variables"><a class="h-anchor" href="#environment-variables">#</a>Переменные среды</h3>
+<div class="section">
+<p>Пользовательская переменная через env.</p>
+<pre><code class="hljs hljs language-yaml"><span class="hljs-attr">jobs:</span> <span class="hljs-attr">build:</span> <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span> <span class="hljs-attr">env:</span> <span class="hljs-attr">CUSTOM_VARIABLE:</span> <span class="hljs-string">'Hello, World!'</span> <span class="hljs-comment"># Пользовательская переменная через env:</span> <span class="hljs-attr">steps:</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Check</span> <span class="hljs-string">environment</span> <span class="hljs-string">variable</span> <span class="hljs-attr">run:</span> <span class="hljs-string">echo</span> <span class="hljs-string">"Value of CUSTOM_VAR is $CUSTOM_VAR"</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="secrets"><a class="h-anchor" href="#secrets">#</a>Секреты</h3>
+<div class="section">
+<p>Добавить секрет: Repository → Settings → Security → Secrets and Variables → Actions → New Repository Secret</p>
+<p>Пример workflow с секретами:</p>
+<pre><code class="hljs hljs language-yaml"><span class="hljs-attr">name:</span> <span class="hljs-string">Workflow</span> <span class="hljs-string">with</span> <span class="hljs-string">Secrets</span> <span class="hljs-attr">on:</span> [<span class="hljs-string">push</span>]
+
+<span class="hljs-attr">jobs:</span> <span class="hljs-attr">example_job:</span> <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span> <span class="hljs-attr">steps:</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Checkout</span> <span class="hljs-string">repository</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v2</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Use</span> <span class="hljs-string">a</span> <span class="hljs-string">secret</span> <span class="hljs-attr">run:</span> <span class="hljs-string">echo</span> <span class="hljs-string">"The secret is ${{ secrets.MY_SECRET }}"</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="artifacts"><a class="h-anchor" href="#artifacts">#</a>Артефакты (artifacts)</h3>
+<div class="section">
+<p>Артефакты: Repository → Actions → Workflow Run → Artifacts</p>
+<pre><code class="hljs hljs language-yaml"><span class="hljs-attr">jobs:</span> <span class="hljs-attr">build:</span> <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span> <span class="hljs-attr">steps:</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Build</span> <span class="hljs-string">project</span> <span class="hljs-attr">run:</span> <span class="hljs-string">make</span> <span class="hljs-string">build</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Upload</span> <span class="hljs-string">build</span> <span class="hljs-string">artifact</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/upload-artifact@v3</span> <span class="hljs-comment"># готовый action для загрузки артефактов</span> <span class="hljs-attr">with:</span> <span class="hljs-attr">name:</span> <span class="hljs-string">my-artifact</span> <span class="hljs-attr">path:</span> <span class="hljs-string">path/to/artifact</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="caching-dependencies"><a class="h-anchor" href="#caching-dependencies">#</a>Кэширование зависимостей</h3>
+<div class="section">
+<p>Кэш зависимостей хранит загруженные пакеты и скомпилированные бинарники.</p>
+<pre><code class="hljs hljs language-yaml"><span class="hljs-attr">jobs:</span> <span class="hljs-attr">build:</span> <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span> <span class="hljs-attr">steps:</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v2</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Cache</span> <span class="hljs-string">dependencies</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/cache@v2</span> <span class="hljs-comment"># хранит загруженные пакеты или скомпилированные бинарники</span> <span class="hljs-attr">with:</span> <span class="hljs-attr">path:</span> <span class="hljs-string">|
+            path/to/dependencies
+            another/path
+</span> <span class="hljs-attr">key:</span> <span class="hljs-string">${{ runner.os }}-deps-${{ hashFiles('**/lockfile') }}</span> <span class="hljs-comment"># хеш lock-файла зависимостей генерируется в ОС</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Install</span> <span class="hljs-string">dependencies</span> <span class="hljs-attr">run:</span> <span class="hljs-string">install-command</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="matrix-strategies"><a class="h-anchor" href="#matrix-strategies">#</a>Матричные стратегии (matrix)</h3>
+<div class="section">
+<pre><code class="hljs hljs language-yaml"><span class="hljs-attr">jobs:</span> <span class="hljs-attr">build:</span> <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span> <span class="hljs-attr">strategy:</span> <span class="hljs-attr">matrix:</span> <span class="hljs-attr">node-version:</span> [<span class="hljs-number">12.</span><span class="hljs-string">x</span>, <span class="hljs-number">14.</span><span class="hljs-string">x</span>, <span class="hljs-number">16.</span><span class="hljs-string">x</span>]
+        <span class="hljs-comment"># стратегия matrix позволяет запускать задачи в различных комбинациях окружений и ОС</span> <span class="hljs-attr">os:</span> [<span class="hljs-string">ubuntu-latest</span>, <span class="hljs-string">windows-latest</span>, <span class="hljs-string">macOS-latest</span>]
+    <span class="hljs-attr">steps:</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v2</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Use</span> <span class="hljs-string">Node.js</span> <span class="hljs-string">${{ matrix.node-version }}</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/setup-node@v1</span> <span class="hljs-attr">with:</span> <span class="hljs-attr">node-version:</span> <span class="hljs-string">${{ matrix.node-version }}</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">run:</span> <span class="hljs-string">npm</span> <span class="hljs-string">install</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">run:</span> <span class="hljs-string">npm</span> <span class="hljs-string">test</span> <span class="hljs-attr">env:</span> <span class="hljs-attr">CI:</span> <span class="hljs-literal">true</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="conditions-and-expressions"><a class="h-anchor" href="#conditions-and-expressions">#</a>Условия и выражения</h3>
+<div class="section">
+<p>Условия по ветке:</p>
+<pre><code class="hljs hljs language-yaml"><span class="hljs-attr">jobs:</span> <span class="hljs-attr">build:</span> <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span> <span class="hljs-attr">steps:</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Checkout</span> <span class="hljs-string">code</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v2</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Run</span> <span class="hljs-string">build</span> <span class="hljs-attr">if:</span> <span class="hljs-string">github.ref</span> <span class="hljs-string">==</span> <span class="hljs-string">'refs/heads/main'</span> <span class="hljs-comment"># Шаг "Run build" выполняется только если текущая ветка — main.</span> <span class="hljs-attr">run:</span> <span class="hljs-string">make</span> <span class="hljs-string">build</span>
+</code></pre>
+<p>Условия по событию:</p>
+<pre><code class="hljs hljs language-yaml"><span class="hljs-attr">jobs:</span> <span class="hljs-attr">test:</span> <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span> <span class="hljs-attr">steps:</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Checkout</span> <span class="hljs-string">code</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v2</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Run</span> <span class="hljs-string">tests</span> <span class="hljs-attr">if:</span> <span class="hljs-string">github.event_name</span> <span class="hljs-string">==</span> <span class="hljs-string">'pull_request'</span> <span class="hljs-comment"># Шаг "Run tests" выполняется только по событию pull request</span> <span class="hljs-attr">run:</span> <span class="hljs-string">npm</span> <span class="hljs-string">test</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="workflow-commands"><a class="h-anchor" href="#workflow-commands">#</a>Команды рабочего процесса</h3>
+<div class="section">
+<p>На ubuntu-latest работают bash-команды.</p>
+<pre><code class="hljs hljs language-yaml"><span class="hljs-attr">steps:</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Set</span> <span class="hljs-string">environment</span> <span class="hljs-string">variable</span> <span class="hljs-attr">run:</span> <span class="hljs-string">echo</span> <span class="hljs-string">"NAME=value"</span> <span class="hljs-string">&gt;&gt;</span> <span class="hljs-string">$GITHUB_ENV</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="concurrency"><a class="h-anchor" href="#concurrency">#</a>Конкурентность (concurrency)</h3>
+<div class="section">
+<p>Поле concurrency создаёт группу по <code>github.head_ref</code>. Новый запуск в той же группе отменяет текущие.</p>
+<pre><code class="hljs hljs language-yaml"><span class="hljs-attr">jobs:</span> <span class="hljs-attr">my_job:</span> <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span> <span class="hljs-attr">concurrency:</span> <span class="hljs-attr">group:</span> <span class="hljs-string">${{ github.head_ref }}</span> <span class="hljs-attr">cancel-in-progress:</span> <span class="hljs-literal">true</span> <span class="hljs-attr">steps:</span> <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Run</span> <span class="hljs-string">a</span> <span class="hljs-string">script</span> <span class="hljs-attr">run:</span> <span class="hljs-string">echo</span> <span class="hljs-string">"Running script..."</span>
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap">
+<h2 id="also-see"><a class="h-anchor" href="#also-see">#</a>Смотрите также</h2>
+<div class="h3-wrap-list">
+<ul>
+<li><a href="yaml.html">YAML</a> <em>()</em></li>
+<li><a href="github.html">Github</a> <em>()</em></li>
+<li><a href="https://docs.github.com/en/actions" rel="noopener external nofollow noreferrer" target="_blank">Github Actions Documentation</a><em>(docs.github.com/en/actions)</em></li>
+</ul>
+</div>
+</div> </div></div><div class="toc-container" id="toc-container"><nav aria-label="Table of Contents" class="toc-list" id="toc-list" role="navigation"></nav></div><script>window.addEventListener("DOMContentLoaded",function(){"function"==typeof window.initTOC&&window.initTOC()})</script><div class="z-50 fixed inset-0 flex justify-center bg-slate-600/80 dark:bg-slate-900/90 items-start text-sm z-50 overflow-hidden lg:pt-16 lg:pb-20 hidden" id="mysearch"><div class="lg:max-w-screen-lg w-full flex flex-col justify-between bg-white dark:bg-slate-700 shadow-3xl dark:shadow-3xl lg:rounded-lg lg:max-h-832 min-h-320 h-full" id="mysearch-box"><div class="flex items-center h-16 flex-none border-b border-slate-200 dark:border-slate-700"><div class="w-full h-full"><form class="flex items-center w-full h-full outline-none rounded-tl-lg"><label class="h-full w-14 mt-1 ml-1 px-4 flex items-center justify-center transition-colors duration-200 ease-in-out text-indigo-200" for="mysearch-input" id="mysearch-label"><div class="text-2xl text-indigo-500"> <svg fill="currentColor" height="1em" viewbox="0 0 1024 1024" width="1em" xmlns="http://www.w3.org/2000/svg"> <path d="M942.14826666 878.7968l-200.56746667-229.92213333C795.37493333 583.8848 827.73333333 500.5312 827.73333333 409.6 827.73333333 202.27413333 659.59253333 34.13333333 452.26666666 34.13333333 244.87253333 34.13333333 76.79999999 202.27413333 76.79999999 409.6S244.87253333 785.06666667 452.26666666 785.06666667c77.14133333 0 148.82133333-23.3472 208.41813333-63.21493334l199.33866667 228.5568c19.72906667 22.7328 54.272 24.91733333 76.8 5.25653334C959.62453333 935.86773333 961.87733333 901.46133333 942.14826666 878.7968zM179.19999999 409.6c0-150.59626667 122.4704-273.06666667 273.06666667-273.06666667 150.59626667 0 273.06666667 122.4704 273.06666667 273.06666667s-122.4704 273.06666667-273.06666667 273.06666667C301.67039999 682.66666667 179.19999999 560.19626667 179.19999999 409.6z"></path>
+</svg>
+</div></label><div class="relative flex-1"> <input autocapitalize="off" autocomplete="off" autocorrect="off" class="flex-1 font-light h-full bg-transparent focus:text-slate-900 text-slate-500 dark:text-slate-300 placeholder-slate-400 placeholder-opacity-80 shadow-none outline-none truncate text-lg sm:text-2xl caret-color-indigo-400 leading-normalized w-full appearance-none rounded-none transition-colors duration-200 ease-in-out" enterkeyhint="go" id="mysearch-input" maxlength="128" placeholder="Search for cheatsheet" spellcheck="false" type="text"/></div> <button class="items-center justify-center h-full w-14 px-4 text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-100 opacity-75 fill-current cursor-pointer transition-fast-out flex" id="mysearch-clear" type="reset"><i class="icon icon-close text-xs font-bold"></i></button></form></div><div class="w-px h-8 bg-slate-100 dark:bg-slate-400/20 flex-none"></div> <button class="cancel mr-1 px-4 h-full text-slate-500 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-300"> Cancel</button></div><div class="flex flex-grow overflow-hidden lg:rounded-br-lg"><div class="relative w-full flex-none overflow-y-auto lg:w-1/2"><ul id="mysearch-list"></ul></div><div class="preview-panel shadow-inner bg-slate-100 dark:bg-slate-800 lg:block w-1/2 flex-none overflow-y-auto"></div></div></div></div>
+</body><script src="js/maina454.js?_v=1769244903599"></script><script>
+        // Получить все элементы pre > code
+        const codeBlocks = document.querySelectorAll('pre > code');
+        const initInnerHTML = '<svg height="1em" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path> </svg>';
+        const successInnerHTML = '<svg height="1em" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg>';
+        codeBlocks.forEach(function (codeBlock) {
+            // Создать кнопку копирования
+            const copyButton = document.createElement('button');
+            copyButton.className = 'opacity-90 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 p-2 text-white shadow-xl rounded-lg flex items-center absolute top-2 right-2 transition-all duration-200 backdrop-blur-sm';
+            copyButton.innerHTML = initInnerHTML;
+            copyButton.style.opacity = "0";
+            const parent = codeBlock.parentNode;
+
+            parent.style = "position: relative;"
+            parent.insertBefore(copyButton, codeBlock);
+
+            // Обработчик клика по кнопке копирования
+            copyButton.addEventListener('click', () => {
+                navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+                    copyButton.innerHTML = successInnerHTML;
+                    setTimeout(() => {
+                        copyButton.innerHTML = initInnerHTML;
+                    }, 1000);
+                });
+            });
+
+            parent.addEventListener('mouseenter', () => {
+                copyButton.style.opacity = "1";
+            });
+            parent.addEventListener('mouseleave', () => {
+                copyButton.style.opacity = "0";
+            });
+        });
+    </script> </html>

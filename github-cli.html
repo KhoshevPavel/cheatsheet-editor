@@ -1,0 +1,525 @@
+<!DOCTYPE HTML>
+
+<html class="scrollbar" lang="en" translate="no"> <head><meta charset="utf-8"/><meta content="IE=Edge,chrome=1" http-equiv="X-UA-Compatible"/><meta content="en" http-equiv="content-language"/><meta content="en" name="language"/><meta content="webkit" name="renderer"/><meta content="width=device-width,initial-scale=1,maximum-scale=1" name="viewport"/><meta content="/" name="app:pageurl"/><title>Github CLI Cheat Sheet &amp; Quick Reference</title><meta content="cheat,sheet,cheatsheets,reference,programming,code table,snippets,linux,command,shortcuts,developers,Github,CICD,CLI" name="keywords"/><meta content="A quick reference to Github CLI, an open-source command line tool that enables GitHub on your terminal. " name="description"/><meta content="Fechin" name="author"/><meta content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" name="robots"/><meta content="CheatSheets.html" name="article:author"/><meta content="2023-11-29T00:00:00.000Z" name="article:published_time"/><meta content="2023-11-29T00:00:00.000Z" name="article:modified_time"/><meta content="Toolkit" name="article:section"/><meta content="Github" name="article:tag"/><meta content="CICD" name="article:tag"/><meta content="CLI" name="article:tag"/><meta content="github-cli.html" property="og:url"/><meta content="Github CLI Cheat Sheet &amp; Quick Reference" property="og:title"/><meta content="CheatSheets.html" property="og:site_name"/><meta content="A quick reference to Github CLI, an open-source command line tool that enables GitHub on your terminal. " property="og:description"/><meta content="assets/image/github-cli-previewa293.png?v=0yy22h" property="og:image"/><meta content="2276" property="og:image:width"/><meta content="1240" property="og:image:height"/><meta content="Github CLI Cheat Sheet &amp; Quick Reference - " property="og:image:alt"/><meta content="article" property="og:type"/><meta content="en_US" property="og:locale"/><meta content="2023-11-29T00:00:00.000Z" property="article:published_time"/><meta content="2023-11-29T00:00:00.000Z" property="article:modified_time"/><meta content="CheatSheets.html" property="article:author"/><meta content="Toolkit" property="article:section"/><meta content="Github" property="article:tag"/><meta content="CICD" property="article:tag"/><meta content="CLI" property="article:tag"/><meta content="summary_large_image" name="twitter:card"/><meta content="Github CLI Cheat Sheet &amp; Quick Reference" name="twitter:title"/><meta content="@Fechin" name="twitter:site"/><meta content="@Fechin" name="twitter:creator"/><meta content="A quick reference to Github CLI, an open-source command line tool that enables GitHub on your terminal. " name="twitter:description"/><meta content="assets/image/github-cli-preview48e0.png?v=acop1" name="twitter:image"/><meta content="Github CLI Cheat Sheet &amp; Quick Reference - " name="twitter:image:alt"/><link href="images/favicon3860.png?v=1" rel="icon"/><link href="images/favicon3860.png?v=1" rel="icon shortcut" type="image/png"/><link href="github-cli.html" rel="canonical"/><link href="css/stylea454.css?_v=1769244903599" rel="stylesheet"/><script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            let html = document.documentElement.classList;
+            html.toggle('dark')
+        }
+    </script></head><body class="bg-slate-100 dark:bg-slate-900"><header class="relative z-10"><div class="max-container z-20 relative"></div></header><div class="mx-auto flex flex-wrap md:py-5 flex-col md:flex-row items-center"><div class="flex flex-col w-full mx-auto items-center text-center my-8"><div class="max-container w-full"><h1 class="text-5xl mb-4"> <span class="text-slate-700 dark:text-slate-300 font-light">Github CLI</span> <span class="text-slate-400 dark:text-slate-500 font-extralight hidden md:inline">cheatsheet</span></h1><div class="lg:w-3/5 mx-auto intro leading-relaxed text-slate-600"><p>Краткая шпаргалка по GitHub CLI — инструменту командной строки для работы с GitHub из терминала.</p></div><div class="pt-5" id="carbon_container"></div></div></div><div class="mdLayout w-full max-container" id="mdLayout"> <div class="h2-wrap">
+<h2 id="getting-started"><a class="h-anchor" href="#getting-started">#</a>Начало работы</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="installation"><a class="h-anchor" href="#installation">#</a>Установка</h3>
+<div class="section">
+<p><strong>Windows</strong></p>
+<table class="show-header">
+<thead>
+<tr>
+<th style="text-align:left">Инструмент</th>
+<th style="text-align:left">Установка</th>
+<th style="text-align:left">Обновление</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">WinGet</td>
+<td style="text-align:left"><code>winget install --id Github.cli</code></td>
+<td style="text-align:left"><code>winget upgrade --id GitHub.cli</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Scoop</td>
+<td style="text-align:left"><code>scoop install gh</code></td>
+<td style="text-align:left"><code>scoop update gh</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Choco</td>
+<td style="text-align:left"><code>choco install gh</code></td>
+<td style="text-align:left"><code>choco upgrade gh</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mac OS</strong></p>
+<table class="show-header">
+<thead>
+<tr>
+<th style="text-align:left">Инструмент</th>
+<th style="text-align:left">Установка</th>
+<th style="text-align:left">Обновление</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Brew</td>
+<td style="text-align:left"><code>brew install gh</code></td>
+<td style="text-align:left"><code>brew upgrade gh</code></td>
+</tr>
+<tr>
+<td style="text-align:left">MacPorts</td>
+<td style="text-align:left"><code>sudo port install gh</code></td>
+<td style="text-align:left"><code>sudo port selfupdate &amp;&amp; sudo port upgrade gh</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Linux</strong></p>
+<p>См. <a href="https://github.com/cli/cli/blob/trunk/docs/install_linux.md" rel="noopener" target="_blank">инструкции по установке</a> для других дистрибутивов Linux.</p>
+<p>Скрипт установки:</p>
+<pre><code class="hljs hljs language-bash"><span class="hljs-built_in">type</span> -p curl &gt;/dev/null || (<span class="hljs-built_in">sudo</span> apt update &amp;&amp; <span class="hljs-built_in">sudo</span> apt install curl -y)
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">dd</span> of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
+&amp;&amp; <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chmod</span> go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
+&amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">"deb [arch=<span class="hljs-subst">$(dpkg --print-architecture)</span> signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main"</span> | <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">tee</span> /etc/apt/sources.list.d/github-cli.list &gt; /dev/null \
+&amp;&amp; <span class="hljs-built_in">sudo</span> apt update \
+&amp;&amp; <span class="hljs-built_in">sudo</span> apt install gh -y
+</code></pre>
+<hr/>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="basic-usage"><a class="h-anchor" href="#basic-usage">#</a>Основное использование</h3>
+<div class="section">
+<p><strong>Справка и документация</strong></p>
+<p>Показать опции команды:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Команда</th>
+<th style="text-align:left">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>gh help [command]</code></td>
+<td style="text-align:left">Справка по любой команде. Введите gh help [путь к команде] для подробностей.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Аутентификация</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Команда</th>
+<th style="text-align:left">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>gh auth login</code></td>
+<td style="text-align:left">Стандартная аутентификация через браузер</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh auth logout</code></td>
+<td style="text-align:left">Удалить конфигурацию аутентификации для хоста</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh auth refresh</code></td>
+<td style="text-align:left">Расширить или исправить scope прав для сохранённых учётных данных</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh auth setup-git</code></td>
+<td style="text-align:left">Настроить git на использование GitHub CLI как credential helper</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh auth status</code></td>
+<td style="text-align:left">Проверить и показать состояние аутентификации</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh auth token</code></td>
+<td style="text-align:left">Вывести токен аутентификации, используемый gh</td>
+</tr>
+</tbody>
+</table>
+<p>С токеном Github:</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">gh auth --with-token &lt; token.txt</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="repository-management"><a class="h-anchor" href="#repository-management">#</a>Управление репозиторием</h3>
+<div class="section">
+<p><strong>Общее</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Команда</th>
+<th style="text-align:left">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>gh repo create</code></td>
+<td style="text-align:left">Создать новый репозиторий на GitHub</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh repo list [target]</code></td>
+<td style="text-align:left">Список репозиториев пользователя или организации</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Целевые команды</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Команда</th>
+<th style="text-align:left">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>gh repo archive [repo]</code></td>
+<td style="text-align:left">Архивировать репозиторий</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh repo clone [dir]</code></td>
+<td style="text-align:left">Клонировать репозиторий локально</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh repo delete [repo]</code></td>
+<td style="text-align:left">Удалить репозиторий</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh repo deploy-key</code></td>
+<td style="text-align:left">Управление deploy-ключами в репозитории</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh repo edit [repo]</code></td>
+<td style="text-align:left">Редактировать настройки репозитория</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh repo fork [repo]</code></td>
+<td style="text-align:left">Создать форк репозитория</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh repo rename [name]</code></td>
+<td style="text-align:left">Переименовать репозиторий</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh repo set-default [repo]</code></td>
+<td style="text-align:left">Задать репозиторий по умолчанию</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh repo sync [dest-repo]</code></td>
+<td style="text-align:left">Синхронизировать целевой репозиторий с исходным</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh repo view [repo]</code></td>
+<td style="text-align:left">Показать описание и README репозитория</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="issues"><a class="h-anchor" href="#issues">#</a>Задачи (issues)</h3>
+<div class="section">
+<p><strong>Поиск issues</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Команда</th>
+<th style="text-align:left">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>gh search issues [query]</code></td>
+<td style="text-align:left">Поиск issues на GitHub</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Примеры</strong></p>
+<pre><code class="hljs hljs language-bash"><span class="hljs-comment"># поиск issues по ключевым словам "readme" и "typo"</span>
+$ gh search issues readme typo
+
+<span class="hljs-comment"># поиск issues по фразе "broken feature"</span>
+$ gh search issues <span class="hljs-string">"broken feature"</span> <span class="hljs-comment"># поиск issues и PR в организации cli</span>
+$ gh search issues --include-prs --owner=cli
+
+<span class="hljs-comment"># поиск открытых issues, назначенных вам</span>
+$ gh search issues --assignee=@me --state=open
+
+<span class="hljs-comment"># поиск issues с большим числом комментариев</span>
+$ gh search issues --comments=<span class="hljs-string">"&gt;100"</span> <span class="hljs-comment"># поиск issues без метки "bug"</span>
+$ gh search issues -- -label:bug
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="pull-requests"><a class="h-anchor" href="#pull-requests">#</a>Pull requests</h3>
+<div class="section">
+<p><strong>Действия с pull request</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Команда</th>
+<th style="text-align:left">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>gh pr create</code></td>
+<td style="text-align:left">Создать pull request</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh pr list</code></td>
+<td style="text-align:left">Список pull requests в репозитории</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh pr status</code></td>
+<td style="text-align:left">Показать статус pull requests</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Пример</strong></p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">gh <span class="hljs-built_in">pr</span> status</span>
+</code></pre>
+<p>Пример вывода:</p>
+<pre><code class="hljs">Current branch
+  #12 Remove the test feature [user:patch-2]
+   - All checks failing - Review required
+
+Created by you
+  You have no open pull requests
+
+Requesting a code review from you
+  #13 Fix tests [branch]
+  - 3/4 checks failing - Review required
+  #15 New feature [branch]
+   - Checks passing - Approved
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="github-actions"><a class="h-anchor" href="#github-actions">#</a>GitHub Actions</h3>
+<div class="section">
+<p><strong>General Actions</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Команда</th>
+<th style="text-align:left">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>gh workflow disable</code></td>
+<td style="text-align:left">Отключить workflow — не запускается и не показывается в списке</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh workflow enable</code></td>
+<td style="text-align:left">Включить workflow — можно запускать и он показывается в списке</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh workflow list</code></td>
+<td style="text-align:left">Список workflow-файлов (отключённые по умолчанию скрыты)</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh workflow run</code></td>
+<td style="text-align:left">Создать событие workflow_dispatch для указанного workflow</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh workflow view</code></td>
+<td style="text-align:left">Просмотр сводки workflow</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Запуск Actions</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Команда</th>
+<th style="text-align:left">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>gh run cancel</code></td>
+<td style="text-align:left">Отменить выполнение workflow</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh run delete</code></td>
+<td style="text-align:left">Удалить выполнение workflow</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh run download</code></td>
+<td style="text-align:left">Скачать артефакты выполнения GitHub Actions</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh run list</code></td>
+<td style="text-align:left">Список последних выполнений</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh run rerun</code></td>
+<td style="text-align:left">Перезапустить всё выполнение, только проваленные jobs или конкретный job</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh run view</code></td>
+<td style="text-align:left">Просмотр сводки выполнения workflow</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh run watch</code></td>
+<td style="text-align:left">Отслеживать выполнение до завершения с отображением прогресса</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="aliases"><a class="h-anchor" href="#aliases">#</a>Псевдонимы</h3>
+<div class="section">
+<p><strong>Настройки псевдонимов</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Команда</th>
+<th style="text-align:left">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>gh alias delete</code></td>
+<td style="text-align:left">Удалить заданные псевдонимы</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh alias import</code></td>
+<td style="text-align:left">Импорт псевдонимов из YAML-файла</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh alias list</code></td>
+<td style="text-align:left">Вывести все настроенные псевдонимы gh</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh alias set</code></td>
+<td style="text-align:left">Задать слово, раскрывающееся в полную команду gh</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="releases"><a class="h-anchor" href="#releases">#</a>Релизы</h3>
+<div class="section">
+<p><strong>General Actions</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Команда</th>
+<th style="text-align:left">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>gh release create</code></td>
+<td style="text-align:left">Создать новый релиз репозитория</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh release list</code></td>
+<td style="text-align:left">Список релизов в репозитории</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Целевые команды</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Команда</th>
+<th style="text-align:left">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>gh release delete</code></td>
+<td style="text-align:left">Удалить релиз</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh release delete-asset</code></td>
+<td style="text-align:left">Удалить файл из релиза</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh release download</code></td>
+<td style="text-align:left">Скачать файлы релиза</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh release edit</code></td>
+<td style="text-align:left">Редактировать релиз</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh release upload</code></td>
+<td style="text-align:left">Загрузить файлы в релиз</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh release view</code></td>
+<td style="text-align:left">Просмотр информации о релизе</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="configuration"><a class="h-anchor" href="#configuration">#</a>Конфигурация</h3>
+<div class="section">
+<p><strong>Настройки конфигурации</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Команда</th>
+<th style="text-align:left">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>gh config clear-cache</code></td>
+<td style="text-align:left">Очистить кэш CLI</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh config get</code></td>
+<td style="text-align:left">Вывести значение ключа конфигурации</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh config list</code></td>
+<td style="text-align:left">Вывести список ключей и значений конфигурации</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gh config set</code></td>
+<td style="text-align:left">Задать значение ключа конфигурации</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div> </div></div><div class="toc-container" id="toc-container"><nav aria-label="Table of Contents" class="toc-list" id="toc-list" role="navigation"></nav></div><script>window.addEventListener("DOMContentLoaded",function(){"function"==typeof window.initTOC&&window.initTOC()})</script><div class="z-50 fixed inset-0 flex justify-center bg-slate-600/80 dark:bg-slate-900/90 items-start text-sm z-50 overflow-hidden lg:pt-16 lg:pb-20 hidden" id="mysearch"><div class="lg:max-w-screen-lg w-full flex flex-col justify-between bg-white dark:bg-slate-700 shadow-3xl dark:shadow-3xl lg:rounded-lg lg:max-h-832 min-h-320 h-full" id="mysearch-box"><div class="flex items-center h-16 flex-none border-b border-slate-200 dark:border-slate-700"><div class="w-full h-full"><form class="flex items-center w-full h-full outline-none rounded-tl-lg"><label class="h-full w-14 mt-1 ml-1 px-4 flex items-center justify-center transition-colors duration-200 ease-in-out text-indigo-200" for="mysearch-input" id="mysearch-label"><div class="text-2xl text-indigo-500"> <svg fill="currentColor" height="1em" viewbox="0 0 1024 1024" width="1em" xmlns="http://www.w3.org/2000/svg"> <path d="M942.14826666 878.7968l-200.56746667-229.92213333C795.37493333 583.8848 827.73333333 500.5312 827.73333333 409.6 827.73333333 202.27413333 659.59253333 34.13333333 452.26666666 34.13333333 244.87253333 34.13333333 76.79999999 202.27413333 76.79999999 409.6S244.87253333 785.06666667 452.26666666 785.06666667c77.14133333 0 148.82133333-23.3472 208.41813333-63.21493334l199.33866667 228.5568c19.72906667 22.7328 54.272 24.91733333 76.8 5.25653334C959.62453333 935.86773333 961.87733333 901.46133333 942.14826666 878.7968zM179.19999999 409.6c0-150.59626667 122.4704-273.06666667 273.06666667-273.06666667 150.59626667 0 273.06666667 122.4704 273.06666667 273.06666667s-122.4704 273.06666667-273.06666667 273.06666667C301.67039999 682.66666667 179.19999999 560.19626667 179.19999999 409.6z"></path>
+</svg>
+</div></label><div class="relative flex-1"> <input autocapitalize="off" autocomplete="off" autocorrect="off" class="flex-1 font-light h-full bg-transparent focus:text-slate-900 text-slate-500 dark:text-slate-300 placeholder-slate-400 placeholder-opacity-80 shadow-none outline-none truncate text-lg sm:text-2xl caret-color-indigo-400 leading-normalized w-full appearance-none rounded-none transition-colors duration-200 ease-in-out" enterkeyhint="go" id="mysearch-input" maxlength="128" placeholder="Search for cheatsheet" spellcheck="false" type="text"/></div> <button class="items-center justify-center h-full w-14 px-4 text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-100 opacity-75 fill-current cursor-pointer transition-fast-out flex" id="mysearch-clear" type="reset"><i class="icon icon-close text-xs font-bold"></i></button></form></div><div class="w-px h-8 bg-slate-100 dark:bg-slate-400/20 flex-none"></div> <button class="cancel mr-1 px-4 h-full text-slate-500 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-300"> Cancel</button></div><div class="flex flex-grow overflow-hidden lg:rounded-br-lg"><div class="relative w-full flex-none overflow-y-auto lg:w-1/2"><ul id="mysearch-list"></ul></div><div class="preview-panel shadow-inner bg-slate-100 dark:bg-slate-800 lg:block w-1/2 flex-none overflow-y-auto"></div></div></div></div>
+</body><script src="js/maina454.js?_v=1769244903599"></script><script>
+        // Получить все элементы pre > code
+        const codeBlocks = document.querySelectorAll('pre > code');
+        const initInnerHTML = '<svg height="1em" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path> </svg>';
+        const successInnerHTML = '<svg height="1em" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg>';
+        codeBlocks.forEach(function (codeBlock) {
+            // Создать кнопку копирования
+            const copyButton = document.createElement('button');
+            copyButton.className = 'opacity-90 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 p-2 text-white shadow-xl rounded-lg flex items-center absolute top-2 right-2 transition-all duration-200 backdrop-blur-sm';
+            copyButton.innerHTML = initInnerHTML;
+            copyButton.style.opacity = "0";
+            const parent = codeBlock.parentNode;
+
+            parent.style = "position: relative;"
+            parent.insertBefore(copyButton, codeBlock);
+
+            // Обработчик клика по кнопке копирования
+            copyButton.addEventListener('click', () => {
+                navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+                    copyButton.innerHTML = successInnerHTML;
+                    setTimeout(() => {
+                        copyButton.innerHTML = initInnerHTML;
+                    }, 1000);
+                });
+            });
+
+            parent.addEventListener('mouseenter', () => {
+                copyButton.style.opacity = "1";
+            });
+            parent.addEventListener('mouseleave', () => {
+                copyButton.style.opacity = "0";
+            });
+        });
+    </script> </html>

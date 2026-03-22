@@ -1,0 +1,338 @@
+<!DOCTYPE HTML>
+<html class="scrollbar" lang="en" translate="no"><head><meta charset="utf-8"><meta content="IE=Edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="en" http-equiv="content-language"><meta content="en" name="language"><meta content="webkit" name="renderer"><meta content="width=device-width,initial-scale=1,maximum-scale=1" name="viewport"><meta content="/" name="app:pageurl"><title>C# Cheat Sheet &amp; Quick Reference</title><meta content="cheat,sheet,cheatsheets,reference,programming,code table,snippets,linux,command,shortcuts,developers,object-oriented,class" name="keywords"><meta content="C# quick reference cheat sheet that provides basic syntax and methods. " name="description"><meta content="Fechin" name="author"><meta content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" name="robots"><meta content="CheatSheets.html" name="article:author"><meta content="2021-12-14T12:22:00.000Z" name="article:published_time"><meta content="2021-12-14T12:22:00.000Z" name="article:modified_time"><meta content="Programming" name="article:section"><meta content="object-oriented" name="article:tag"><meta content="class" name="article:tag"><meta content="cs.html" property="og:url"><meta content="C# Cheat Sheet &amp; Quick Reference" property="og:title"><meta content="CheatSheets.html" property="og:site_name"><meta content="C# quick reference cheat sheet that provides basic syntax and methods. " property="og:description"><meta content="assets/image/cs-preview09f2.png?v=iv343" property="og:image"><meta content="2276" property="og:image:width"><meta content="1240" property="og:image:height"><meta content="C# Cheat Sheet &amp; Quick Reference - " property="og:image:alt"><meta content="article" property="og:type"><meta content="en_US" property="og:locale"><meta content="2021-12-14T12:22:00.000Z" property="article:published_time"><meta content="2021-12-14T12:22:00.000Z" property="article:modified_time"><meta content="CheatSheets.html" property="article:author"><meta content="Programming" property="article:section"><meta content="object-oriented" property="article:tag"><meta content="class" property="article:tag"><meta content="summary_large_image" name="twitter:card"><meta content="C# Cheat Sheet &amp; Quick Reference" name="twitter:title"><meta content="@Fechin" name="twitter:site"><meta content="@Fechin" name="twitter:creator"><meta content="C# quick reference cheat sheet that provides basic syntax and methods. " name="twitter:description"><meta content="assets/image/cs-previewe4df.png?v=kb5emh" name="twitter:image"><meta content="C# Cheat Sheet &amp; Quick Reference - " name="twitter:image:alt"><link href="images/favicon3860.png?v=1" rel="icon"><link href="images/favicon3860.png?v=1" rel="icon shortcut" type="image/png"><link href="cs.html" rel="canonical"><link href="css/stylea454.css?_v=1769244903599" rel="stylesheet"><script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            let html = document.documentElement.classList;
+            html.toggle('dark')
+        }
+    </script></head><body class="bg-slate-100 dark:bg-slate-900"><header class="relative z-10"><div class="max-container z-20 relative"></div></header><div class="mx-auto flex flex-wrap md:py-5 flex-col md:flex-row items-center"><div class="flex flex-col w-full mx-auto items-center text-center my-8"><div class="max-container w-full"><h1 class="text-5xl mb-4"> <span class="text-slate-700 dark:text-slate-300 font-light">C#</span> <span class="text-slate-400 dark:text-slate-500 font-extralight hidden md:inline">cheatsheet</span></h1><div class="lg:w-3/5 mx-auto intro leading-relaxed text-slate-600"><p>Краткая справочная шпаргалка по C# с базовым синтаксисом и методами.</p></div><div class="pt-5" id="carbon_container"></div></div></div><div id="mdLayout" class="mdLayout w-full max-container">
+<div class="h2-wrap">
+<h2 id="getting-started"><a class="h-anchor" href="#getting-started">#</a>Начало работы</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="hello-cs"><a class="h-anchor" href="#hello-cs">#</a>Привет.cs</h3>
+<div class="section">
+<pre><code class="hljs hljs language-cs"><span class="hljs-keyword">class</span> <span class="hljs-title">Hello</span> {
+  <span class="hljs-comment">// главный метод</span> <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-built_in">string</span>[] <span class="hljs-keyword">args</span></span>)</span>
+  {
+    <span class="hljs-comment">// Вывод: Hello, world!</span>
+    Console.WriteLine(<span class="hljs-string">"Hello, world!"</span>);
+  }
+}
+</code></pre>
+<p>Создаёт директорию проекта для нового консольного приложения</p>
+<pre><code class="hljs hljs language-cs">$ dotnet <span class="hljs-keyword">new</span> console
+</code></pre>
+<p>Выводит список всех шаблонов приложений</p>
+<pre><code class="hljs hljs language-cs">$ dotnet <span class="hljs-keyword">new</span> list
+</code></pre>
+<p>Компиляция и запуск (убедитесь, что находитесь в директории проекта)</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">dotnet run</span>
+Hello, world!
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="variables"><a class="h-anchor" href="#variables">#</a>Переменные</h3>
+<div class="section">
+<pre><code class="hljs hljs language-cs"><span class="hljs-built_in">int</span> intNum = <span class="hljs-number">9</span>;
+<span class="hljs-built_in">long</span> longNum = <span class="hljs-number">9999999</span>;
+<span class="hljs-built_in">float</span> floatNum = <span class="hljs-number">9.99F</span>;
+<span class="hljs-built_in">double</span> doubleNum = <span class="hljs-number">99.999</span>;
+<span class="hljs-built_in">decimal</span> decimalNum = <span class="hljs-number">99.9999</span>M;
+<span class="hljs-built_in">char</span> letter = <span class="hljs-string">'D'</span>;
+<span class="hljs-built_in">bool</span> @bool = <span class="hljs-literal">true</span>;
+<span class="hljs-built_in">string</span> site = <span class="hljs-string">""</span>;
+
+<span class="hljs-keyword">var</span> num = <span class="hljs-number">999</span>;
+<span class="hljs-keyword">var</span> str = <span class="hljs-string">"999"</span>;
+<span class="hljs-keyword">var</span> bo = <span class="hljs-literal">false</span>;
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="primitive-data-types"><a class="h-anchor" href="#primitive-data-types">#</a>Примитивные типы данных</h3>
+<div class="section">
+<table class="show-header">
+<thead>
+<tr>
+<th>Тип</th>
+<th>Размер</th>
+<th>Диапазон</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>int</code></td>
+<td>4 bytes</td>
+<td>-2<sup>31</sup> <sup>to</sup> 2<sup>31</sup>-1</td>
+</tr>
+<tr>
+<td><code>long</code></td>
+<td>8 bytes</td>
+<td>-2<sup>63</sup> <sup>to</sup> 2<sup>63</sup>-1</td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td>4 bytes</td>
+<td>6 <sup>to</sup> 7 decimal digits</td>
+</tr>
+<tr>
+<td><code>double</code></td>
+<td>8 bytes</td>
+<td>15 decimal digits</td>
+</tr>
+<tr>
+<td><code>decimal</code></td>
+<td>16 bytes</td>
+<td>28 <sup>to</sup> 29 decimal digits</td>
+</tr>
+<tr>
+<td><code>char</code></td>
+<td>2 bytes</td>
+<td>0 <sup>to</sup> 65535</td>
+</tr>
+<tr>
+<td><code>bool</code></td>
+<td>1 bit</td>
+<td>true / false</td>
+</tr>
+<tr>
+<td><code>строка</code></td>
+<td>2 bytes per char</td>
+<td><em>N/A</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="comments"><a class="h-anchor" href="#comments">#</a>Комментарии</h3>
+<div class="section span-2">
+<pre><code class="hljs hljs language-cs"><span class="hljs-comment">// Однострочный комментарий</span> <br><br><span class="hljs-comment">/* Многострочный комментарий */</span> <br><br><span class="hljs-comment">// TODO: Добавляет комментарий в список задач Visual Studio</span> <br><span class="hljs-comment">/// Однострочный комментарий для документации</span> <br><br><span class="hljs-comment">/** Многострочный комментарий для документации **/</span> </code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="strings"><a class="h-anchor" href="#strings">#</a>Строки</h3>
+<div class="section">
+<pre><code class="hljs hljs language-cs"><span class="hljs-built_in">string</span> first = <span class="hljs-string">"John"</span>;
+<span class="hljs-built_in">string</span> last = <span class="hljs-string">"Doe"</span>;
+
+<span class="hljs-comment">// конкатенация строк</span>
+<span class="hljs-built_in">string</span> name = first + <span class="hljs-string">" "</span> + last;
+Console.WriteLine(name); <span class="hljs-comment">// =&gt; John Doe</span>
+</code></pre>
+<p>См. также: <a href="#c-strings">Строки C#</a></p>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="user-input"><a class="h-anchor" href="#user-input">#</a>Пользовательский ввод</h3>
+<div class="section span-2">
+<pre><code class="hljs hljs language-cs">Console.WriteLine(<span class="hljs-string">"Enter number:"</span>);
+<span class="hljs-keyword">if</span>(<span class="hljs-built_in">int</span>.TryParse(Console.ReadLine(),<span class="hljs-keyword">out</span> <span class="hljs-built_in">int</span> input))
+{
+  <span class="hljs-comment">// ввод проверен</span>
+  Console.WriteLine(<span class="hljs-string">$"You entered <span class="hljs-subst">{input}</span>"</span>);
+}
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="conditionals"><a class="h-anchor" href="#conditionals">#</a>Условные предложения</h3>
+<div class="section">
+<pre><code class="hljs hljs language-cs"><span class="hljs-built_in">int</span> j = <span class="hljs-number">10</span>;
+
+<span class="hljs-keyword">if</span> (j == <span class="hljs-number">10</span>) {
+  Console.WriteLine(<span class="hljs-string">"I get printed"</span>);
+} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (j &gt; <span class="hljs-number">10</span>) {
+  Console.WriteLine(<span class="hljs-string">"I don't"</span>);
+} <span class="hljs-keyword">else</span> {
+  Console.WriteLine(<span class="hljs-string">"I also don't"</span>);
+}
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="arrays"><a class="h-anchor" href="#arrays">#</a>Массивы</h3>
+<div class="section">
+<pre><code class="hljs hljs language-cs"><span class="hljs-built_in">char</span>[] chars = <span class="hljs-keyword">new</span> <span class="hljs-built_in">char</span>[<span class="hljs-number">10</span>];
+chars[<span class="hljs-number">0</span>] = <span class="hljs-string">'a'</span>;
+chars[<span class="hljs-number">1</span>] = <span class="hljs-string">'b'</span>;
+
+<span class="hljs-built_in">string</span>[] letters = {<span class="hljs-string">"A"</span>, <span class="hljs-string">"B"</span>, <span class="hljs-string">"C"</span>};
+<span class="hljs-built_in">int</span>[] mylist = {<span class="hljs-number">100</span>, <span class="hljs-number">200</span>};
+<span class="hljs-built_in">bool</span>[] answers = {<span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>};
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="loops"><a class="h-anchor" href="#loops">#</a>Циклы</h3>
+<div class="section">
+<pre><code class="hljs hljs language-cs"><span class="hljs-built_in">int</span>[] numbers = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>};
+
+<span class="hljs-keyword">for</span>(<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; numbers.Length; i++) {
+  Console.WriteLine(numbers[i]);
+}
+</code></pre>
+<hr>
+<pre><code class="hljs hljs language-cs"><span class="hljs-keyword">foreach</span>(<span class="hljs-built_in">int</span> num <span class="hljs-keyword">in</span> numbers) {
+  Console.WriteLine(num);
+}
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap">
+<h2 id="c-strings"><a class="h-anchor" href="#c-strings">#</a>Строки C#</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="string-concatenation"><a class="h-anchor" href="#string-concatenation">#</a>Конкатенация строк</h3>
+<div class="section">
+<pre><code class="hljs hljs language-cs"><span class="hljs-built_in">string</span> first = <span class="hljs-string">"John"</span>;
+<span class="hljs-built_in">string</span> last = <span class="hljs-string">"Doe"</span>;
+
+<span class="hljs-built_in">string</span> name = first + <span class="hljs-string">" "</span> + last;
+Console.WriteLine(name); <span class="hljs-comment">// =&gt; John Doe</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="string-interpolation"><a class="h-anchor" href="#string-interpolation">#</a>Строковая интерполяция</h3>
+<div class="section">
+<pre><code class="hljs hljs language-cs"><span class="hljs-built_in">string</span> first = <span class="hljs-string">"John"</span>;
+<span class="hljs-built_in">string</span> last = <span class="hljs-string">"Doe"</span>;
+
+<span class="hljs-built_in">string</span> name = <span class="hljs-string">$"<span class="hljs-subst">{first}</span> <span class="hljs-subst">{last}</span>"</span>;
+Console.WriteLine(name); <span class="hljs-comment">// =&gt; John Doe</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap row-span-2">
+<h3 id="string-members"><a class="h-anchor" href="#string-members">#</a>Строковые члены</h3>
+<div class="section">
+<table class="show-header" style="width: 100%; height: 639.671px;">
+<tbody>
+<tr style="height: 82.6094px;">
+<td style="width: 50.1229%; height: 82.6094px;">Length</td>
+<td style="width: 49.8771%; height: 82.6094px;">Свойство, возвращающее длину строки.</td>
+</tr>
+<tr style="height: 61.4062px;">
+<td style="width: 50.1229%; height: 61.4062px;">Compare()</td>
+<td style="width: 49.8771%; height: 61.4062px;">Статический метод сравнения двух строк.</td>
+</tr>
+<tr style="height: 82.6094px;">
+<td style="width: 50.1229%; height: 82.6094px;">Contains()</td>
+<td style="width: 49.8771%; height: 82.6094px;">Проверяет, содержит ли строка указанную подстроку.</td>
+</tr>
+<tr style="height: 82.6094px;">
+<td style="width: 50.1229%; height: 82.6094px;">Equals()</td>
+<td style="width: 49.8771%; height: 82.6094px;">Проверяет, совпадают ли две строки посимвольно.</td>
+</tr>
+<tr style="height: 82.6094px;">
+<td style="width: 50.1229%; height: 82.6094px;">Format()</td>
+<td style="width: 49.8771%; height: 82.6094px;">Форматирует строку через нотацию {0} и примитивы.</td>
+</tr>
+<tr style="height: 103.812px;">
+<td style="width: 50.1229%; height: 103.812px;">Trim()</td>
+<td style="width: 49.8771%; height: 103.812px;">Удаляет указанные символы в начале и конце. По умолчанию — пробелы.</td>
+</tr>
+<tr style="height: 103.812px;">
+<td style="width: 50.1229%; height: 103.812px;">Split()</td>
+<td style="width: 49.8771%; height: 103.812px;">Разбивает строку по указанному символу и создаёт массив из частей.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="verbatim-strings"><a class="h-anchor" href="#verbatim-strings">#</a>Дословные строки (@"...")</h3>
+<div class="section">
+<pre><code class="hljs wrap hljs language-cs"><span class="hljs-built_in">string</span> longString = <span class="hljs-string">@"I can type any characters in here !#@$%^&amp;*()__+ '' \n \t except double quotes and I will be taken literally. I even work with multiple lines."</span>;
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="member-example"><a class="h-anchor" href="#member-example">#</a>Пример члена класса</h3>
+<div class="section">
+<pre><code class="hljs hljs language-cs"><span class="hljs-comment">// Использование свойства System.String</span>
+<span class="hljs-built_in">string</span> lengthOfString = <span class="hljs-string">"How long?"</span>;
+lengthOfString.Length           <span class="hljs-comment">// =&gt; 9</span> <br><span class="hljs-comment">// Использование методов System.String</span>
+lengthOfString.Contains(<span class="hljs-string">"How"</span>); <span class="hljs-comment">// =&gt; true</span>
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap">
+<h2 id="misc"><a class="h-anchor" href="#misc">#</a>Разное</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap col-span-2">
+<h3 id="general-net-terms"><a class="h-anchor" href="#general-net-terms">#</a>Основные термины .NET</h3>
+<div class="section">
+<table class="show-header">
+<thead>
+<tr>
+<th>Термин</th>
+<th>Определение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Runtime</td>
+<td>Набор служб для выполнения скомпилированной единицы кода.</td>
+</tr>
+<tr>
+<td>Common Language Runtime (CLR)</td>
+<td>Загружает и управляет объектами .NET. Обрабатывает память, хостинг приложений, потоки, проверки безопасности и др.</td>
+</tr>
+<tr>
+<td>Managed code</td>
+<td>Код, компилируемый и выполняемый в .NET. Примеры: C#, F#, VB.</td>
+</tr>
+<tr>
+<td>Unmanaged code</td>
+<td>Код, компилируемый в машинный код, не управляется .NET. Без сборки мусора и т.п. Примеры: DLL из C/C++.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div></div><div class="toc-container" id="toc-container"><nav aria-label="Table of Contents" class="toc-list" id="toc-list" role="navigation"></nav></div><script>window.addEventListener("DOMContentLoaded",function(){"function"==typeof window.initTOC&&window.initTOC()})</script><div class="z-50 fixed inset-0 flex justify-center bg-slate-600/80 dark:bg-slate-900/90 items-start text-sm z-50 overflow-hidden lg:pt-16 lg:pb-20 hidden" id="mysearch"><div class="lg:max-w-screen-lg w-full flex flex-col justify-between bg-white dark:bg-slate-700 shadow-3xl dark:shadow-3xl lg:rounded-lg lg:max-h-832 min-h-320 h-full" id="mysearch-box"><div class="flex items-center h-16 flex-none border-b border-slate-200 dark:border-slate-700"><div class="w-full h-full"><form class="flex items-center w-full h-full outline-none rounded-tl-lg"><label class="h-full w-14 mt-1 ml-1 px-4 flex items-center justify-center transition-colors duration-200 ease-in-out text-indigo-200" for="mysearch-input" id="mysearch-label"><div class="text-2xl text-indigo-500"> <svg fill="currentColor" height="1em" viewBox="0 0 1024 1024" width="1em" xmlns="http://www.w3.org/2000/svg"> <path d="M942.14826666 878.7968l-200.56746667-229.92213333C795.37493333 583.8848 827.73333333 500.5312 827.73333333 409.6 827.73333333 202.27413333 659.59253333 34.13333333 452.26666666 34.13333333 244.87253333 34.13333333 76.79999999 202.27413333 76.79999999 409.6S244.87253333 785.06666667 452.26666666 785.06666667c77.14133333 0 148.82133333-23.3472 208.41813333-63.21493334l199.33866667 228.5568c19.72906667 22.7328 54.272 24.91733333 76.8 5.25653334C959.62453333 935.86773333 961.87733333 901.46133333 942.14826666 878.7968zM179.19999999 409.6c0-150.59626667 122.4704-273.06666667 273.06666667-273.06666667 150.59626667 0 273.06666667 122.4704 273.06666667 273.06666667s-122.4704 273.06666667-273.06666667 273.06666667C301.67039999 682.66666667 179.19999999 560.19626667 179.19999999 409.6z"></path>
+</svg>
+</div></label><div class="relative flex-1"> <input autocapitalize="off" autocomplete="off" autocorrect="off" class="flex-1 font-light h-full bg-transparent focus:text-slate-900 text-slate-500 dark:text-slate-300 placeholder-slate-400 placeholder-opacity-80 shadow-none outline-none truncate text-lg sm:text-2xl caret-color-indigo-400 leading-normalized w-full appearance-none rounded-none transition-colors duration-200 ease-in-out" enterkeyhint="go" id="mysearch-input" maxlength="128" placeholder="Search for cheatsheet" spellcheck="false" type="text"></div> <button class="items-center justify-center h-full w-14 px-4 text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-100 opacity-75 fill-current cursor-pointer transition-fast-out flex" id="mysearch-clear" type="reset"><i class="icon icon-close text-xs font-bold"></i></button></form></div><div class="w-px h-8 bg-slate-100 dark:bg-slate-400/20 flex-none"></div> <button class="cancel mr-1 px-4 h-full text-slate-500 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-300"> Cancel</button></div><div class="flex flex-grow overflow-hidden lg:rounded-br-lg"><div class="relative w-full flex-none overflow-y-auto lg:w-1/2"><ul id="mysearch-list"></ul></div><div class="preview-panel shadow-inner bg-slate-100 dark:bg-slate-800 lg:block w-1/2 flex-none overflow-y-auto"></div></div></div></div>
+<script src="js/maina454.js?_v=1769244903599"></script><script>
+        // Получить все элементы pre > code
+        const codeBlocks = document.querySelectorAll('pre > code');
+        const initInnerHTML = '<svg height="1em" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path> </svg>';
+        const successInnerHTML = '<svg height="1em" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg>';
+        codeBlocks.forEach(function (codeBlock) {
+            // Создать кнопку копирования
+            const copyButton = document.createElement('button');
+            copyButton.className = 'opacity-90 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 p-2 text-white shadow-xl rounded-lg flex items-center absolute top-2 right-2 transition-all duration-200 backdrop-blur-sm';
+            copyButton.innerHTML = initInnerHTML;
+            copyButton.style.opacity = "0";
+            const parent = codeBlock.parentNode;
+
+            parent.style = "position: relative;"
+            parent.insertBefore(copyButton, codeBlock);
+
+            // Обработчик клика по кнопке копирования
+            copyButton.addEventListener('click', () => {
+                navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+                    copyButton.innerHTML = successInnerHTML;
+                    setTimeout(() => {
+                        copyButton.innerHTML = initInnerHTML;
+                    }, 1000);
+                });
+            });
+
+            parent.addEventListener('mouseenter', () => {
+                copyButton.style.opacity = "1";
+            });
+            parent.addEventListener('mouseleave', () => {
+                copyButton.style.opacity = "0";
+            });
+        });
+    </script> </body></html>

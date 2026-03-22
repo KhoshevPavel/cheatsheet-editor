@@ -1,0 +1,1746 @@
+<header class="relative z-10">
+<div class="max-container z-20 relative"> </div>
+</header>
+<div class="mx-auto flex flex-wrap md:py-5 flex-col md:flex-row items-center">
+<div class="flex flex-col w-full mx-auto items-center text-center my-8">
+<div class="max-container w-full">
+<h1 class="text-5xl mb-4"><span class="text-slate-700 dark:text-slate-300 font-light">C</span> <span class="text-slate-400 dark:text-slate-500 font-extralight hidden md:inline">cheatsheet</span></h1>
+<div class="lg:w-3/5 mx-auto intro leading-relaxed text-slate-600">
+<p>Краткая справочная шпаргалка по языку C с базовым синтаксисом и методами.</p>
+</div>
+<div class="pt-5" id="carbon_container"></div>
+</div>
+</div>
+<div class="mdLayout w-full max-container" id="mdLayout">
+<div class="h2-wrap">
+<h2 id="getting-started"><a class="h-anchor" href="#getting-started">#</a>Начало работы</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap row-span-2">
+<h3 id="hello-c"><a class="h-anchor" href="#hello-c">#</a>hello.c</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span> <span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello World!\n"</span>);
+
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>Компиляция hello.c через gcc</p>
+<pre><code class="hljs hljs language-bash">$ gcc -Wall -g hello.c -o hello
+</code></pre>
+<p>Запуск скомпилированного hello</p>
+<pre><code class="hljs hljs language-bash">$ ./hello
+</code></pre>
+<p>Вывод =&gt; Hello World!</p>
+</div>
+</div>
+<div class="h3-wrap row-span-2">
+<h3 id="variables"><a class="h-anchor" href="#variables">#</a>Переменные</h3>
+<div class="section span-2">
+<pre><code class="hljs hljs language-c"><span class="hljs-type">int</span> myNum = <span class="hljs-number">15</span>;
+
+<span class="hljs-type">int</span> myNum2; <span class="hljs-comment">// не присваивать, затем присвоить</span>
+myNum2 = <span class="hljs-number">15</span>;
+
+<span class="hljs-type">int</span> myNum3 = <span class="hljs-number">15</span>; <span class="hljs-comment">// myNum3 равен 15</span>
+myNum3 = <span class="hljs-number">10</span>;     <span class="hljs-comment">// теперь myNum3 равен 10</span> <span class="hljs-type">float</span> myFloat = <span class="hljs-number">5.99</span>; <span class="hljs-comment">// число с плавающей точкой</span>
+<span class="hljs-type">char</span> myLetter = <span class="hljs-string">'D'</span>;  <span class="hljs-comment">// символ</span> <span class="hljs-type">int</span> x = <span class="hljs-number">5</span>;
+<span class="hljs-type">int</span> y = <span class="hljs-number">6</span>;
+<span class="hljs-type">int</span> sum = x + y; <span class="hljs-comment">// добавить переменные в сумму</span> <span class="hljs-comment">// объявить несколько переменных</span>
+<span class="hljs-type">int</span> a = <span class="hljs-number">5</span>, b = <span class="hljs-number">6</span>, c = <span class="hljs-number">50</span>;
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="constants"><a class="h-anchor" href="#constants">#</a>Константы</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-type">const</span> <span class="hljs-type">int</span> minutesPerHour = <span class="hljs-number">60</span>;
+<span class="hljs-type">const</span> <span class="hljs-type">float</span> PI = <span class="hljs-number">3.14</span>;
+</code></pre>
+<p>Лучшие практики</p>
+<pre><code class="hljs hljs language-c"><span class="hljs-type">const</span> <span class="hljs-type">int</span> BIRTHYEAR = <span class="hljs-number">1980</span>;
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="comment"><a class="h-anchor" href="#comment">#</a>Комментарий</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-comment">// это комментарий</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello World!\n"</span>); <span class="hljs-comment">// Можно комментировать в любом месте файла</span> <span class="hljs-comment">/*Многострочный комментарий: вывести Hello World! на экран, это круто */</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="print-text"><a class="h-anchor" href="#print-text">#</a>Вывод текста</h3>
+<div class="section span-2">
+<pre><code class="hljs hljs language-c"><span class="hljs-built_in">printf</span>(<span class="hljs-string">"I am learning C.\n"</span>);
+<span class="hljs-type">int</span> testInteger = <span class="hljs-number">5</span>;
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Number = %d\n"</span>, testInteger);
+
+<span class="hljs-type">float</span> f = <span class="hljs-number">5.99</span>; <span class="hljs-comment">// число с плавающей точкой</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Value = %f\n"</span>, f);
+
+<span class="hljs-type">short</span> a = <span class="hljs-number">0b1010110</span>; <span class="hljs-comment">// двоичное число</span>
+<span class="hljs-type">int</span> b = <span class="hljs-number">02713</span>; <span class="hljs-comment">// восьмеричное число</span>
+<span class="hljs-type">long</span> c = <span class="hljs-number">0X1DAB83</span>; <span class="hljs-comment">// шестнадцатеричное число</span> <span class="hljs-comment">// вывод в восьмеричной форме</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"a=%ho, b=%o, c=%lo\n"</span>, a, b, c);
+<span class="hljs-comment">// вывод =&gt; a=126, b=2713, c=7325603</span> <span class="hljs-comment">// вывод в десятичной форме</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"a=%hd, b=%d, c=%ld\n"</span>, a, b, c);
+<span class="hljs-comment">// вывод =&gt; a=86, b=1483, c=1944451</span> <span class="hljs-comment">// вывод в шестнадцатеричной форме (строчные буквы)</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"a=%hx, b=%x, c=%lx\n"</span>, a, b, c);
+<span class="hljs-comment">// вывод =&gt; a=56, b=5cb, c=1dab83</span> <span class="hljs-comment">// вывод в шестнадцатеричной форме (заглавные буквы)</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"a=%hX, b=%X, c=%lX\n"</span>, a, b, c);
+<span class="hljs-comment">// вывод =&gt; a=56, b=5CB, c=1DAB83</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="control-the-number-of-spaces"><a class="h-anchor" href="#control-the-number-of-spaces">#</a>Управление шириной вывода</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-type">int</span> a1 = <span class="hljs-number">20</span>, a2 = <span class="hljs-number">345</span>, a3 = <span class="hljs-number">700</span>;
+<span class="hljs-type">int</span> b1 = <span class="hljs-number">56720</span>, b2 = <span class="hljs-number">9999</span>, b3 = <span class="hljs-number">20098</span>;
+<span class="hljs-type">int</span> c1 = <span class="hljs-number">233</span>, c2 = <span class="hljs-number">205</span>, c3 = <span class="hljs-number">1</span>;
+<span class="hljs-type">int</span> d1 = <span class="hljs-number">34</span>, d2 = <span class="hljs-number">0</span>, d3 = <span class="hljs-number">23</span>;
+
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%-9d %-9d %-9d\n"</span>, a1, a2, a3);
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%-9d %-9d %-9d\n"</span>, b1, b2, b3);
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%-9d %-9d %-9d\n"</span>, c1, c2, c3);
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%-9d %-9d %-9d\n"</span>, d1, d2, d3);
+</code></pre>
+<p>результат вывода</p>
+<pre><code class="hljs hljs language-bash">20        345       700
+56720     9999      20098
+233       205       1
+34        0         23
+</code></pre>
+<p>В <code>%-9d</code>, <code>d</code> — вывод в <code>10</code> системе, <code>9</code> — ширина не менее <code>9</code> символов, при недостатке заполняется пробелами, <code>-</code> — выравнивание по левому краю</p>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="strings"><a class="h-anchor" href="#strings">#</a>Строки</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-type">char</span> greetings[] = <span class="hljs-string">"Hello World!"</span>;
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s"</span>, greetings);
+</code></pre>
+<p>Доступ к строке</p>
+<pre><code class="hljs hljs language-c"><span class="hljs-type">char</span> greetings[] = <span class="hljs-string">"Hello World!"</span>;
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%c"</span>, greetings[<span class="hljs-number">0</span>]);
+</code></pre>
+<p>Изменить строку</p>
+<pre><code class="hljs hljs language-c"><span class="hljs-type">char</span> greetings[] = <span class="hljs-string">"Hello World!"</span>;
+greetings[<span class="hljs-number">0</span>] = <span class="hljs-string">'J'</span>;
+
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s"</span>, greetings);
+<span class="hljs-comment">// выводит "Jello World!"</span>
+</code></pre>
+<p>Другой способ создать строку</p>
+<pre><code class="hljs hljs language-c"><span class="hljs-type">char</span> greetings[] = {<span class="hljs-string">'H'</span>,<span class="hljs-string">'e'</span>,<span class="hljs-string">'l'</span>,<span class="hljs-string">'l'</span>,<span class="hljs-string">'\0'</span>};
+
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s"</span>, greetings);
+<span class="hljs-comment">// вывести "Hell!"</span>
+</code></pre>
+<p>Создание строки через указатель на символ (строковые литералы)</p>
+<pre><code class="hljs hljs language-c"><span class="hljs-type">char</span> *greetings = <span class="hljs-string">"Hello"</span>;
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s"</span>, greetings);
+<span class="hljs-comment">// вывести "Hello!"</span>
+</code></pre>
+<p><strong>NOTE</strong>: String literals might be stored in read-only section of memory. Modifying a string literal invokes undefined behavior. You can't modify it!</p>
+<p>В C нет типа String, используйте тип char и создайте массив символов</p>
+</div>
+</div>
+<div class="h3-wrap row-span-2">
+<h3 id="condition"><a class="h-anchor" href="#condition">#</a>Условие (if)</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-type">int</span> time = <span class="hljs-number">20</span>;
+<span class="hljs-keyword">if</span> (time &lt; <span class="hljs-number">18</span>) {
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Goodbye!\n"</span>);
+} <span class="hljs-keyword">else</span> {
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Good evening!\n"</span>);
+}
+<span class="hljs-comment">// вывод -&gt; "Good evening!"</span>
+<span class="hljs-type">int</span> time = <span class="hljs-number">22</span>;
+<span class="hljs-keyword">if</span> (time &lt; <span class="hljs-number">10</span>) {
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Good morning!\n"</span>);
+} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (time &lt; <span class="hljs-number">20</span>) {
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Goodbye!\n"</span>);
+} <span class="hljs-keyword">else</span> {
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Good evening!\n"</span>);
+}
+<span class="hljs-comment">// вывод -&gt; "Good evening!"</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap col-span-2">
+<h3 id="ternary-operator"><a class="h-anchor" href="#ternary-operator">#</a>Тернарный оператор</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-type">int</span> age = <span class="hljs-number">20</span>;
+(age &gt; <span class="hljs-number">19</span>) ? <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Adult\n"</span>) : <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Teenager\n"</span>);
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="switch"><a class="h-anchor" href="#switch">#</a>switch</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-type">int</span> day = <span class="hljs-number">4</span>;
+
+<span class="hljs-keyword">switch</span> (day) {
+  <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>: <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Wednesday\n"</span>); <span class="hljs-keyword">break</span>;
+  <span class="hljs-keyword">case</span> <span class="hljs-number">4</span>: <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Thursday\n"</span>); <span class="hljs-keyword">break</span>;
+  <span class="hljs-keyword">default</span>:
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Weekend!\n"</span>);
+}
+<span class="hljs-comment">// вывод -&gt; "Thursday" (день 4)</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="while-loop"><a class="h-anchor" href="#while-loop">#</a>Цикл while</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;
+
+<span class="hljs-keyword">while</span> (i &lt; <span class="hljs-number">5</span>) {
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, i);
+  i++;
+}
+</code></pre>
+<p><strong>NOTE</strong>: Don't forget to increment the variable used in the condition, otherwise the loop will never end and become an "infinite loop"!</p>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="do-while-loop"><a class="h-anchor" href="#do-while-loop">#</a>Цикл do...while</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;
+
+<span class="hljs-keyword">do</span> {
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, i);
+  i++;
+} <span class="hljs-keyword">while</span> (i &lt; <span class="hljs-number">5</span>);
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="for-loop"><a class="h-anchor" href="#for-loop">#</a>Цикл for</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) {
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, i);
+}
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap row-span-2">
+<h3 id="break-out-of-the-loop-break-continue"><a class="h-anchor" href="#break-out-of-the-loop-break-continue">#</a>Выход из цикла: break/continue</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) {
+  <span class="hljs-keyword">if</span> (i == <span class="hljs-number">4</span>) {
+    <span class="hljs-keyword">break</span>;
+  }
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, i);
+}
+</code></pre>
+<p>Выйти из цикла, когда i равно 4</p>
+<pre><code class="hljs hljs language-c"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) {
+  <span class="hljs-keyword">if</span> (i == <span class="hljs-number">4</span>) {
+    <span class="hljs-keyword">continue</span>;
+  }
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, i);
+}
+</code></pre>
+<p>Пример пропуска значения 4</p>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="while-break-example"><a class="h-anchor" href="#while-break-example">#</a>Пример перерыва</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;
+
+<span class="hljs-keyword">while</span> (i &lt; <span class="hljs-number">10</span>) {
+  <span class="hljs-keyword">if</span> (i == <span class="hljs-number">4</span>) {
+    <span class="hljs-keyword">break</span>;
+  }
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, i);
+
+  i++;
+}
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="while-continue-example"><a class="h-anchor" href="#while-continue-example">#</a>Пример с continue</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;
+
+<span class="hljs-keyword">while</span> (i &lt; <span class="hljs-number">10</span>) {
+  i++;
+
+  <span class="hljs-keyword">if</span> (i == <span class="hljs-number">4</span>) {
+    <span class="hljs-keyword">continue</span>;
+  }
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, i);
+}
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap row-span-2">
+<h3 id="arrays"><a class="h-anchor" href="#arrays">#</a>Массивы</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-type">int</span> myNumbers[] = {<span class="hljs-number">25</span>, <span class="hljs-number">50</span>, <span class="hljs-number">75</span>, <span class="hljs-number">100</span>};
+
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, myNumbers[<span class="hljs-number">0</span>]);
+<span class="hljs-comment">// вывод 25</span>
+</code></pre>
+<p>Изменить элементы массива</p>
+<pre><code class="hljs hljs language-c"><span class="hljs-type">int</span> myNumbers[] = {<span class="hljs-number">25</span>, <span class="hljs-number">50</span>, <span class="hljs-number">75</span>, <span class="hljs-number">100</span>};
+myNumbers[<span class="hljs-number">0</span>] = <span class="hljs-number">33</span>;
+
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, myNumbers[<span class="hljs-number">0</span>]);
+</code></pre>
+<p>Перебрать массив</p>
+<pre><code class="hljs hljs language-c"><span class="hljs-type">int</span> myNumbers[] = {<span class="hljs-number">25</span>, <span class="hljs-number">50</span>, <span class="hljs-number">75</span>, <span class="hljs-number">100</span>};
+<span class="hljs-type">int</span> i;
+
+<span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; i++) {
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, myNumbers[i]);
+}
+</code></pre>
+<p>Задать размер массива</p>
+<pre><code class="hljs hljs language-c"><span class="hljs-comment">// Объявить массив из четырех целых чисел:</span>
+<span class="hljs-type">int</span> myNumbers[<span class="hljs-number">4</span>];
+
+<span class="hljs-comment">// добавить элемент</span>
+myNumbers[<span class="hljs-number">0</span>] = <span class="hljs-number">25</span>;
+myNumbers[<span class="hljs-number">1</span>] = <span class="hljs-number">50</span>;
+myNumbers[<span class="hljs-number">2</span>] = <span class="hljs-number">75</span>;
+myNumbers[<span class="hljs-number">3</span>] = <span class="hljs-number">100</span>;
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap col-span-2">
+<h3 id="enumeration-enum"><a class="h-anchor" href="#enumeration-enum">#</a>Перечисление (enum)</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">week</span> {</span> Mon = <span class="hljs-number">1</span>, Tues, Wed, Thurs, Fri, Sat, Sun };
+</code></pre>
+<p>Определить переменную enum</p>
+<pre><code class="hljs hljs language-c"><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">week</span> <span class="hljs-title">a</span>, <span class="hljs-title">b</span>, <span class="hljs-title">c</span>;</span>
+<span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">week</span> {</span> Mon = <span class="hljs-number">1</span>, Tues, Wed, Thurs, Fri, Sat, Sun } a, b, c;
+</code></pre>
+<p>Переменной перечисления можно присвоить значение из списка</p>
+<pre><code class="hljs hljs language-c"><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">week</span> {</span> Mon = <span class="hljs-number">1</span>, Tues, Wed, Thurs, Fri, Sat, Sun };
+<span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">week</span> <span class="hljs-title">a</span> =</span> Mon, b = Wed, c = Sat;
+<span class="hljs-comment">// или</span>
+<span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">week</span>{</span> Mon = <span class="hljs-number">1</span>, Tues, Wed, Thurs, Fri, Sat, Sun } a = Mon, b = Wed, c = Sat;
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="enumerate-sample-applications"><a class="h-anchor" href="#enumerate-sample-applications">#</a>Примеры применения enum</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">week</span> {</span>Mon = <span class="hljs-number">1</span>, Tues, Wed, Thurs} day;
+
+<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;day);
+
+<span class="hljs-keyword">switch</span>(day) {
+  <span class="hljs-keyword">case</span> Mon: <span class="hljs-built_in">puts</span>(<span class="hljs-string">"Monday"</span>); <span class="hljs-keyword">break</span>;
+  <span class="hljs-keyword">case</span> Tues: <span class="hljs-built_in">puts</span>(<span class="hljs-string">"Tuesday"</span>); <span class="hljs-keyword">break</span>;
+  <span class="hljs-keyword">case</span> Wed: <span class="hljs-built_in">puts</span>(<span class="hljs-string">"Wednesday"</span>); <span class="hljs-keyword">break</span>;
+  <span class="hljs-keyword">case</span> Thurs: <span class="hljs-built_in">puts</span>(<span class="hljs-string">"Thursday"</span>); <span class="hljs-keyword">break</span>;
+  <span class="hljs-keyword">default</span>: <span class="hljs-built_in">puts</span>(<span class="hljs-string">"Error!"</span>);
+}
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="user-input"><a class="h-anchor" href="#user-input">#</a>Пользовательский ввод</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-comment">// Создать целочисленную переменную для числа от пользователя</span>
+<span class="hljs-type">int</span> myNum;
+
+<span class="hljs-comment">// Попросить пользователя ввести число</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Enter a number: "</span>);
+
+<span class="hljs-comment">// Получить и сохранить число, введённое пользователем</span>
+<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;myNum);
+
+<span class="hljs-comment">// Вывести число, введённое пользователем</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"The number you entered: %d\n"</span>, myNum);
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="user-input-string"><a class="h-anchor" href="#user-input-string">#</a>Ввод строки от пользователя</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-comment">// создать строку</span>
+<span class="hljs-type">char</span> firstName[<span class="hljs-number">30</span>];
+<span class="hljs-comment">// Попросить пользователя ввести текст</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Enter your name: "</span>);
+<span class="hljs-comment">// получить и сохранить текст</span>
+<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%s"</span>, &amp;firstName);
+<span class="hljs-comment">// вывести текст</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello %s.\n"</span>, firstName);
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="memory-address"><a class="h-anchor" href="#memory-address">#</a>Адрес в памяти</h3>
+<div class="section">
+<p>При создании переменной ей назначается адрес в памяти</p>
+<pre><code class="hljs hljs language-c"><span class="hljs-type">int</span> myAge = <span class="hljs-number">43</span>;
+
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%p"</span>, &amp;myAge);
+<span class="hljs-comment">// Вывод: 0x7ffe5367e044</span>
+</code></pre>
+<p>To access it, use the reference operator (<code>&amp;</code>)</p>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="create-pointer"><a class="h-anchor" href="#create-pointer">#</a>Создание указателя</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-type">int</span> myAge = <span class="hljs-number">43</span>; <span class="hljs-comment">// переменная типа int</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, myAge); <span class="hljs-comment">// вывести значение myAge (43)</span> <span class="hljs-comment">// Вывести адрес памяти переменной myAge (0x7ffe5367e044)</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%p\n"</span>, &amp;myAge);
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap col-span-2">
+<h3 id="pointer-variable"><a class="h-anchor" href="#pointer-variable">#</a>Переменная-указатель</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-type">int</span> myAge = <span class="hljs-number">43</span>; <span class="hljs-comment">// переменная типа int</span>
+<span class="hljs-type">int</span>*ptr = &amp;myAge; <span class="hljs-comment">// переменная-указатель с именем ptr, используется для хранения адреса myAge</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, myAge); <span class="hljs-comment">// вывести значение myAge (43)</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%p\n"</span>, &amp;myAge); <span class="hljs-comment">// вывести адрес памяти myAge (0x7ffe5367e044)</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%p\n"</span>, ptr); <span class="hljs-comment">// использовать указатель (0x7ffe5367e044), чтобы вывести адрес памяти myAge</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="dereference"><a class="h-anchor" href="#dereference">#</a>Разыменование</h3>
+<div class="section span-2">
+<pre><code class="hljs hljs language-c"><span class="hljs-type">int</span> myAge = <span class="hljs-number">43</span>; <span class="hljs-comment">// объявление переменной</span>
+<span class="hljs-type">int</span>*ptr = &amp;myAge; <span class="hljs-comment">// объявление указателя</span> <span class="hljs-comment">// Ссылка: вывести myAge через указатель</span>
+<span class="hljs-comment">// адрес памяти (0x7ffe5367e044)</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%p\n"</span>, ptr);
+<span class="hljs-comment">// разыменование: вывести значение myAge через указатель (43)</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, *ptr);
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap">
+<h2 id="operators"><a class="h-anchor" href="#operators">#</a>Операторы</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="arithmetic-operators"><a class="h-anchor" href="#arithmetic-operators">#</a>Арифметические операторы</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-type">int</span> myNum = <span class="hljs-number">100</span> + <span class="hljs-number">50</span>;
+<span class="hljs-type">int</span> sum1 = <span class="hljs-number">100</span> + <span class="hljs-number">50</span>; <span class="hljs-comment">// 150 (100 + 50)</span>
+<span class="hljs-type">int</span> sum2 = sum1 + <span class="hljs-number">250</span>; <span class="hljs-comment">// 400 (150 + 250)</span>
+<span class="hljs-type">int</span> sum3 = sum2 + sum2; <span class="hljs-comment">// 800 (400 + 400)</span>
+</code></pre>
+<hr/>
+<table>
+<thead>
+<tr>
+<th>Оператор</th>
+<th>Имя</th>
+<th>Пример</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>+</code></td>
+<td>Добавить</td>
+<td><code>x + y</code></td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>Вычитание</td>
+<td><code>x - y</code></td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>Multiply</td>
+<td><code>x * y</code></td>
+</tr>
+<tr>
+<td><code>/</code></td>
+<td>Деление</td>
+<td><code>x / y</code></td>
+</tr>
+<tr>
+<td><code>%</code></td>
+<td>Остаток от деления</td>
+<td><code>x % y</code></td>
+</tr>
+<tr>
+<td><code>++</code></td>
+<td>Увеличение</td>
+<td><code>++x</code></td>
+</tr>
+<tr>
+<td><code>--</code></td>
+<td>Уменьшение</td>
+<td><code>--x</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="assignment-operator"><a class="h-anchor" href="#assignment-operator">#</a>Оператор присваивания</h3>
+<div class="section">
+<table>
+<thead>
+<tr>
+<th>Пример</th>
+<th>Как</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x <code>=</code> 5</td>
+<td>x <code>=</code> 5</td>
+</tr>
+<tr>
+<td>x <code>+=</code> 3</td>
+<td>x <code>=</code> x <code>+</code> 3</td>
+</tr>
+<tr>
+<td>x <code>-=</code> 3</td>
+<td>x <code>=</code> x <code>-</code> 3</td>
+</tr>
+<tr>
+<td>x <code>*=</code> 3</td>
+<td>x <code>=</code> x <code>*</code> 3</td>
+</tr>
+<tr>
+<td>x <code>/=</code> 3</td>
+<td>x <code>=</code> x <code>/</code> 3</td>
+</tr>
+<tr>
+<td>x <code>%=</code> 3</td>
+<td>x <code>=</code> x <code>%</code> 3</td>
+</tr>
+<tr>
+<td>x <code>&amp;=</code> 3</td>
+<td>x <code>=</code> x <code>&amp;</code> 3</td>
+</tr>
+<tr>
+<td>x <code>|=</code> 3</td>
+<td>x <code>=</code> x <code>|</code> 3</td>
+</tr>
+<tr>
+<td>x <code>^=</code> 3</td>
+<td>x <code>=</code> x <code>^</code> 3</td>
+</tr>
+<tr>
+<td>x <code>&gt;&gt;=</code> 3</td>
+<td>x <code>=</code> x <code>&gt;&gt;</code> 3</td>
+</tr>
+<tr>
+<td>x <code>&lt;&lt;=</code> 3</td>
+<td>x <code>=</code> x <code>&lt;&lt;</code> 3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="comparison-operators"><a class="h-anchor" href="#comparison-operators">#</a>Операторы сравнения</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-type">int</span> x = <span class="hljs-number">5</span>;
+<span class="hljs-type">int</span> y = <span class="hljs-number">3</span>;
+
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, x &gt; y);
+<span class="hljs-comment">// возвращает 1 (true), потому что 5 больше 3</span>
+</code></pre>
+<hr/>
+<table>
+<thead>
+<tr>
+<th>Символ</th>
+<th>Имя</th>
+<th>Пример</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>==</code></td>
+<td>равно</td>
+<td>x <code>==</code> y</td>
+</tr>
+<tr>
+<td><code>!=</code></td>
+<td>не равно</td>
+<td>x <code>!=</code> y</td>
+</tr>
+<tr>
+<td><code>&gt;</code></td>
+<td>больше чем</td>
+<td>x <code>&gt;</code> y</td>
+</tr>
+<tr>
+<td><code>&lt;</code></td>
+<td>меньше чем</td>
+<td>x <code>&lt;</code> y</td>
+</tr>
+<tr>
+<td><code>&gt;=</code></td>
+<td>больше или равно</td>
+<td>x <code>&gt;=</code> y</td>
+</tr>
+<tr>
+<td><code>&lt;=</code></td>
+<td>меньше или равно</td>
+<td>x <code>&lt;=</code> y</td>
+</tr>
+</tbody>
+</table>
+<p>Операторы сравнения используются для сравнения двух значений</p>
+</div>
+</div>
+<div class="h3-wrap col-span-2">
+<h3 id="logical-operators"><a class="h-anchor" href="#logical-operators">#</a>Логические операторы</h3>
+<div class="section">
+<table class="show-header">
+<thead>
+<tr>
+<th>Символ</th>
+<th>Имя</th>
+<th>Описание</th>
+<th>Пример</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&amp;&amp;</code></td>
+<td>логическое И</td>
+<td>возвращает true, если оба выражения истинны</td>
+<td><code>x &lt; 5 &amp;&amp; x &lt; 10</code></td>
+</tr>
+<tr>
+<td><code>||</code></td>
+<td>логическое ИЛИ</td>
+<td>возвращает true, если одно из выражений истинно</td>
+<td><code>x &lt; 5 || x &lt; 4</code></td>
+</tr>
+<tr>
+<td><code>!</code></td>
+<td>логическое НЕ</td>
+<td>Инвертировать результат, вернуть false, если true</td>
+<td><code>!(x &lt; 5 &amp;&amp; x &lt; 10)</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap row-span-2">
+<h3 id="operator-examples"><a class="h-anchor" href="#operator-examples">#</a>Примеры операторов</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> a = <span class="hljs-number">60</span>; <span class="hljs-comment">/*60 = 0011 1100 */</span>
+<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> b = <span class="hljs-number">13</span>; <span class="hljs-comment">/*13 = 0000 1101 */</span>
+<span class="hljs-type">int</span> c = <span class="hljs-number">0</span>;
+
+c = a &amp; b; <span class="hljs-comment">/*12 = 0000 1100 */</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Line 1 -the value of c is %d\n"</span>, c);
+
+c = a | b; <span class="hljs-comment">/*61 = 0011 1101 */</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Line 2 -the value of c is %d\n"</span>, c);
+c = a ^ b; <span class="hljs-comment">/*49 = 0011 0001 */</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Line 3 -the value of c is %d\n"</span>, c);
+c = ~a; <span class="hljs-comment">/*-61 = 1100 0011 */</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Line 4 -The value of c is %d\n"</span>, c);
+c = a &lt;&lt; <span class="hljs-number">2</span>; <span class="hljs-comment">/*240 = 1111 0000 */</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Line 5 -the value of c is %d\n"</span>, c);
+c = a &gt;&gt; <span class="hljs-number">2</span>; <span class="hljs-comment">/*15 = 0000 1111 */</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Line 6 -The value of c is %d\n"</span>, c);
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap col-span-2">
+<h3 id="bitwise-operators"><a class="h-anchor" href="#bitwise-operators">#</a>Побитовые операторы</h3>
+<div class="section">
+<table class="show-header">
+<thead>
+<tr>
+<th style="text-align: left;">Оператор</th>
+<th style="text-align: left;">Описание</th>
+<th style="text-align: left;">Экземпляр</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>&amp;</code></td>
+<td style="text-align: left;">Побитовая операция AND, операция "AND" над двоичными разрядами</td>
+<td style="text-align: left;"><code>(A &amp; B)</code> will get <code>12</code> which is 0000 1100</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>|</code></td>
+<td style="text-align: left;">Побитовый оператор OR, операция "or" над двоичными разрядами</td>
+<td style="text-align: left;"><code>(A | B)</code> will get<code>61</code> which is 0011 1101</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>^</code></td>
+<td style="text-align: left;">Оператор XOR, выполняет операцию "XOR" над двоичными разрядами</td>
+<td style="text-align: left;"><code>(A ^ B)</code> will get <code>49</code> which is 0011 0001</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>~</code></td>
+<td style="text-align: left;">Оператор инверсии, выполняет операцию "inversion" над двоичными битами</td>
+<td style="text-align: left;"><code>(~A)</code> will get <code>-61</code> which is 1100 0011</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>&lt;&lt;</code></td>
+<td style="text-align: left;">оператор побитового сдвига влево</td>
+<td style="text-align: left;"><code>A &lt;&lt; 2</code> will get <code>240</code> which is 1111 0000</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>&gt;&gt;</code></td>
+<td style="text-align: left;">оператор побитового сдвига вправо</td>
+<td style="text-align: left;"><code>A &gt;&gt; 2</code> will get <code>15</code> which is 0000 1111</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap">
+<h2 id="data-types"><a class="h-anchor" href="#data-types">#</a>Типы данных</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap col-span-2">
+<h3 id="basic-data-types"><a class="h-anchor" href="#basic-data-types">#</a>Основные типы данных</h3>
+<div class="section">
+<table class="show-header">
+<thead>
+<tr>
+<th>Тип данных</th>
+<th>Размер</th>
+<th>Диапазон</th>
+<th style="text-align: left;">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>char</code></td>
+<td>1 byte</td>
+<td><code>−128</code> ~ <code>127</code></td>
+<td style="text-align: left;">одиночный символ/буквенно-цифровой/ASCII</td>
+</tr>
+<tr>
+<td><code>signed char</code></td>
+<td>1 byte</td>
+<td><code>−128</code> ~ <code>127</code></td>
+<td style="text-align: left;"> </td>
+</tr>
+<tr>
+<td><code>unsigned char</code></td>
+<td>1 byte</td>
+<td><code>0</code> ~ <code>255</code></td>
+<td style="text-align: left;"> </td>
+</tr>
+<tr>
+<td><code>int</code></td>
+<td><code>2</code> to <code>4</code> bytes</td>
+<td><code>−32,768</code> ~ <code>32,767</code></td>
+<td style="text-align: left;">хранить целые числа</td>
+</tr>
+<tr>
+<td><code>signed int</code></td>
+<td>2 bytes</td>
+<td><code>−32,768</code> ~ <code>32,767</code></td>
+<td style="text-align: left;"> </td>
+</tr>
+<tr>
+<td><code>unsigned int</code></td>
+<td>2 bytes</td>
+<td><code>0</code> ~ <code>65,535</code></td>
+<td style="text-align: left;"> </td>
+</tr>
+<tr>
+<td><code>short int</code></td>
+<td>2 bytes</td>
+<td><code>−32,768</code> ~ <code>32,767</code></td>
+<td style="text-align: left;"> </td>
+</tr>
+<tr>
+<td><code>signed short int</code></td>
+<td>2 bytes</td>
+<td><code>−32,768</code> ~ <code>32,767</code></td>
+<td style="text-align: left;"> </td>
+</tr>
+<tr>
+<td><code>unsigned short int</code></td>
+<td>2 bytes</td>
+<td><code>0</code> ~ <code>65,535</code></td>
+<td style="text-align: left;"> </td>
+</tr>
+<tr>
+<td><code>long int</code></td>
+<td>4 bytes</td>
+<td><code>-2,147,483,648</code> ~ <code>2,147,483,647</code></td>
+<td style="text-align: left;"> </td>
+</tr>
+<tr>
+<td><code>signed long int</code></td>
+<td>4 bytes</td>
+<td><code>-2,147,483,648</code> ~ <code>2,147,483,647</code></td>
+<td style="text-align: left;"> </td>
+</tr>
+<tr>
+<td><code>unsigned long int</code></td>
+<td>4 bytes</td>
+<td><code>0</code> ~ <code>4,294,967,295</code></td>
+<td style="text-align: left;"> </td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td>4 bytes</td>
+<td><code>3.4E-38</code> ~ <code>3.4E+38</code></td>
+<td style="text-align: left;"> </td>
+</tr>
+<tr>
+<td><code>double</code></td>
+<td>8 bytes</td>
+<td><code>1.7E-308</code> ~ <code>1.7E+308</code></td>
+<td style="text-align: left;"> </td>
+</tr>
+<tr>
+<td><code>long double</code></td>
+<td>10 bytes</td>
+<td><code>3.4E-4932</code> ~ <code>1.1E+4932</code></td>
+<td style="text-align: left;"> </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="data-types-2"><a class="h-anchor" href="#data-types-2">#</a>Типы данных</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-comment">// создать переменные</span>
+<span class="hljs-type">int</span> myNum = <span class="hljs-number">5</span>; <span class="hljs-comment">// целое число</span>
+<span class="hljs-type">float</span> myFloatNum = <span class="hljs-number">5.99</span>; <span class="hljs-comment">// число с плавающей точкой</span>
+<span class="hljs-type">char</span> myLetter = <span class="hljs-string">'D'</span>; <span class="hljs-comment">// строка</span>
+<span class="hljs-comment">// Данные или числа с плавающей точкой высокой точности</span>
+<span class="hljs-type">double</span> myDouble = <span class="hljs-number">3.2325467</span>;
+<span class="hljs-comment">// вывести выходные переменные</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, myNum);
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%f\n"</span>, myFloatNum);
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%c\n"</span>, myLetter);
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%lf\n"</span>, myDouble);
+</code></pre>
+<hr/>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Data Type</th>
+<th style="text-align: left;">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>char</code></td>
+<td style="text-align: left;">символьный тип</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>short</code></td>
+<td style="text-align: left;">короткое целое число</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>int</code></td>
+<td style="text-align: left;">целочисленный тип</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>long</code></td>
+<td style="text-align: left;">длинное целое число</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>float</code></td>
+<td style="text-align: left;">тип с плавающей точкой одинарной точности</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>double</code></td>
+<td style="text-align: left;">тип с плавающей точкой двойной точности</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>void</code></td>
+<td style="text-align: left;">без типа</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="basic-format-specifiers"><a class="h-anchor" href="#basic-format-specifiers">#</a>Спецификаторы базового формата</h3>
+<div class="section">
+<table class="show-header">
+<thead>
+<tr>
+<th>Спецификатор формата</th>
+<th style="text-align: left;">Data Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>%d</code> or <code>%i</code></td>
+<td style="text-align: left;">целочисленный тип int</td>
+</tr>
+<tr>
+<td><code>%f</code></td>
+<td style="text-align: left;">десятичный тип одинарной точности float</td>
+</tr>
+<tr>
+<td><code>%lf</code></td>
+<td style="text-align: left;">число или данные с плавающей точкой двойной высокой точности</td>
+</tr>
+<tr>
+<td><code>%c</code></td>
+<td style="text-align: left;">символ char</td>
+</tr>
+<tr>
+<td><code>%s</code></td>
+<td style="text-align: left;">для строк</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="separate-base-format-specifiers"><a class="h-anchor" href="#separate-base-format-specifiers">#</a>Отдельные спецификаторы базового формата</h3>
+<div class="section">
+<table class="show-header">
+<thead>
+<tr>
+<th>Формат</th>
+<th>Short</th>
+<th>Int</th>
+<th style="text-align: left;">Long</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Octal</td>
+<td><code>%ho</code></td>
+<td><code>%o</code></td>
+<td style="text-align: left;"><code>%lo</code></td>
+</tr>
+<tr>
+<td>Decimal</td>
+<td><code>%hd</code></td>
+<td><code>%d</code></td>
+<td style="text-align: left;"><code>%ld</code></td>
+</tr>
+<tr>
+<td>Hexadecimal</td>
+<td><code>%hx</code> / <code>%hX</code></td>
+<td><code>%x</code> / <code>%X</code></td>
+<td style="text-align: left;"><code>%lx</code> / <code>%lX</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="data-format-example"><a class="h-anchor" href="#data-format-example">#</a>Пример формата данных</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-type">int</span> myNum = <span class="hljs-number">5</span>;
+<span class="hljs-type">float</span> myFloatNum = <span class="hljs-number">5.99</span>; <span class="hljs-comment">// число с плавающей точкой</span>
+<span class="hljs-type">char</span> myLetter = <span class="hljs-string">'D'</span>;     <span class="hljs-comment">// строка</span>
+<span class="hljs-comment">// вывести выходные переменные</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, myNum);
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%f\n"</span>, myFloatNum);
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%c\n"</span>, myLetter);
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap">
+<h2 id="c-preprocessor"><a class="h-anchor" href="#c-preprocessor">#</a>Препроцессор C</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap row-span-2">
+<h3 id="preprocessor-directives"><a class="h-anchor" href="#preprocessor-directives">#</a>Директивы препроцессора</h3>
+<div class="section">
+<table class="show-header">
+<thead>
+<tr>
+<th>Директива</th>
+<th style="text-align: left;">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>#define</code></td>
+<td style="text-align: left;">определить макрос</td>
+</tr>
+<tr>
+<td><code>#include</code></td>
+<td style="text-align: left;">включить файл исходного кода</td>
+</tr>
+<tr>
+<td><code>#undef</code></td>
+<td style="text-align: left;">неопределённый макрос</td>
+</tr>
+<tr>
+<td><code>#ifdef</code></td>
+<td style="text-align: left;">Возвращает true, если макрос определён</td>
+</tr>
+<tr>
+<td><code>#ifndef</code></td>
+<td style="text-align: left;">Возвращает true, если макрос не определён</td>
+</tr>
+<tr>
+<td><code>#if</code></td>
+<td style="text-align: left;">Скомпилировать следующий код, если заданное условие истинно</td>
+</tr>
+<tr>
+<td><code>#else</code></td>
+<td style="text-align: left;">Альтернатива для #if</td>
+</tr>
+<tr>
+<td><code>#elif</code></td>
+<td style="text-align: left;">Если условие #if ложно, текущее условие истинно</td>
+</tr>
+<tr>
+<td><code>#endif</code></td>
+<td style="text-align: left;">Завершить блок условной компиляции #if...#else</td>
+</tr>
+<tr>
+<td><code>#error</code></td>
+<td style="text-align: left;">Вывести сообщение об ошибке при возникновении standard error</td>
+</tr>
+<tr>
+<td><code>#pragma</code></td>
+<td style="text-align: left;">Передать компилятору специальные команды стандартизированным способом</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="hljs hljs language-c"><span class="hljs-comment">// заменить все MAX_ARRAY_LENGTH на 20</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> MAX_ARRAY_LENGTH 20</span>
+<span class="hljs-comment">// Получить stdio.h из системной библиотеки</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-comment">// Получить myheader.h из локального каталога</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"myheader.h"</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">undef</span> FILE_SIZE</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> FILE_SIZE 42 <span class="hljs-comment">// снять определение и задать значение 42</span></span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap row-span-2">
+<h3 id="predefined-macros"><a class="h-anchor" href="#predefined-macros">#</a>Предопределенные макросы</h3>
+<div class="section">
+<table class="show-header">
+<thead>
+<tr>
+<th>Макрос</th>
+<th style="text-align: left;">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>__DATE__</code></td>
+<td style="text-align: left;">Текущая дата, символьная константа в формате "MMM DD YYYY"</td>
+</tr>
+<tr>
+<td><code>__TIME__</code></td>
+<td style="text-align: left;">Текущее время, символьная константа в формате "HH:MM:SS"</td>
+</tr>
+<tr>
+<td><code>__FILE__</code></td>
+<td style="text-align: left;">Содержит текущее имя файла, строковую константу</td>
+</tr>
+<tr>
+<td><code>__LINE__</code></td>
+<td style="text-align: left;">Содержит текущий номер строки, десятичную константу</td>
+</tr>
+<tr>
+<td><code>__STDC__</code></td>
+<td style="text-align: left;">Определено как 1, когда компилятор компилирует по стандарту ANSI</td>
+</tr>
+</tbody>
+</table>
+<p><code>ANSI C</code> определяет ряд макросов, которые можно использовать, но эти предопределённые макросы нельзя изменять напрямую</p>
+<h4 id="predefined-macro-example"><a class="h-anchor" href="#predefined-macro-example">#</a>Пример предопределённого макроса</h4>
+<pre><code class="hljs hljs language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span> <span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"File: %s\n"</span>, __FILE__);
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Date: %s\n"</span>, __DATE__);
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Time: %s\n"</span>, __TIME__);
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Line: %d\n"</span>, __LINE__);
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"ANSI: %d\n"</span>, __STDC__);
+}
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="macro-continuation-operator"><a class="h-anchor" href="#macro-continuation-operator">#</a>Оператор продолжения макроса (\)</h3>
+<div class="section">
+<p>Макрос обычно записывается в одну строку.</p>
+<pre><code class="hljs hljs language-c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> message_for(a, b) \
+    printf(#a <span class="hljs-string">" and "</span> #b <span class="hljs-string">": We love you!\n"</span>)</span>
+</code></pre>
+<p>Если макрос слишком длинный для одной строки, используйте оператор продолжения макроса <code>\</code></p>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="string-constantization-operator"><a class="h-anchor" href="#string-constantization-operator">#</a>Оператор # (стрингификация)</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span> <span class="hljs-meta">#<span class="hljs-keyword">define</span> message_for(a, b) \
+  printf(#a <span class="hljs-string">" and "</span> #b <span class="hljs-string">": We love you!\n"</span>)</span> <span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+  message_for(Carole, Debra);
+
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>При компиляции и запуске этого кода вы получите следующий результат:</p>
+<pre><code class="hljs">Carole and Debra: We love you!
+</code></pre>
+<p>Чтобы преобразовать параметр макроса в строковую константу, используйте оператор стрингификации <code>#</code></p>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="tag-paste-operator"><a class="h-anchor" href="#tag-paste-operator">#</a>Оператор ## (конкатенация токенов)</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span> <span class="hljs-meta">#<span class="hljs-keyword">define</span> tokenpaster(n) printf (<span class="hljs-string">"Token "</span> #n <span class="hljs-string">" = %d\n"</span>, token##n)</span> <span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+  <span class="hljs-type">int</span> token34 = <span class="hljs-number">40</span>;
+  tokenpaster(<span class="hljs-number">34</span>);
+
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="defined-operator"><a class="h-anchor" href="#defined-operator">#</a>Оператор defined()</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span> <span class="hljs-meta">#<span class="hljs-keyword">if</span> !defined (MESSAGE)</span> <span class="hljs-meta">#<span class="hljs-keyword">define</span> MESSAGE <span class="hljs-string">"You wish!"</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">endif</span></span> <span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Here is the message: %s\n"</span>, MESSAGE);
+
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="parameterized-macros"><a class="h-anchor" href="#parameterized-macros">#</a>Параметризованные макросы</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-type">int</span> <span class="hljs-title function_">square</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> {
+  <span class="hljs-keyword">return</span> x * x;
+}
+</code></pre>
+<p>Макрос переписывает приведённый выше код следующим образом:</p>
+<pre><code class="hljs hljs language-c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> square(x) ( (x) * (x) )</span>
+</code></pre>
+<p>Между именем макроса и открывающей скобкой не допускаются пробелы</p>
+<pre><code class="hljs hljs language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> MAX(x,y) ( (x) &gt; (y) ? (x) : (y) )</span> <span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Max between 20 and 10 is %d\n"</span>, MAX(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>));
+
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap">
+<h2 id="c-function"><a class="h-anchor" href="#c-function">#</a>Функции C</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap row-span-2">
+<h3 id="function-declaration-and-definition"><a class="h-anchor" href="#function-declaration-and-definition">#</a>Объявление и определение функции</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello World!\n"</span>);
+
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>Функция состоит из двух частей</p>
+<pre><code class="hljs hljs language-c"><span class="hljs-type">void</span> <span class="hljs-title function_">myFunction</span><span class="hljs-params">()</span> { <span class="hljs-comment">// объявление</span> <span class="hljs-comment">// тело функции (исполняемый код) (определение)</span>
+}
+</code></pre>
+<hr/>
+<ul>
+<li><code>Declaration</code> declares the function name, return type and parameters <em>(if any)</em></li>
+<li><code>Definition</code> function body <em>(code to execute)</em></li>
+</ul>
+<hr/>
+<pre><code class="hljs hljs language-c"><span class="hljs-comment">// объявление функции</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">myFunction</span><span class="hljs-params">()</span>;
+<span class="hljs-comment">// главный метод</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+  myFunction(); <span class="hljs-comment">// --&gt; вызвать функцию</span> <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">myFunction</span><span class="hljs-params">()</span> {<span class="hljs-comment">// Определение функции</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Good evening!\n"</span>);
+}
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="call-function"><a class="h-anchor" href="#call-function">#</a>Функция вызова</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-comment">// создать функцию</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">myFunction</span><span class="hljs-params">()</span> {
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Good evening!\n"</span>);
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+  myFunction(); <span class="hljs-comment">// вызвать функцию</span>
+  myFunction(); <span class="hljs-comment">// может вызываться несколько раз</span> <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+<span class="hljs-comment">// вывод -&gt; "Good evening!"</span>
+<span class="hljs-comment">// вывод -&gt; "Good evening!"</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="function-parameters"><a class="h-anchor" href="#function-parameters">#</a>Параметры функции</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-type">void</span> <span class="hljs-title function_">myFunction</span><span class="hljs-params">(<span class="hljs-type">char</span> name[])</span> {
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hello %s\n"</span>, name);
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+  myFunction(<span class="hljs-string">"Liam"</span>);
+  myFunction(<span class="hljs-string">"Jenny"</span>);
+
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+<span class="hljs-comment">// Привет, Liam</span>
+<span class="hljs-comment">// Привет, Jenny</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="multiple-parameters"><a class="h-anchor" href="#multiple-parameters">#</a>Несколько параметров</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-type">void</span> <span class="hljs-title function_">myFunction</span><span class="hljs-params">(<span class="hljs-type">char</span> name[], <span class="hljs-type">int</span> age)</span> {
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Hi %s, you are %d years old.\n"</span>,name,age);
+}
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+  myFunction(<span class="hljs-string">"Liam"</span>, <span class="hljs-number">3</span>);
+  myFunction(<span class="hljs-string">"Jenny"</span>, <span class="hljs-number">14</span>);
+
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+<span class="hljs-comment">// Привет, Liam, тебе 3 года.</span>
+<span class="hljs-comment">// Привет, Jenny, тебе 14 лет.</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap row-span-2">
+<h3 id="return-value"><a class="h-anchor" href="#return-value">#</a>Возвращаемое значение</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-type">int</span> <span class="hljs-title function_">myFunction</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> {
+  <span class="hljs-keyword">return</span> <span class="hljs-number">5</span> + x;
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Result: %d\n"</span>, myFunction(<span class="hljs-number">3</span>));
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+<span class="hljs-comment">// вывести 8 (5 + 3)</span>
+</code></pre>
+<p>Два параметра</p>
+<pre><code class="hljs hljs language-c"><span class="hljs-type">int</span> <span class="hljs-title function_">myFunction</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> {
+  <span class="hljs-keyword">return</span> x + y;
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Result: %d\n"</span>, myFunction(<span class="hljs-number">5</span>, <span class="hljs-number">3</span>));
+  <span class="hljs-comment">// сохранить результат в переменной</span> <span class="hljs-type">int</span> result = myFunction(<span class="hljs-number">5</span>, <span class="hljs-number">3</span>);
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Result = %d\n"</span>, result);
+
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+<span class="hljs-comment">// результат: 8 (5 + 3)</span>
+<span class="hljs-comment">// результат = 8 (5 + 3)</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="recursive-example"><a class="h-anchor" href="#recursive-example">#</a>Рекурсивный пример</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-type">int</span> <span class="hljs-title function_">sum</span><span class="hljs-params">(<span class="hljs-type">int</span> k)</span>;
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+  <span class="hljs-type">int</span> result = sum(<span class="hljs-number">10</span>);
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, result);
+
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">sum</span><span class="hljs-params">(<span class="hljs-type">int</span> k)</span> {
+  <span class="hljs-keyword">if</span> (k &gt; <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">return</span> k + sum(k <span class="hljs-number">-1</span>);
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+  }
+}
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="mathematical-functions"><a class="h-anchor" href="#mathematical-functions">#</a>Математические функции</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;math.h&gt;</span></span> <span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%f\n"</span>, <span class="hljs-built_in">sqrt</span>(<span class="hljs-number">16</span>)); <span class="hljs-comment">// квадратный корень</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%f\n"</span>, <span class="hljs-built_in">ceil</span>(<span class="hljs-number">1.4</span>)); <span class="hljs-comment">// округлить вверх (round)</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%f\n"</span>, <span class="hljs-built_in">floor</span>(<span class="hljs-number">1.4</span>)); <span class="hljs-comment">// округлить вниз (round)</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%f\n"</span>, <span class="hljs-built_in">pow</span>(<span class="hljs-number">4</span>, <span class="hljs-number">3</span>)); <span class="hljs-comment">// x(4) в степени y(3)</span>
+}
+</code></pre>
+<hr/>
+<ul>
+<li><code>abs(x)</code> модуль числа</li>
+<li><code>acos(x)</code> арккосинус</li>
+<li><code>asin(x)</code> арксинус</li>
+<li><code>atan(x)</code> арктангенс</li>
+<li><code>cbrt(x)</code> кубический корень</li>
+<li><code>cos(x)</code> косинус</li>
+<li>значение <code>exp(x)</code> e^x</li>
+<li><code>sin(x)</code> синус x</li>
+<li>тангенс <code>tan(x)</code> x</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap">
+<h2 id="c-structures"><a class="h-anchor" href="#c-structures">#</a>Структуры C</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="create-structure"><a class="h-anchor" href="#create-structure">#</a>Создать структуру</h3>
+<div class="section">
+<pre><code class="hljs hljs language-c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">MyStructure</span> {</span> <span class="hljs-comment">// объявление структуры</span> <span class="hljs-type">int</span> myNum; <span class="hljs-comment">// член (переменная int)</span> <span class="hljs-type">char</span> myLetter; <span class="hljs-comment">// член (переменная char)</span>
+}; <span class="hljs-comment">// завершить структуру точкой с запятой</span>
+</code></pre>
+<p>Создать переменную struct с именем s1</p>
+<pre><code class="hljs language-c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">myStructure</span> {</span> <span class="hljs-type">int</span> myNum;
+  <span class="hljs-type">char</span> myLetter;
+};
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">myStructure</span> <span class="hljs-title">s1</span>;</span> <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="strings-in-the-structure"><a class="h-anchor" href="#strings-in-the-structure">#</a>Строки в структуре</h3>
+<div class="section">
+<pre><code class="hljs language-c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">myStructure</span> {</span> <span class="hljs-type">int</span> myNum;
+  <span class="hljs-type">char</span> myLetter;
+  <span class="hljs-type">char</span> myString[<span class="hljs-number">30</span>]; <span class="hljs-comment">// Строка</span>
+};
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">myStructure</span> <span class="hljs-title">s1</span>;</span> <span class="hljs-built_in">strcpy</span>(s1. myString, <span class="hljs-string">"Some text"</span>);
+  <span class="hljs-comment">// вывести значение</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">"My string: %s\n"</span>, s1.myString);
+
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>Присвоение значений строкам с помощью функции strcpy</p>
+</div>
+</div>
+<div class="h3-wrap row-span-2">
+<h3 id="accessing-structure-members"><a class="h-anchor" href="#accessing-structure-members">#</a>Доступ к членам структуры</h3>
+<div class="section">
+<pre><code class="hljs language-c"><span class="hljs-comment">// создать структуру с именем myStructure</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">myStructure</span> {</span> <span class="hljs-type">int</span> myNum;
+  <span class="hljs-type">char</span> myLetter;
+};
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+  <span class="hljs-comment">// Создать переменную структуры myStructure с именем s1</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">myStructure</span> <span class="hljs-title">s1</span>;</span> <span class="hljs-comment">// Присвоить значения членам s1</span>
+  s1.myNum = <span class="hljs-number">13</span>;
+  s1.myLetter = <span class="hljs-string">'B'</span>;
+
+  <span class="hljs-comment">// Создать переменную структуры myStructure с именем s2</span> <span class="hljs-comment">// и присвоить ей значение</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">myStructure</span> <span class="hljs-title">s2</span> =</span> {<span class="hljs-number">13</span>, <span class="hljs-string">'B'</span>};
+  <span class="hljs-comment">// вывести значение</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">"My number: %d\n"</span>, s1.myNum);
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"My letter: %c\n"</span>, s1.myLetter);
+
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>Создать разные переменные структуры</p>
+<pre><code class="hljs hljs language-c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">myStructure</span> <span class="hljs-title">s1</span>;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">myStructure</span> <span class="hljs-title">s2</span>;</span>
+<span class="hljs-comment">// Присвоить значения разным переменным структуры</span>
+s1.myNum = <span class="hljs-number">13</span>;
+s1.myLetter = <span class="hljs-string">'B'</span>;
+
+s2.myNum = <span class="hljs-number">20</span>;
+s2.myLetter = <span class="hljs-string">'C'</span>;
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="copy-structure"><a class="h-anchor" href="#copy-structure">#</a>Копировать структуру</h3>
+<div class="section">
+<pre><code class="hljs language-c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">myStructure</span> <span class="hljs-title">s1</span> =</span> {
+  <span class="hljs-number">13</span>, <span class="hljs-string">'B'</span>, <span class="hljs-string">"Some text"</span>
+};
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">myStructure</span> <span class="hljs-title">s2</span>;</span>
+s2 = s1;
+</code></pre>
+<p>В примере значение s1 копируется в s2</p>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="modify-value"><a class="h-anchor" href="#modify-value">#</a>Изменить значение</h3>
+<div class="section">
+<pre><code class="hljs language-c"><span class="hljs-comment">// Создать переменную struct и присвоить ей значение</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">myStructure</span> <span class="hljs-title">s1</span> =</span> {
+  <span class="hljs-number">13</span>, <span class="hljs-string">'B'</span>
+};
+<span class="hljs-comment">// изменить значение</span>
+s1.myNum = <span class="hljs-number">30</span>;
+s1.myLetter = <span class="hljs-string">'C'</span>;
+<span class="hljs-comment">// вывести значение</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d %c"</span>,
+    s1.myNum,
+    s1.myLetter);
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap">
+<h2 id="file-processing"><a class="h-anchor" href="#file-processing">#</a>Обработка файлов</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="file-processing-function"><a class="h-anchor" href="#file-processing-function">#</a>Функция обработки файлов</h3>
+<div class="section">
+<table class="show-header">
+<thead>
+<tr>
+<th>Функция</th>
+<th style="text-align: left;">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fopen()</code></td>
+<td style="text-align: left;">открыть новый или существующий файл</td>
+</tr>
+<tr>
+<td><code>fprintf()</code></td>
+<td style="text-align: left;">записать данные в файл</td>
+</tr>
+<tr>
+<td><code>fscanf()</code></td>
+<td style="text-align: left;">прочитать данные из файла</td>
+</tr>
+<tr>
+<td><code>fputc()</code></td>
+<td style="text-align: left;">записать символ в файл</td>
+</tr>
+<tr>
+<td><code>fgetc()</code></td>
+<td style="text-align: left;">прочитать символ из файла</td>
+</tr>
+<tr>
+<td><code>fclose()</code></td>
+<td style="text-align: left;">закрыть файл</td>
+</tr>
+<tr>
+<td><code>fseek()</code></td>
+<td style="text-align: left;">установить файловый указатель в заданную позицию</td>
+</tr>
+<tr>
+<td><code>fputw()</code></td>
+<td style="text-align: left;">Записать целое число в файл</td>
+</tr>
+<tr>
+<td><code>fgetw()</code></td>
+<td style="text-align: left;">прочитать целое число из файла</td>
+</tr>
+<tr>
+<td><code>ftell()</code></td>
+<td style="text-align: left;">возвращает текущую позицию</td>
+</tr>
+<tr>
+<td><code>rewind()</code></td>
+<td style="text-align: left;">установить файловый указатель в начало файла</td>
+</tr>
+</tbody>
+</table>
+<p>There are many functions in the C library to <code>open</code>/<code>read</code>/<code>write</code>/<code>search</code>и<code>close</code> files</p>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="open-mode-parameter"><a class="h-anchor" href="#open-mode-parameter">#</a>Параметр открытого режима</h3>
+<div class="section">
+<table class="show-header">
+<thead>
+<tr>
+<th>Режим</th>
+<th style="text-align: left;">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>r</code></td>
+<td style="text-align: left;">Открыть текстовый файл в режиме чтения, разрешая чтение файла</td>
+</tr>
+<tr>
+<td><code>w</code></td>
+<td style="text-align: left;">Открыть текстовый файл в режиме записи, разрешая запись в файл</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td style="text-align: left;">Открыть текстовый файл в режиме добавления. Если файл не существует, он будет создан</td>
+</tr>
+<tr>
+<td><code>r+</code></td>
+<td style="text-align: left;">Открыть текстовый файл в режиме чтения и записи, разрешая чтение и запись файла</td>
+</tr>
+<tr>
+<td><code>w+</code></td>
+<td style="text-align: left;">Открыть текстовый файл в режиме чтения и записи, разрешая чтение и запись файла</td>
+</tr>
+<tr>
+<td><code>a+</code></td>
+<td style="text-align: left;">Открыть текстовый файл в режиме чтения и записи, разрешая чтение и запись файла</td>
+</tr>
+<tr>
+<td><code>rb</code></td>
+<td style="text-align: left;">Открыть двоичный файл в режиме чтения</td>
+</tr>
+<tr>
+<td><code>wb</code></td>
+<td style="text-align: left;">Открыть двоичный файл в режиме записи</td>
+</tr>
+<tr>
+<td><code>ab</code></td>
+<td style="text-align: left;">Открыть двоичный файл в режиме добавления</td>
+</tr>
+<tr>
+<td><code>rb+</code></td>
+<td style="text-align: left;">открыть двоичный файл в режиме чтения и записи</td>
+</tr>
+<tr>
+<td><code>wb+</code></td>
+<td style="text-align: left;">Открыть двоичный файл в режиме чтения и записи</td>
+</tr>
+<tr>
+<td><code>ab+</code></td>
+<td style="text-align: left;">открыть двоичный файл в режиме чтения и записи</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="open-the-file-fopen"><a class="h-anchor" href="#open-the-file-fopen">#</a>Открытие файла: fopen()</h3>
+<div class="section">
+<pre><code class="hljs language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span> <span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+  FILE *fp;
+  <span class="hljs-type">char</span> ch;
+
+  fp = fopen(<span class="hljs-string">"file_handle.c"</span>, <span class="hljs-string">"r"</span>);
+
+  <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) {
+    ch = fgetc(fp);
+    <span class="hljs-keyword">if</span> (ch == EOF)
+      <span class="hljs-keyword">break</span>;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%c"</span>, ch);
+  }
+  fclose(fp);
+}
+</code></pre>
+<p>После выполнения всех операций с файлом его нужно закрыть с помощью fclose()</p>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="write-to-file-fprintf"><a class="h-anchor" href="#write-to-file-fprintf">#</a>Запись в файл: fprintf()</h3>
+<div class="section">
+<pre><code class="hljs language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span> <span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+  FILE *fp;
+  fp = fopen(<span class="hljs-string">"file.txt"</span>, <span class="hljs-string">"w"</span>); <span class="hljs-comment">// открыть файл</span> <span class="hljs-comment">// записать данные в файл</span> <span class="hljs-built_in">fprintf</span>(fp, <span class="hljs-string">"Hello file for fprintf..\n"</span>);
+  fclose(fp); <span class="hljs-comment">// закрыть файл</span>
+}
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="read-the-file-fscanf"><a class="h-anchor" href="#read-the-file-fscanf">#</a>Чтение файла: fscanf()</h3>
+<div class="section">
+<pre><code class="hljs language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span> <span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+  FILE *fp;
+
+  <span class="hljs-type">char</span> buff[<span class="hljs-number">255</span>]; <span class="hljs-comment">// Создать массив char для хранения данных файла</span>
+  fp = fopen(<span class="hljs-string">"file.txt"</span>, <span class="hljs-string">"r"</span>);
+
+  <span class="hljs-keyword">while</span>(<span class="hljs-built_in">fscanf</span>(fp, <span class="hljs-string">"%s"</span>, buff) != EOF) {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s "</span>, buff);
+  }
+  fclose(fp);
+}
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="write-to-file-fputc"><a class="h-anchor" href="#write-to-file-fputc">#</a>Запись в файл: fputc()</h3>
+<div class="section">
+<pre><code class="hljs language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span> <span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+  FILE *fp;
+  fp = fopen(<span class="hljs-string">"file1.txt"</span>, <span class="hljs-string">"w"</span>); <span class="hljs-comment">// открыть файл</span>
+  fputc(<span class="hljs-string">'a'</span>,fp); <span class="hljs-comment">// записать один символ в файл</span>
+  fclose(fp); <span class="hljs-comment">// закрыть файл</span>
+}
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="read-the-file-fgetc"><a class="h-anchor" href="#read-the-file-fgetc">#</a>Чтение файла: fgetc()</h3>
+<div class="section">
+<pre><code class="hljs language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;conio.h&gt;</span></span> <span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+  FILE *fp;
+  <span class="hljs-type">char</span> c;
+
+  clrscr();
+
+  fp = fopen(<span class="hljs-string">"myfile.txt"</span>, <span class="hljs-string">"r"</span>);
+
+  <span class="hljs-keyword">while</span>( (c = fgetc(fp) ) != EOF) {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%c"</span>, c);
+  }
+  fclose(fp);
+
+  getch();
+}
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="write-to-file-fputs"><a class="h-anchor" href="#write-to-file-fputs">#</a>Запись в файл: fputs()</h3>
+<div class="section">
+<pre><code class="hljs language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;conio.h&gt;</span></span> <span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+  FILE *fp;
+
+  clrscr();
+
+  fp = fopen(<span class="hljs-string">"myfile2.txt"</span>,<span class="hljs-string">"w"</span>);
+  <span class="hljs-built_in">fputs</span>(<span class="hljs-string">"hello c programming"</span>,fp);
+  fclose(fp);
+
+  getch();
+}
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="read-files-fgets"><a class="h-anchor" href="#read-files-fgets">#</a>Чтение файлов: fgets()</h3>
+<div class="section">
+<pre><code class="hljs language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;conio.h&gt;</span></span> <span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+  FILE *fp;
+  <span class="hljs-type">char</span> text[<span class="hljs-number">300</span>];
+
+  clrscr();
+
+  fp = fopen(<span class="hljs-string">"myfile2.txt"</span>, <span class="hljs-string">"r"</span>);
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s"</span>, fgets(text, <span class="hljs-number">200</span>, fp));
+  fclose(fp);
+
+  getch();
+}
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="fseek"><a class="h-anchor" href="#fseek">#</a>fseek()</h3>
+<div class="section">
+<pre><code class="hljs language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span> <span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+  FILE *fp;
+
+  fp = fopen(<span class="hljs-string">"myfile.txt"</span>,<span class="hljs-string">"w+"</span>);
+  <span class="hljs-built_in">fputs</span>(<span class="hljs-string">"This is Book"</span>, fp);
+
+  <span class="hljs-comment">// Установить файловый указатель в заданную позицию</span>
+  fseek(fp, <span class="hljs-number">7</span>, SEEK_SET);
+
+  <span class="hljs-built_in">fputs</span>(<span class="hljs-string">"Kenny Wong"</span>, fp);
+  fclose(fp);
+}
+</code></pre>
+<p>Установить файловый указатель в заданную позицию</p>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="rewind"><a class="h-anchor" href="#rewind">#</a>rewind()</h3>
+<div class="section">
+<pre><code class="hljs language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;conio.h&gt;</span></span> <span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+  FILE *fp;
+  <span class="hljs-type">char</span> c;
+
+  clrscr();
+
+  fp = fopen(<span class="hljs-string">"file.txt"</span>, <span class="hljs-string">"r"</span>);
+
+  <span class="hljs-keyword">while</span>( (c = fgetc(fp) ) != EOF) {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%c"</span>, c);
+  }
+
+  rewind(fp); <span class="hljs-comment">// переместить файловый указатель в начало файла</span> <span class="hljs-keyword">while</span>( (c = fgetc(fp) ) != EOF) {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%c"</span>, c);
+  }
+  fclose(fp);
+
+  getch();
+}
+<span class="hljs-comment">// вывод</span>
+<span class="hljs-comment">// Привет, мир! Привет, мир!</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="ftell"><a class="h-anchor" href="#ftell">#</a>ftell()</h3>
+<div class="section">
+<pre><code class="hljs language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;conio.h&gt;</span></span> <span class="hljs-type">void</span> <span class="hljs-title function_">main</span> <span class="hljs-params">()</span> {
+   FILE *fp;
+   <span class="hljs-type">int</span> length;
+
+   clrscr();
+
+   fp = fopen(<span class="hljs-string">"file.txt"</span>, <span class="hljs-string">"r"</span>);
+
+   fseek(fp, <span class="hljs-number">0</span>, SEEK_END);
+   length = ftell(fp); <span class="hljs-comment">// вернуть текущую позицию</span>
+   fclose(fp);
+
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">"File size: %d bytes"</span>, length);
+
+   getch();
+}
+<span class="hljs-comment">// вывод</span>
+<span class="hljs-comment">// размер файла: 18 байт</span>
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="toc-container" id="toc-container"><nav aria-label="Table of Contents" class="toc-list" id="toc-list" role="navigation"></nav></div>
+<div class="z-50 fixed inset-0 flex justify-center bg-slate-600/80 dark:bg-slate-900/90 items-start text-sm z-50 overflow-hidden lg:pt-16 lg:pb-20 hidden" id="mysearch">
+<div class="lg:max-w-screen-lg w-full flex flex-col justify-between bg-white dark:bg-slate-700 shadow-3xl dark:shadow-3xl lg:rounded-lg lg:max-h-832 min-h-320 h-full" id="mysearch-box">
+<div class="flex items-center h-16 flex-none border-b border-slate-200 dark:border-slate-700">
+<div class="w-full h-full"><form class="flex items-center w-full h-full outline-none rounded-tl-lg">
+<div class="text-2xl text-indigo-500"> </div>
+<label class="h-full w-14 mt-1 ml-1 px-4 flex items-center justify-center transition-colors duration-200 ease-in-out text-indigo-200" for="mysearch-input" id="mysearch-label"></label>
+<div class="relative flex-1"><input autocomplete="off" class="flex-1 font-light h-full bg-transparent focus:text-slate-900 text-slate-500 dark:text-slate-300 placeholder-slate-400 placeholder-opacity-80 shadow-none outline-none truncate text-lg sm:text-2xl caret-color-indigo-400 leading-normalized w-full appearance-none rounded-none transition-colors duration-200 ease-in-out" id="mysearch-input" maxlength="128" placeholder="Search for cheatsheet" spellcheck="false" type="text"/></div>
+<button class="items-center justify-center h-full w-14 px-4 text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-100 opacity-75 fill-current cursor-pointer transition-fast-out flex" id="mysearch-clear" type="reset"></button></form></div>
+<div class="w-px h-8 bg-slate-100 dark:bg-slate-400/20 flex-none"> </div>
+<button class="cancel mr-1 px-4 h-full text-slate-500 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-300"> Cancel</button></div>
+<div class="flex flex-grow overflow-hidden lg:rounded-br-lg">
+<div class="relative w-full flex-none overflow-y-auto lg:w-1/2">
+<ul id="mysearch-list"></ul>
+</div>
+<div class="preview-panel shadow-inner bg-slate-100 dark:bg-slate-800 lg:block w-1/2 flex-none overflow-y-auto"> </div>
+</div>
+</div>
+</div>

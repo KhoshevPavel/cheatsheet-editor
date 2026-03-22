@@ -1,0 +1,728 @@
+<!DOCTYPE HTML>
+
+<html class="scrollbar" lang="en" translate="no"><head><meta charset="utf-8"/><meta content="IE=Edge,chrome=1" http-equiv="X-UA-Compatible"/><meta content="en" http-equiv="content-language"/><meta content="en" name="language"/><meta content="webkit" name="renderer"/><meta content="width=device-width,initial-scale=1,maximum-scale=1" name="viewport"/><meta content="/" name="app:pageurl"/><title>Docker Cheat Sheet &amp; Quick Reference</title><meta content="cheat,sheet,cheatsheets,reference,programming,code table,snippets,linux,command,shortcuts,developers,container,virtual" name="keywords"/><meta content="This is a quick reference cheat sheet for Docker. And you can find the most common Docker commands here. " name="description"/><meta content="Fechin" name="author"/><meta content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" name="robots"/><meta content="CheatSheets.html" name="article:author"/><meta content="2020-12-30T10:55:24.000Z" name="article:published_time"/><meta content="2020-12-30T10:55:24.000Z" name="article:modified_time"/><meta content="Programming" name="article:section"/><meta content="container" name="article:tag"/><meta content="virtual" name="article:tag"/><meta content="docker.html" property="og:url"/><meta content="Docker Cheat Sheet &amp; Quick Reference" property="og:title"/><meta content="CheatSheets.html" property="og:site_name"/><meta content="This is a quick reference cheat sheet for Docker. And you can find the most common Docker commands here. " property="og:description"/><meta content="assets/image/docker-previewc6bd.png?v=wtbg9" property="og:image"/><meta content="2276" property="og:image:width"/><meta content="1240" property="og:image:height"/><meta content="Docker Cheat Sheet &amp; Quick Reference - " property="og:image:alt"/><meta content="article" property="og:type"/><meta content="en_US" property="og:locale"/><meta content="2020-12-30T10:55:24.000Z" property="article:published_time"/><meta content="2020-12-30T10:55:24.000Z" property="article:modified_time"/><meta content="CheatSheets.html" property="article:author"/><meta content="Programming" property="article:section"/><meta content="container" property="article:tag"/><meta content="virtual" property="article:tag"/><meta content="summary_large_image" name="twitter:card"/><meta content="Docker Cheat Sheet &amp; Quick Reference" name="twitter:title"/><meta content="@Fechin" name="twitter:site"/><meta content="@Fechin" name="twitter:creator"/><meta content="This is a quick reference cheat sheet for Docker. And you can find the most common Docker commands here. " name="twitter:description"/><meta content="assets/image/docker-preview60f4.png?v=9ruvt" name="twitter:image"/><meta content="Docker Cheat Sheet &amp; Quick Reference - " name="twitter:image:alt"/><link href="images/favicon3860.png?v=1" rel="icon"/><link href="images/favicon3860.png?v=1" rel="icon shortcut" type="image/png"/><link href="docker.html" rel="canonical"/><link href="css/stylea454.css?_v=1769244903599" rel="stylesheet"/><script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            let html = document.documentElement.classList;
+            html.toggle('dark')
+        }
+    </script></head><body class="bg-slate-100 dark:bg-slate-900"><header class="relative z-10"><div class="max-container z-20 relative"></div></header><div class="mx-auto flex flex-wrap md:py-5 flex-col md:flex-row items-center"><div class="flex flex-col w-full mx-auto items-center text-center my-8"><div class="max-container w-full"><h1 class="text-5xl mb-4"> <span class="text-slate-700 dark:text-slate-300 font-light">Docker</span> <span class="text-slate-400 dark:text-slate-500 font-extralight hidden md:inline">cheatsheet</span></h1><div class="lg:w-3/5 mx-auto intro leading-relaxed text-slate-600"><p>Краткая шпаргалка по Docker с наиболее часто используемыми командами.</p></div><div class="pt-5" id="carbon_container"></div></div></div><div class="mdLayout w-full max-container" id="mdLayout">
+<div class="h2-wrap cols-2">
+<h2 id="getting-started"><a class="h-anchor" href="#getting-started">#</a>Начало работы</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="getting-started-2"><a class="h-anchor" href="#getting-started-2">#</a>Начало работы</h3>
+<div class="section">
+<p>Создание и запуск контейнера в фоне</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run -d -p 80:80 docker/getting-started</span>
+</code></pre>
+<hr/>
+<ul class="marker-none">
+<li><code>-d</code> — запуск контейнера в отсоединённом режиме</li>
+<li><code>-p 80:80</code> — проброс порта 80 в порт 80 контейнера</li>
+<li><code>docker/getting-started</code> — используемый образ</li>
+</ul>
+<p>Создание и запуск контейнера на переднем плане</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run -it -p 8001:8080 --name my-nginx nginx</span>
+</code></pre>
+<hr/>
+<ul class="marker-none">
+<li><code>-it</code> — интерактивный режим bash</li>
+<li><code>-p 8001:8080</code> — проброс порта 8001 в порт 8080 контейнера</li>
+<li><code>--name my-nginx</code> — указание имени</li>
+<li><code>nginx</code> — используемый образ</li>
+</ul>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="general-commands"><a class="h-anchor" href="#general-commands">#</a>Общие команды</h3>
+<div class="section">
+<table>
+<thead>
+<tr>
+<th>Пример</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docker ps</code></td>
+<td>Список запущенных контейнеров</td>
+</tr>
+<tr>
+<td><code>docker ps -a</code></td>
+<td>Список всех контейнеров</td>
+</tr>
+<tr>
+<td><code>docker ps -s</code></td>
+<td>Список запущенных контейнеров<br/><em>(с CPU / памятью)</em></td>
+</tr>
+<tr>
+<td><code>docker images</code></td>
+<td>Список всех образов</td>
+</tr>
+<tr>
+<td><code>docker exec -it &lt;container&gt;  bash</code></td>
+<td>Подключение к контейнеру</td>
+</tr>
+<tr>
+<td><code>docker logs &lt;container&gt;</code></td>
+<td>Показать лог консоли контейнера</td>
+</tr>
+<tr>
+<td><code>docker stop &lt;container&gt;</code></td>
+<td>Остановить контейнер</td>
+</tr>
+<tr>
+<td><code>docker restart &lt;container&gt;</code></td>
+<td>Перезапустить контейнер</td>
+</tr>
+<tr>
+<td><code>docker rm &lt;container&gt;</code></td>
+<td>Удалить контейнер</td>
+</tr>
+<tr>
+<td><code>docker port &lt;container&gt;</code></td>
+<td>Показать маппинг портов контейнера</td>
+</tr>
+<tr>
+<td><code>docker top &lt;container&gt;</code></td>
+<td>Список процессов</td>
+</tr>
+<tr>
+<td><code>docker kill &lt;container&gt;</code></td>
+<td>Завершить контейнер</td>
+</tr>
+</tbody>
+</table>
+<p>Параметр <code>&lt;container&gt;</code> — id или имя контейнера</p>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap cols-2">
+<h2 id="docker-containers"><a class="h-anchor" href="#docker-containers">#</a>Контейнеры Docker</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="starting-stopping"><a class="h-anchor" href="#starting-stopping">#</a>Запуск и остановка</h3>
+<div class="section">
+<table>
+<thead>
+<tr>
+<th>Описание</th>
+<th>Пример</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docker start my-nginx</code></td>
+<td>Запуск</td>
+</tr>
+<tr>
+<td><code>docker stop my-nginx</code></td>
+<td>Остановка</td>
+</tr>
+<tr>
+<td><code>docker restart my-nginx</code></td>
+<td>Перезапуск</td>
+</tr>
+<tr>
+<td><code>docker pause my-nginx</code></td>
+<td>Приостановка</td>
+</tr>
+<tr>
+<td><code>docker unpause my-nginx</code></td>
+<td>Возобновление</td>
+</tr>
+<tr>
+<td><code>docker wait my-nginx</code></td>
+<td>Блокировка контейнера</td>
+</tr>
+<tr>
+<td><code>docker kill my-nginx</code></td>
+<td>Отправка SIGKILL</td>
+</tr>
+<tr>
+<td><code>docker attach my-nginx</code></td>
+<td>Подключение к существующему контейнеру</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="information"><a class="h-anchor" href="#information">#</a>Информация</h3>
+<div class="section">
+<table>
+<thead>
+<tr>
+<th>Пример</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docker ps</code></td>
+<td>Список запущенных контейнеров</td>
+</tr>
+<tr>
+<td><code>docker ps -a</code></td>
+<td>Список всех контейнеров</td>
+</tr>
+<tr>
+<td><code>docker logs my-nginx</code></td>
+<td>Логи контейнера</td>
+</tr>
+<tr>
+<td><code>docker inspect my-nginx</code></td>
+<td>Инспекция контейнера</td>
+</tr>
+<tr>
+<td><code>docker events my-nginx</code></td>
+<td>События контейнера</td>
+</tr>
+<tr>
+<td><code>docker port my-nginx</code></td>
+<td>Публичные порты</td>
+</tr>
+<tr>
+<td><code>docker top my-nginx</code></td>
+<td>Запущенные процессы</td>
+</tr>
+<tr>
+<td><code>docker stats my-nginx</code></td>
+<td>Использование ресурсов контейнером</td>
+</tr>
+<tr>
+<td><code>docker diff my-nginx</code></td>
+<td>Список изменений в контейнере</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="creating"><a class="h-anchor" href="#creating">#</a>Создание</h3>
+<div class="section span-3">
+<pre class="docker-create-options"><code class="hljs hljs language-shell"><span class="hljs-built_in">docker create</span> [options] IMAGE
+<span class="hljs-attr">-a, --attach</span>              <span class="hljs-comment"># подключить stdout/err</span>
+<span class="hljs-attr">-i, --interactive</span>         <span class="hljs-comment"># подключить stdin (интерактивно)</span>
+<span class="hljs-attr">-t, --tty</span>                 <span class="hljs-comment"># pseudo-tty</span>
+<span class="hljs-attr">--name NAME</span>               <span class="hljs-comment"># назвать контейнер</span>
+<span class="hljs-attr">-p, --publish 5000:5000</span>    <span class="hljs-comment"># маппинг портов (хост:контейнер)</span>
+<span class="hljs-attr">--expose 5432</span>             <span class="hljs-comment"># открыть порт для контейнеров</span>
+<span class="hljs-attr">-P, --publish-all</span>         <span class="hljs-comment"># опубликовать все порты</span>
+<span class="hljs-attr">--link container:alias</span>    <span class="hljs-comment"># линковка</span>
+<span class="hljs-attr">-v, --volume `pwd`:/app</span>   <span class="hljs-comment"># монтирование (нужны абсолютные пути)</span>
+<span class="hljs-attr">-e, --env NAME=hello</span>      <span class="hljs-comment"># переменные окружения</span>
+</code></pre>
+<h4 id="example"><a class="h-anchor" href="#example">#</a>Пример</h4>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker create --name my_redis --expose 6379 redis:3.0.2</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="manipulating"><a class="h-anchor" href="#manipulating">#</a>Манипулирование</h3>
+<div class="section">
+<p>Переименование контейнера</p>
+<pre><code class="hljs hljs language-shell">docker rename my-nginx my-nginx
+</code></pre>
+<p>Удаление контейнера</p>
+<pre><code class="hljs hljs language-shell">docker rm my-nginx
+</code></pre>
+<p>Обновление контейнера</p>
+<pre><code class="hljs hljs language-shell">docker update --cpu-shares 512 -m 300M my-nginx
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap cols-2">
+<h2 id="docker-images"><a class="h-anchor" href="#docker-images">#</a>Образы Docker</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="manipulating-2"><a class="h-anchor" href="#manipulating-2">#</a>Манипулирование</h3>
+<div class="section">
+<table>
+<thead>
+<tr>
+<th>Пример</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docker images</code></td>
+<td>Список образов</td>
+</tr>
+<tr>
+<td><code>docker rmi nginx</code></td>
+<td>Удаление образа</td>
+</tr>
+<tr>
+<td><code>docker load &lt; ubuntu.tar.gz</code></td>
+<td>Загрузка образа из tar-архива</td>
+</tr>
+<tr>
+<td><code>docker load --input ubuntu.tar</code></td>
+<td>Загрузка образа из tar-архива</td>
+</tr>
+<tr>
+<td><code>docker save busybox &gt; ubuntu.tar</code></td>
+<td>Сохранить образ в tar-архив</td>
+</tr>
+<tr>
+<td><code>docker history</code></td>
+<td>История образа</td>
+</tr>
+<tr>
+<td><code>docker commit nginx</code></td>
+<td>Сохранить контейнер как образ</td>
+</tr>
+<tr>
+<td><code>docker tag nginx eon01/nginx</code></td>
+<td>Тегирование образа</td>
+</tr>
+<tr>
+<td><code>docker push eon01/nginx</code></td>
+<td>Отправка образа в реестр</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="building-images"><a class="h-anchor" href="#building-images">#</a>Сборка образов</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker build .</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker build github.com/creack/docker-firefox</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker build - &lt; Dockerfile</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker build - &lt; context.tar.gz</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker build -t eon/my-nginx .</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker build -f myOtherDockerfile .</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">curl example.com/remote/Dockerfile | docker build -f - .</span>
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap cols-2">
+<h2 id="docker-networking"><a class="h-anchor" href="#docker-networking">#</a>Сети Docker</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="manipulating-3"><a class="h-anchor" href="#manipulating-3">#</a>Манипулирование</h3>
+<div class="section">
+<p>Удаление сети</p>
+<pre><code class="hljs hljs language-shell">docker network rm MyOverlayNetwork
+</code></pre>
+<p>Список сетей</p>
+<pre><code class="hljs hljs language-shell">docker network ls
+</code></pre>
+<p>Информация о сети</p>
+<pre><code class="hljs hljs language-shell">docker network inspect MyOverlayNetwork
+</code></pre>
+<p>Подключение запущенного контейнера к сети</p>
+<pre><code class="hljs hljs language-shell">docker network connect MyOverlayNetwork nginx
+</code></pre>
+<p>Подключение контейнера к сети при запуске</p>
+<pre><code class="hljs hljs language-shell">docker run -it -d --network=MyOverlayNetwork nginx
+</code></pre>
+<p>Отключение контейнера от сети</p>
+<pre><code class="hljs hljs language-shell">docker network disconnect MyOverlayNetwork nginx
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="creating-networks"><a class="h-anchor" href="#creating-networks">#</a>Создание сетей</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell">docker network create -d overlay MyOverlayNetwork
+
+docker network create -d bridge MyBridgeNetwork
+
+docker network create -d overlay \
+  --subnet=192.168.0.0/16 \
+  --subnet=192.170.0.0/16 \
+  --gateway=192.168.0.100 \
+  --gateway=192.170.0.100 \
+  --ip-range=192.168.1.0/24 \
+  --aux-address="my-router=192.168.1.5" \
+  --aux-address="my-switch=192.168.1.6" \
+  --aux-address="my-printer=192.170.1.5" \
+  --aux-address="my-nas=192.170.1.6" \
+  MyOverlayNetwork
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap cols-2">
+<h2 id="clean-up"><a class="h-anchor" href="#clean-up">#</a>Очистка</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="clean-all"><a class="h-anchor" href="#clean-all">#</a>Очистить все</h3>
+<div class="section">
+<p>Очищает висячие образы, контейнеры, тома и сети (не связанные с контейнером)</p>
+<pre><code class="hljs hljs language-shell">docker system prune
+</code></pre>
+<hr/>
+<p>Дополнительно удаляет остановленные контейнеры и все неиспользуемые образы</p>
+<pre><code class="hljs hljs language-shell">docker system prune -a
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="containers"><a class="h-anchor" href="#containers">#</a>Контейнеры</h3>
+<div class="section">
+<p>Остановить все запущенные контейнеры</p>
+<pre><code class="hljs hljs language-shell">docker stop $(docker ps -a -q)
+</code></pre>
+<p>Удалить остановленные контейнеры</p>
+<pre><code class="hljs hljs language-shell">docker container prune
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3><a class="h-anchor" href="#images">#</a>Образы</h3>
+<div class="section">
+<p>Удалить все висячие образы (без тегов и не связанные с контейнером):</p>
+<pre><code class="hljs hljs language-shell">docker image prune
+</code></pre>
+<p>Удалить все образы, не используемые контейнерами</p>
+<pre><code class="hljs hljs language-shell">docker image prune -a
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="volumes"><a class="h-anchor" href="#volumes">#</a>Тома (volumes)</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell">docker volume prune
+</code></pre>
+<p>Удалить тома, не используемые ни одним контейнером</p>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap cols-2">
+<h2 id="miscellaneous"><a class="h-anchor" href="#miscellaneous">#</a>Разное</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="docker-hub"><a class="h-anchor" href="#docker-hub">#</a>Docker Hub</h3>
+<div class="section">
+<table>
+<thead>
+<tr>
+<th>Синтаксис Docker</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docker search search_word</code></td>
+<td>Поиск образов в Docker Hub</td>
+</tr>
+<tr>
+<td><code>docker pull user/image   </code></td>
+<td>Загрузка образа из Docker Hub</td>
+</tr>
+<tr>
+<td><code>docker login             </code></td>
+<td>Аутентификация в Docker Hub</td>
+</tr>
+<tr>
+<td><code>docker push user/image   </code></td>
+<td>Загрузка образа в Docker Hub</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap row-span-3">
+<h3 id="registry-commands"><a class="h-anchor" href="#registry-commands">#</a>Команды реестра</h3>
+<div class="section">
+<p>Вход в реестр</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker login</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker login localhost:8080</span>
+</code></pre>
+<p>Выход из реестра</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker <span class="hljs-built_in">logout</span></span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker <span class="hljs-built_in">logout</span> localhost:8080</span>
+</code></pre>
+<p>Поиск образа</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker search nginx</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker search nginx --stars=3 --no-trunc busybox</span>
+</code></pre>
+<p>Загрузка образа</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker pull nginx</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker pull eon01/nginx localhost:5000/myadmin/nginx</span>
+</code></pre>
+<p>Загрузка образа в реестр</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker push eon01/nginx</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker push eon01/nginx localhost:5000/myadmin/nginx</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="batch-clean"><a class="h-anchor" href="#batch-clean">#</a>Пакетная очистка</h3>
+<div class="section">
+<table>
+<thead>
+<tr>
+<th>Пример</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docker stop -f $(docker ps -a -q)</code></td>
+<td>Остановить все контейнеры</td>
+</tr>
+<tr>
+<td><code>docker rm -f $(docker ps -a -q)</code></td>
+<td>Удалить все контейнеры</td>
+</tr>
+<tr>
+<td><code>docker rmi -f $(docker images -q)</code></td>
+<td>Удалить все образы</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="volumes-2"><a class="h-anchor" href="#volumes-2">#</a>Тома (volumes)</h3>
+<div class="section">
+<p>Список томов</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker volume <span class="hljs-built_in">ls</span></span>
+</code></pre>
+<p>Очистка неиспользуемых томов</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker volume prune</span>
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap cols-2">
+<h2 id="debug-inspect"><a class="h-anchor" href="#debug-inspect">#</a>Отладка и инспекция</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="inspect-format"><a class="h-anchor" href="#inspect-format">#</a>Inspect + format</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker inspect my-nginx</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker inspect -f '{{.State.Status}}' my-nginx</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' my-nginx</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps --format 'table {{.Names}}\\t{{.Status}}\\t{{.Ports}}'</span>
+</code></pre>
+<ul class="marker-none">
+<li><code>inspect</code> — полный JSON c метаданными контейнера</li>
+<li><code>-f '{{...}}'</code> — вывести только нужное поле через Go template</li>
+<li><code>.State.Status</code> — быстро проверить текущий статус контейнера</li>
+<li><code>.NetworkSettings...</code> — получить IP контейнера в сети</li>
+<li><code>ps --format</code> — кастомный вывод колонок для быстрого обзора</li>
+</ul>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="logs-events"><a class="h-anchor" href="#logs-events">#</a>Логи и события</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker logs -f --tail=200 my-nginx</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker logs --since=30m my-nginx</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker events --since 1h</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker stats --no-stream</span>
+</code></pre>
+<ul class="marker-none">
+<li><code>-f</code> — следить за логом в реальном времени</li>
+<li><code>--tail=200</code> — показать последние 200 строк перед follow</li>
+<li><code>--since=30m</code> — логи только за последние 30 минут</li>
+<li><code>events</code> — события Docker daemon (start, die, pull и т.д.)</li>
+<li><code>stats --no-stream</code> — одноразовый снимок ресурсов без постоянного потока</li>
+</ul>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="copy-debug"><a class="h-anchor" href="#copy-debug">#</a>Копирование и shell-debug</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker cp my-nginx:/etc/nginx/nginx.conf .</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker cp ./index.html my-nginx:/usr/share/nginx/html/</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker exec -it my-nginx sh</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker exec -it --user root my-nginx sh</span>
+</code></pre>
+<ul class="marker-none">
+<li><code>docker cp container:path .</code> — копировать файл из контейнера на хост</li>
+<li><code>docker cp ./file container:path</code> — копировать файл с хоста в контейнер</li>
+<li><code>exec -it ... sh</code> — интерактивная shell-сессия внутри контейнера</li>
+<li><code>--user root</code> — запуск команды от root (для диагностики прав/файлов)</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap cols-2">
+<h2 id="advanced-volumes"><a class="h-anchor" href="#advanced-volumes">#</a>Тома и монтирование</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="volume-commands"><a class="h-anchor" href="#volume-commands">#</a>Управление томами</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker volume create app_data</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker volume inspect app_data</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker volume ls --filter dangling=true</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker volume rm app_data</span>
+</code></pre>
+<ul class="marker-none">
+<li><code>volume create</code> — создать именованный volume</li>
+<li><code>volume inspect</code> — посмотреть mountpoint и метаданные тома</li>
+<li><code>--filter dangling=true</code> — тома, не используемые контейнерами</li>
+<li><code>volume rm</code> — удалить том (только если не занят контейнером)</li>
+</ul>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="mount-syntax"><a class="h-anchor" href="#mount-syntax">#</a>bind mount vs named volume</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run -d --name app -v app_data:/var/lib/app my-app</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run -d --name app -v /abs/path:/app:ro my-app</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run -d --mount type=bind,src=/abs/path,dst=/app,readonly my-app</span>
+</code></pre>
+<ul class="marker-none">
+<li><code>-v app_data:/var/lib/app</code> — named volume, управляется Docker</li>
+<li><code>-v /abs/path:/app:ro</code> — bind mount из директории хоста в контейнер read-only</li>
+<li><code>--mount ...</code> — более явный и безопасный синтаксис для сложных mount-конфигураций</li>
+</ul>
+<p>Для хоста всегда используйте абсолютные пути.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap cols-2">
+<h2 id="security-resources"><a class="h-anchor" href="#security-resources">#</a>Безопасность и лимиты</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="runtime-hardening"><a class="h-anchor" href="#runtime-hardening">#</a>Hardening runtime</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run --read-only --tmpfs /tmp my-app</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run --cap-drop ALL --cap-add NET_BIND_SERVICE my-app</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run --user 1000:1000 my-app</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run --security-opt no-new-privileges my-app</span>
+</code></pre>
+<ul class="marker-none">
+<li><code>--read-only</code> — корневая ФС контейнера только для чтения</li>
+<li><code>--tmpfs /tmp</code> — временная writable-область в памяти</li>
+<li><code>--cap-drop/--cap-add</code> — минимально необходимые Linux capabilities</li>
+<li><code>--user</code> — запуск без root, по UID:GID</li>
+<li><code>no-new-privileges</code> — запрет эскалации прав внутри процесса</li>
+</ul>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="resource-limits"><a class="h-anchor" href="#resource-limits">#</a>CPU / RAM / restart policy</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run -m 512m --memory-swap 512m my-app</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run --cpus=1.5 --pids-limit=200 my-app</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run --restart unless-stopped my-app</span>
+</code></pre>
+<ul class="marker-none">
+<li><code>-m</code> — лимит RAM контейнера</li>
+<li><code>--memory-swap 512m</code> — ограничить swap (равно RAM: swap фактически отключён)</li>
+<li><code>--cpus</code> — ограничение CPU-квоты</li>
+<li><code>--pids-limit</code> — ограничение количества процессов</li>
+<li><code>--restart unless-stopped</code> — автоподнятие после перезапуска хоста/демона</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap cols-2">
+<h2 id="buildx-multiarch"><a class="h-anchor" href="#buildx-multiarch">#</a>Buildx и multi-platform</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="buildx-basic"><a class="h-anchor" href="#buildx-basic">#</a>Сборка для нескольких архитектур</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker buildx create --use --name mybuilder</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker buildx ls</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker buildx build --platform linux/amd64,linux/arm64 -t myorg/my-app:latest --push .</span>
+</code></pre>
+<ul class="marker-none">
+<li><code>buildx create --use</code> — создать и активировать builder</li>
+<li><code>--platform</code> — собрать multi-arch образ</li>
+<li><code>--push</code> — сразу отправить multi-arch manifest в registry</li>
+</ul>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="cache-build"><a class="h-anchor" href="#cache-build">#</a>Кэширование сборки</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker buildx build --cache-from type=registry,ref=myorg/my-app:cache \</span>
+<span class="hljs-meta prompt_">&gt; </span><span class="language-bash">  --cache-to type=registry,ref=myorg/my-app:cache,mode=max \</span>
+<span class="hljs-meta prompt_">&gt; </span><span class="language-bash">  -t myorg/my-app:latest --push .</span>
+</code></pre>
+<ul class="marker-none">
+<li><code>--cache-from</code> — использовать удалённый кэш предыдущих сборок</li>
+<li><code>--cache-to ... mode=max</code> — выгрузить максимум кэша для следующих CI-джоб</li>
+<li>Сильно ускоряет повторные build в CI/CD</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap cols-2">
+<h2 id="docker-troubleshooting-faq"><a class="h-anchor" href="#docker-troubleshooting-faq">#</a>Troubleshooting FAQ</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap col-span-2">
+<h3 id="docker-faq-10"><a class="h-anchor" href="#docker-faq-10">#</a>10 частых проблем и быстрые команды</h3>
+<div class="section">
+<table>
+<thead>
+<tr><th>Проблема</th><th>Команды диагностики / решение</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>1)</strong> Контейнер сразу падает (Exited)</td><td><code>docker ps -a</code><br/><code>docker logs --tail=200 &lt;container&gt;</code><br/><code>docker inspect -f '{{.State.ExitCode}}' &lt;container&gt;</code></td></tr>
+<tr><td><strong>2)</strong> Порт не пробрасывается</td><td><code>docker port &lt;container&gt;</code><br/><code>ss -ltnp | rg ':80|:8080'</code><br/><code>docker inspect -f '{{json .NetworkSettings.Ports}}' &lt;container&gt;</code></td></tr>
+<tr><td><strong>3)</strong> Нет доступа к файлам в bind mount</td><td><code>docker exec -it &lt;container&gt; id</code><br/><code>ls -la /abs/path</code><br/>Проверьте UID/GID и абсолютный путь хоста</td></tr>
+<tr><td><strong>4)</strong> Образ не обновился после изменений</td><td><code>docker build --no-cache -t my-app .</code><br/><code>docker image ls | rg my-app</code><br/><code>docker run --rm my-app:latest</code></td></tr>
+<tr><td><strong>5)</strong> «No space left on device»</td><td><code>docker system df</code><br/><code>docker image prune -a</code><br/><code>docker volume prune</code><br/><code>docker system prune</code></td></tr>
+<tr><td><strong>6)</strong> Контейнеру не хватает памяти/CPU</td><td><code>docker stats</code><br/><code>docker inspect -f '{{.HostConfig.Memory}} {{.HostConfig.NanoCpus}}' &lt;container&gt;</code><br/>Запустите с <code>-m</code>/<code>--cpus</code></td></tr>
+<tr><td><strong>7)</strong> DNS/сеть внутри контейнера не работает</td><td><code>docker network ls</code><br/><code>docker network inspect bridge</code><br/><code>docker exec -it &lt;container&gt; getent hosts example.com</code></td></tr>
+<tr><td><strong>8)</strong> Не удается удалить образ (image in use)</td><td><code>docker ps -a --filter ancestor=&lt;image&gt;</code><br/><code>docker rm -f &lt;containers...&gt;</code><br/><code>docker rmi &lt;image&gt;</code></td></tr>
+<tr><td><strong>9)</strong> Healthcheck unhealthy</td><td><code>docker inspect -f '{{json .State.Health}}' &lt;container&gt;</code><br/><code>docker logs &lt;container&gt;</code><br/>Проверьте <code>HEALTHCHECK</code> в Dockerfile</td></tr>
+<tr><td><strong>10)</strong> Права root внутри контейнера небезопасны</td><td><code>docker inspect -f '{{.Config.User}}' &lt;container&gt;</code><br/><code>docker run --user 1000:1000 --read-only --tmpfs /tmp ...</code><br/><code>docker run --cap-drop ALL ...</code></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div></div><div class="toc-container" id="toc-container"><nav aria-label="Table of Contents" class="toc-list" id="toc-list" role="navigation"></nav></div><script>window.addEventListener("DOMContentLoaded",function(){"function"==typeof window.initTOC&&window.initTOC()})</script><div class="z-50 fixed inset-0 flex justify-center bg-slate-600/80 dark:bg-slate-900/90 items-start text-sm z-50 overflow-hidden lg:pt-16 lg:pb-20 hidden" id="mysearch"><div class="lg:max-w-screen-lg w-full flex flex-col justify-between bg-white dark:bg-slate-700 shadow-3xl dark:shadow-3xl lg:rounded-lg lg:max-h-832 min-h-320 h-full" id="mysearch-box"><div class="flex items-center h-16 flex-none border-b border-slate-200 dark:border-slate-700"><div class="w-full h-full"><form class="flex items-center w-full h-full outline-none rounded-tl-lg"><label class="h-full w-14 mt-1 ml-1 px-4 flex items-center justify-center transition-colors duration-200 ease-in-out text-indigo-200" for="mysearch-input" id="mysearch-label"><div class="text-2xl text-indigo-500"> <svg fill="currentColor" height="1em" viewbox="0 0 1024 1024" width="1em" xmlns="http://www.w3.org/2000/svg"> <path d="M942.14826666 878.7968l-200.56746667-229.92213333C795.37493333 583.8848 827.73333333 500.5312 827.73333333 409.6 827.73333333 202.27413333 659.59253333 34.13333333 452.26666666 34.13333333 244.87253333 34.13333333 76.79999999 202.27413333 76.79999999 409.6S244.87253333 785.06666667 452.26666666 785.06666667c77.14133333 0 148.82133333-23.3472 208.41813333-63.21493334l199.33866667 228.5568c19.72906667 22.7328 54.272 24.91733333 76.8 5.25653334C959.62453333 935.86773333 961.87733333 901.46133333 942.14826666 878.7968zM179.19999999 409.6c0-150.59626667 122.4704-273.06666667 273.06666667-273.06666667 150.59626667 0 273.06666667 122.4704 273.06666667 273.06666667s-122.4704 273.06666667-273.06666667 273.06666667C301.67039999 682.66666667 179.19999999 560.19626667 179.19999999 409.6z"></path>
+</svg>
+</div></label><div class="relative flex-1"> <input autocapitalize="off" autocomplete="off" autocorrect="off" class="flex-1 font-light h-full bg-transparent focus:text-slate-900 text-slate-500 dark:text-slate-300 placeholder-slate-400 placeholder-opacity-80 shadow-none outline-none truncate text-lg sm:text-2xl caret-color-indigo-400 leading-normalized w-full appearance-none rounded-none transition-colors duration-200 ease-in-out" enterkeyhint="go" id="mysearch-input" maxlength="128" placeholder="Search for cheatsheet" spellcheck="false" type="text"/></div> <button class="items-center justify-center h-full w-14 px-4 text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-100 opacity-75 fill-current cursor-pointer transition-fast-out flex" id="mysearch-clear" type="reset"><i class="icon icon-close text-xs font-bold"></i></button></form></div><div class="w-px h-8 bg-slate-100 dark:bg-slate-400/20 flex-none"></div> <button class="cancel mr-1 px-4 h-full text-slate-500 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-300"> Cancel</button></div><div class="flex flex-grow overflow-hidden lg:rounded-br-lg"><div class="relative w-full flex-none overflow-y-auto lg:w-1/2"><ul id="mysearch-list"></ul></div><div class="preview-panel shadow-inner bg-slate-100 dark:bg-slate-800 lg:block w-1/2 flex-none overflow-y-auto"></div></div></div></div>
+<script src="js/maina454.js?_v=1769244903599"></script><script>
+        // Получить все элементы pre > code
+        const codeBlocks = document.querySelectorAll('pre > code');
+        const initInnerHTML = '<svg height="1em" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path> </svg>';
+        const successInnerHTML = '<svg height="1em" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg>';
+        codeBlocks.forEach(function (codeBlock) {
+            // Создать кнопку копирования
+            const copyButton = document.createElement('button');
+            copyButton.className = 'opacity-90 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 p-2 text-white shadow-xl rounded-lg flex items-center absolute top-2 right-2 transition-all duration-200 backdrop-blur-sm';
+            copyButton.innerHTML = initInnerHTML;
+            copyButton.style.opacity = "0";
+            const parent = codeBlock.parentNode;
+
+            parent.style = "position: relative;"
+            parent.insertBefore(copyButton, codeBlock);
+
+            // Обработчик клика по кнопке копирования
+            copyButton.addEventListener('click', () => {
+                navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+                    copyButton.innerHTML = successInnerHTML;
+                    setTimeout(() => {
+                        copyButton.innerHTML = initInnerHTML;
+                    }, 1000);
+                });
+            });
+
+            parent.addEventListener('mouseenter', () => {
+                copyButton.style.opacity = "1";
+            });
+            parent.addEventListener('mouseleave', () => {
+                copyButton.style.opacity = "0";
+            });
+        });
+    </script> </body></html>

@@ -1,0 +1,390 @@
+<!DOCTYPE HTML>
+
+<html class="scrollbar" lang="en" translate="no"> <head><meta charset="utf-8"/><meta content="IE=Edge,chrome=1" http-equiv="X-UA-Compatible"/><meta content="en" http-equiv="content-language"/><meta content="en" name="language"/><meta content="webkit" name="renderer"/><meta content="width=device-width,initial-scale=1,maximum-scale=1" name="viewport"/><meta content="/" name="app:pageurl"/><title>GitLab Cheat Sheet &amp; Quick Reference</title><meta content="cheat,sheet,cheatsheets,reference,programming,code table,snippets,linux,command,shortcuts,developers" name="keywords"/><meta content="A visual cheat-sheet for the 58 keyboard shortcuts found in GitLab " name="description"/><meta content="Fechin" name="author"/><meta content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" name="robots"/><meta content="CheatSheets.html" name="article:author"/><meta content="2022-11-23T16:23:31.693Z" name="article:published_time"/><meta content="2022-11-23T16:23:31.693Z" name="article:modified_time"/><meta content="Keyboard Shortcuts" name="article:section"/><meta content="gitlab.html" property="og:url"/><meta content="GitLab Cheat Sheet &amp; Quick Reference" property="og:title"/><meta content="CheatSheets.html" property="og:site_name"/><meta content="A visual cheat-sheet for the 58 keyboard shortcuts found in GitLab " property="og:description"/><meta content="assets/image/gitlab-preview5981.png?v=zorgt" property="og:image"/><meta content="2276" property="og:image:width"/><meta content="1240" property="og:image:height"/><meta content="GitLab Cheat Sheet &amp; Quick Reference - " property="og:image:alt"/><meta content="article" property="og:type"/><meta content="en_US" property="og:locale"/><meta content="2022-11-23T16:23:31.693Z" property="article:published_time"/><meta content="2022-11-23T16:23:31.693Z" property="article:modified_time"/><meta content="CheatSheets.html" property="article:author"/><meta content="Keyboard Shortcuts" property="article:section"/><meta content="summary_large_image" name="twitter:card"/><meta content="GitLab Cheat Sheet &amp; Quick Reference" name="twitter:title"/><meta content="@Fechin" name="twitter:site"/><meta content="@Fechin" name="twitter:creator"/><meta content="A visual cheat-sheet for the 58 keyboard shortcuts found in GitLab " name="twitter:description"/><meta content="assets/image/gitlab-preview8874.png?v=nj5z9" name="twitter:image"/><meta content="GitLab Cheat Sheet &amp; Quick Reference - " name="twitter:image:alt"/><link href="images/favicon3860.png?v=1" rel="icon"/><link href="images/favicon3860.png?v=1" rel="icon shortcut" type="image/png"/><link href="gitlab.html" rel="canonical"/><link href="css/stylea454.css?_v=1769244903599" rel="stylesheet"/><script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            let html = document.documentElement.classList;
+            html.toggle('dark')
+        }
+    </script></head><body class="bg-slate-100 dark:bg-slate-900"><header class="relative z-10"><div class="max-container z-20 relative"></div></header><div class="mx-auto flex flex-wrap md:py-5 flex-col md:flex-row items-center"><div class="flex flex-col w-full mx-auto items-center text-center my-8"><div class="max-container w-full"><h1 class="text-5xl mb-4"> <span class="text-slate-700 dark:text-slate-300 font-light">GitLab</span> <span class="text-slate-400 dark:text-slate-500 font-extralight hidden md:inline">cheatsheet</span></h1><div class="lg:w-3/5 mx-auto intro leading-relaxed text-slate-600"><p>Наглядная шпаргалка по 58 горячим клавишам GitLab</p></div><div class="pt-5" id="carbon_container"></div></div></div><div class="mdLayout w-full max-container" id="mdLayout"> <div class="h2-wrap">
+<h2 id="keyboard-shortcuts"><a class="h-anchor" href="#keyboard-shortcuts">#</a>Горячие клавиши</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="global"><a class="h-anchor" href="#global">#</a>Глобальный</h3>
+<div class="section">
+<table class="shortcuts">
+<thead>
+<tr>
+<th>Сочетание клавиш</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>?</code></td>
+<td>Показать/скрыть шпаргалку по горячим клавишам</td>
+</tr>
+<tr>
+<td><code>Shift</code> <code>P</code></td>
+<td>Страница проектов</td>
+</tr>
+<tr>
+<td><code>Shift</code> <code>G</code></td>
+<td>Страница групп</td>
+</tr>
+<tr>
+<td><code>Shift</code> <code>A</code></td>
+<td>Страница активности</td>
+</tr>
+<tr>
+<td><code>Shift</code> <code>L</code></td>
+<td>Страница этапов</td>
+</tr>
+<tr>
+<td><code>Shift</code> <code>S</code></td>
+<td>Страница сниппетов</td>
+</tr>
+<tr>
+<td><code>S</code></td>
+<td>Фокус на поиск issues или merge requests</td>
+</tr>
+<tr>
+<td><code>Shift</code> <code>I</code></td>
+<td>Страница issues</td>
+</tr>
+<tr>
+<td><code>Shift</code> <code>T</code></td>
+<td>Страница merge requests</td>
+</tr>
+<tr>
+<td><code>P</code> <code>B</code></td>
+<td>Показать/скрыть панель производительности</td>
+</tr>
+<tr>
+<td><code>Up</code></td>
+<td>Редактировать последний комментарий (в пустом поле под обсуждением)</td>
+</tr>
+<tr>
+<td><code>Ctrl</code> <code>Shift</code> <code>P</code></td>
+<td>Предпросмотр Markdown при редактировании</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="project"><a class="h-anchor" href="#project">#</a>Проект</h3>
+<div class="section">
+<table class="shortcuts">
+<thead>
+<tr>
+<th>Сочетание клавиш</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>G</code> <code>P</code></td>
+<td>Главная страница проекта</td>
+</tr>
+<tr>
+<td><code>G</code> <code>V</code></td>
+<td>Лента активности проекта</td>
+</tr>
+<tr>
+<td><code>G</code> <code>R</code></td>
+<td>Список релизов</td>
+</tr>
+<tr>
+<td><code>G</code> <code>F</code></td>
+<td>Список файлов проекта</td>
+</tr>
+<tr>
+<td><code>T</code></td>
+<td>Поиск файлов в проекте</td>
+</tr>
+<tr>
+<td><code>G</code> <code>C</code></td>
+<td>Список коммитов</td>
+</tr>
+<tr>
+<td><code>G</code> <code>N</code></td>
+<td>Граф репозитория</td>
+</tr>
+<tr>
+<td><code>G</code> <code>D</code></td>
+<td>Графики репозитория</td>
+</tr>
+<tr>
+<td><code>G</code> <code>I</code></td>
+<td>Список issues</td>
+</tr>
+<tr>
+<td><code>I</code></td>
+<td>Создать новый issue</td>
+</tr>
+<tr>
+<td><code>G</code> <code>B</code></td>
+<td>Доски issues</td>
+</tr>
+<tr>
+<td><code>G</code> <code>M</code></td>
+<td>Список merge requests</td>
+</tr>
+<tr>
+<td><code>G</code> <code>J</code></td>
+<td>Список CI/CD jobs</td>
+</tr>
+<tr>
+<td><code>G</code> <code>L</code></td>
+<td>Метрики проекта</td>
+</tr>
+<tr>
+<td><code>G</code> <code>E</code></td>
+<td>Окружения проекта</td>
+</tr>
+<tr>
+<td><code>G</code> <code>K</code></td>
+<td>Интеграция Kubernetes</td>
+</tr>
+<tr>
+<td><code>G</code> <code>S</code></td>
+<td>Список сниппетов</td>
+</tr>
+<tr>
+<td><code>G</code> <code>W</code></td>
+<td>Вики проекта (если включена)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="issues-and-merge-requests"><a class="h-anchor" href="#issues-and-merge-requests">#</a>Проблемы и мерж-реквесты</h3>
+<div class="section">
+<table class="shortcuts">
+<thead>
+<tr>
+<th>Сочетание клавиш</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>E</code></td>
+<td>Редактировать описание</td>
+</tr>
+<tr>
+<td><code>A</code></td>
+<td>Изменить исполнителя</td>
+</tr>
+<tr>
+<td><code>M</code></td>
+<td>Изменить этап</td>
+</tr>
+<tr>
+<td><code>L</code></td>
+<td>Изменить метку</td>
+</tr>
+<tr>
+<td><code>R</code></td>
+<td>Написать комментарий (выделенный текст будет процитирован)</td>
+</tr>
+<tr>
+<td><code>N</code></td>
+<td>Следующее нерешённое обсуждение (только MR)</td>
+</tr>
+<tr>
+<td><code>P</code></td>
+<td>Предыдущее нерешённое обсуждение (только MR)</td>
+</tr>
+<tr>
+<td><code>]</code></td>
+<td>Следующий файл (только MR)</td>
+</tr>
+<tr>
+<td><code>[</code></td>
+<td>Предыдущий файл (только MR)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="project-files"><a class="h-anchor" href="#project-files">#</a>Файлы проекта</h3>
+<div class="section">
+<table class="shortcuts">
+<thead>
+<tr>
+<th>Сочетание клавиш</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Up</code></td>
+<td>Выделить выше</td>
+</tr>
+<tr>
+<td><code>Down</code></td>
+<td>Выделить ниже</td>
+</tr>
+<tr>
+<td><code>Enter</code></td>
+<td>Открыть выделенное</td>
+</tr>
+<tr>
+<td><code>Esc</code></td>
+<td>Вернуться к списку файлов (при поиске)</td>
+</tr>
+<tr>
+<td><code>Y</code></td>
+<td>Постоянная ссылка на файл (при просмотре)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="web-ide"><a class="h-anchor" href="#web-ide">#</a>Веб-IDE</h3>
+<div class="section">
+<table class="shortcuts">
+<thead>
+<tr>
+<th>Сочетание клавиш</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl</code> <code>P</code></td>
+<td>Поиск и открытие файла для редактирования</td>
+</tr>
+<tr>
+<td><code>Ctrl</code> <code>Enter</code></td>
+<td>Сделать коммит (при редактировании сообщения)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="repository-graph"><a class="h-anchor" href="#repository-graph">#</a>Граф репозитория</h3>
+<div class="section">
+<table class="shortcuts">
+<thead>
+<tr>
+<th>Сочетание клавиш</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Лево</code></td>
+<td>Прокрутить влево</td>
+</tr>
+<tr>
+<td><code>Право</code></td>
+<td>Прокрутить вправо</td>
+</tr>
+<tr>
+<td><code>Up</code></td>
+<td>Прокрутить вверх</td>
+</tr>
+<tr>
+<td><code>Down</code></td>
+<td>Прокрутить вниз</td>
+</tr>
+<tr>
+<td><code>Shift</code> <code>Up</code></td>
+<td>Прокрутить вверх до конца</td>
+</tr>
+<tr>
+<td><code>Shift</code> <code>Down</code></td>
+<td>Прокрутить вниз до конца</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="wiki-pages"><a class="h-anchor" href="#wiki-pages">#</a>Вики-страницы</h3>
+<div class="section">
+<table class="shortcuts">
+<thead>
+<tr>
+<th>Сочетание клавиш</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>E</code></td>
+<td>Редактировать вики-страницу</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="filtered-search"><a class="h-anchor" href="#filtered-search">#</a>Фильтрованный поиск</h3>
+<div class="section">
+<table class="shortcuts">
+<thead>
+<tr>
+<th>Сочетание клавиш</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl</code> <code>Backspace</code></td>
+<td>Очистить весь фильтр поиска</td>
+</tr>
+<tr>
+<td><code>Alt</code> <code>Backspace</code></td>
+<td>Удалять по одному токену</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="epics"><a class="h-anchor" href="#epics">#</a>Эпосы</h3>
+<div class="section">
+<table class="shortcuts">
+<thead>
+<tr>
+<th>Сочетание клавиш</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>R</code></td>
+<td>Написать комментарий (выделенный текст будет процитирован)</td>
+</tr>
+<tr>
+<td><code>E</code></td>
+<td>Редактировать описание</td>
+</tr>
+<tr>
+<td><code>L</code></td>
+<td>Изменить метку</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap">
+<h2 id="also-see"><a class="h-anchor" href="#also-see">#</a>Смотрите также</h2>
+<div class="h3-wrap-list">
+<ul>
+<li><a href="https://docs.gitlab.com/ee/user/shortcuts.html" rel="noopener external nofollow noreferrer" target="_blank">Keyboard shortcuts for GitLab</a> <em>(docs.gitlab.com)</em></li>
+</ul>
+</div>
+</div> </div></div><div class="toc-container" id="toc-container"><nav aria-label="Table of Contents" class="toc-list" id="toc-list" role="navigation"></nav></div><script>window.addEventListener("DOMContentLoaded",function(){"function"==typeof window.initTOC&&window.initTOC()})</script><div class="z-50 fixed inset-0 flex justify-center bg-slate-600/80 dark:bg-slate-900/90 items-start text-sm z-50 overflow-hidden lg:pt-16 lg:pb-20 hidden" id="mysearch"><div class="lg:max-w-screen-lg w-full flex flex-col justify-between bg-white dark:bg-slate-700 shadow-3xl dark:shadow-3xl lg:rounded-lg lg:max-h-832 min-h-320 h-full" id="mysearch-box"><div class="flex items-center h-16 flex-none border-b border-slate-200 dark:border-slate-700"><div class="w-full h-full"><form class="flex items-center w-full h-full outline-none rounded-tl-lg"><label class="h-full w-14 mt-1 ml-1 px-4 flex items-center justify-center transition-colors duration-200 ease-in-out text-indigo-200" for="mysearch-input" id="mysearch-label"><div class="text-2xl text-indigo-500"> <svg fill="currentColor" height="1em" viewbox="0 0 1024 1024" width="1em" xmlns="http://www.w3.org/2000/svg"> <path d="M942.14826666 878.7968l-200.56746667-229.92213333C795.37493333 583.8848 827.73333333 500.5312 827.73333333 409.6 827.73333333 202.27413333 659.59253333 34.13333333 452.26666666 34.13333333 244.87253333 34.13333333 76.79999999 202.27413333 76.79999999 409.6S244.87253333 785.06666667 452.26666666 785.06666667c77.14133333 0 148.82133333-23.3472 208.41813333-63.21493334l199.33866667 228.5568c19.72906667 22.7328 54.272 24.91733333 76.8 5.25653334C959.62453333 935.86773333 961.87733333 901.46133333 942.14826666 878.7968zM179.19999999 409.6c0-150.59626667 122.4704-273.06666667 273.06666667-273.06666667 150.59626667 0 273.06666667 122.4704 273.06666667 273.06666667s-122.4704 273.06666667-273.06666667 273.06666667C301.67039999 682.66666667 179.19999999 560.19626667 179.19999999 409.6z"></path>
+</svg>
+</div></label><div class="relative flex-1"> <input autocapitalize="off" autocomplete="off" autocorrect="off" class="flex-1 font-light h-full bg-transparent focus:text-slate-900 text-slate-500 dark:text-slate-300 placeholder-slate-400 placeholder-opacity-80 shadow-none outline-none truncate text-lg sm:text-2xl caret-color-indigo-400 leading-normalized w-full appearance-none rounded-none transition-colors duration-200 ease-in-out" enterkeyhint="go" id="mysearch-input" maxlength="128" placeholder="Search for cheatsheet" spellcheck="false" type="text"/></div> <button class="items-center justify-center h-full w-14 px-4 text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-100 opacity-75 fill-current cursor-pointer transition-fast-out flex" id="mysearch-clear" type="reset"><i class="icon icon-close text-xs font-bold"></i></button></form></div><div class="w-px h-8 bg-slate-100 dark:bg-slate-400/20 flex-none"></div> <button class="cancel mr-1 px-4 h-full text-slate-500 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-300"> Cancel</button></div><div class="flex flex-grow overflow-hidden lg:rounded-br-lg"><div class="relative w-full flex-none overflow-y-auto lg:w-1/2"><ul id="mysearch-list"></ul></div><div class="preview-panel shadow-inner bg-slate-100 dark:bg-slate-800 lg:block w-1/2 flex-none overflow-y-auto"></div></div></div></div>
+</body><script src="js/maina454.js?_v=1769244903599"></script> </html>

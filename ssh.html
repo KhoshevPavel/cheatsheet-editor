@@ -1,0 +1,410 @@
+<!DOCTYPE HTML>
+
+<html class="scrollbar" lang="en" translate="no"> <head><meta charset="utf-8"/><meta content="IE=Edge,chrome=1" http-equiv="X-UA-Compatible"/><meta content="en" http-equiv="content-language"/><meta content="en" name="language"/><meta content="webkit" name="renderer"/><meta content="width=device-width,initial-scale=1,maximum-scale=1" name="viewport"/><meta content="/" name="app:pageurl"/><title>SSH Command Cheat Sheet &amp; Quick Reference</title><meta content="cheat,sheet,cheatsheets,reference,programming,code table,snippets,linux,command,shortcuts,developers,network,protocol,remote,22" name="keywords"/><meta content="This quick reference cheat sheet provides various for using SSH. " name="description"/><meta content="Fechin" name="author"/><meta content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" name="robots"/><meta content="CheatSheets.html" name="article:author"/><meta content="2021-01-27T11:48:05.000Z" name="article:published_time"/><meta content="2021-01-27T11:48:05.000Z" name="article:modified_time"/><meta content="Linux Command" name="article:section"/><meta content="network" name="article:tag"/><meta content="protocol" name="article:tag"/><meta content="remote" name="article:tag"/><meta content="22" name="article:tag"/><meta content="ssh.html" property="og:url"/><meta content="SSH Command Cheat Sheet &amp; Quick Reference" property="og:title"/><meta content="CheatSheets.html" property="og:site_name"/><meta content="This quick reference cheat sheet provides various for using SSH. " property="og:description"/><meta content="assets/image/ssh-previewa546.png?v=eipwzl" property="og:image"/><meta content="2276" property="og:image:width"/><meta content="1240" property="og:image:height"/><meta content="SSH Command Cheat Sheet &amp; Quick Reference - " property="og:image:alt"/><meta content="article" property="og:type"/><meta content="en_US" property="og:locale"/><meta content="2021-01-27T11:48:05.000Z" property="article:published_time"/><meta content="2021-01-27T11:48:05.000Z" property="article:modified_time"/><meta content="CheatSheets.html" property="article:author"/><meta content="Linux Command" property="article:section"/><meta content="network" property="article:tag"/><meta content="protocol" property="article:tag"/><meta content="remote" property="article:tag"/><meta content="22" property="article:tag"/><meta content="summary_large_image" name="twitter:card"/><meta content="SSH Command Cheat Sheet &amp; Quick Reference" name="twitter:title"/><meta content="@Fechin" name="twitter:site"/><meta content="@Fechin" name="twitter:creator"/><meta content="This quick reference cheat sheet provides various for using SSH. " name="twitter:description"/><meta content="assets/image/ssh-preview3439.png?v=p4h9x" name="twitter:image"/><meta content="SSH Command Cheat Sheet &amp; Quick Reference - " name="twitter:image:alt"/><link href="images/favicon3860.png?v=1" rel="icon"/><link href="images/favicon3860.png?v=1" rel="icon shortcut" type="image/png"/><link href="ssh.html" rel="canonical"/><link href="css/stylea454.css?_v=1769244903599" rel="stylesheet"/><script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            let html = document.documentElement.classList;
+            html.toggle('dark')
+        }
+    </script></head><body class="bg-slate-100 dark:bg-slate-900"><header class="relative z-10"><div class="max-container z-20 relative"></div></header><div class="mx-auto flex flex-wrap md:py-5 flex-col md:flex-row items-center"><div class="flex flex-col w-full mx-auto items-center text-center my-8"><div class="max-container w-full"><h1 class="text-5xl mb-4"> <span class="text-slate-700 dark:text-slate-300 font-light">SSH</span> <span class="text-slate-400 dark:text-slate-500 font-extralight hidden md:inline">cheatsheet</span></h1><div class="lg:w-3/5 mx-auto intro leading-relaxed text-slate-600"><p>Краткая шпаргалка по SSH.</p></div><div class="pt-5" id="carbon_container"></div></div></div><div class="mdLayout w-full max-container" id="mdLayout"> <div class="h2-wrap">
+<h2 id="getting-started"><a class="h-anchor" href="#getting-started">#</a>Начало работы</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="connecting"><a class="h-anchor" href="#connecting">#</a>Подключение</h3>
+<div class="section">
+<p>Подключиться к серверу (порт 22)</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ssh root@192.168.1.5</span>
+</code></pre>
+<p>Подключение на указанный порт</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ssh root@192.168.1.5 -p 6222</span>
+</code></pre>
+<p>Подключение через pem-файл (права 0400)</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ssh -i /path/file.pem root@192.168.1.5</span>
+</code></pre>
+<p>См.: <a href="chmod.html#ssh-permissions">Права SSH</a></p>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="executing"><a class="h-anchor" href="#executing">#</a>Выполнение</h3>
+<div class="section">
+<p>Выполнение удалённой команды</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ssh root@192.168.1.5 <span class="hljs-string">'ls -l'</span></span>
+</code></pre>
+<p>Запуск локального скрипта</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ssh root@192.168.1.5 bash &lt; script.sh</span>
+</code></pre>
+<p>Сжатие и загрузка с сервера</p>
+<pre><code class="hljs wrap hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ssh root@192.168.1.5 <span class="hljs-string">"tar cvzf - ~/source"</span> &gt; output.tgz</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap row-span-2">
+<h3 id="scp"><a class="h-anchor" href="#scp">#</a>SCP</h3>
+<div class="section">
+<p>Копирование с удалённого на локальный</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">scp user@server:/dir/file.ext dest/</span>
+</code></pre>
+<p>Копирование между двумя серверами</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">scp user@server:/file user@server:/dir</span>
+</code></pre>
+<p>Копирование с локального на удалённый</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">scp dest/file.ext user@server:/dir</span>
+</code></pre>
+<p>Копирование целой папки</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">scp -r user@server:/dir dest/</span>
+</code></pre>
+<p>Копирование всех файлов из папки</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">scp user@server:/dir/* dest/</span>
+</code></pre>
+<p>Копировать из папки сервера в текущую папку</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">scp user@server:/dir/* .</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="config-location"><a class="h-anchor" href="#config-location">#</a>Расположение конфигурации</h3>
+<div class="section">
+<table>
+<thead>
+<tr>
+<th>Путь к файлу</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/etc/ssh/ssh_config</code></td>
+<td>Системная конфигурация</td>
+</tr>
+<tr>
+<td><code>~/.ssh/config</code></td>
+<td>Пользовательская конфигурация</td>
+</tr>
+<tr>
+<td><code>~/.ssh/id_{type}</code></td>
+<td>Приватный ключ</td>
+</tr>
+<tr>
+<td><code>~/.ssh/id_{type}.pub</code></td>
+<td>Публичный ключ</td>
+</tr>
+<tr>
+<td><code>~/.ssh/known_hosts</code></td>
+<td>Известные серверы</td>
+</tr>
+<tr>
+<td><code>~/.ssh/authorized_keys</code></td>
+<td>Ключ для авторизованного входа</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="scp-options"><a class="h-anchor" href="#scp-options">#</a>Опции SCP</h3>
+<div class="section">
+<table>
+<thead>
+<tr>
+<th>Параметры</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>scp <code>-r</code></td>
+<td><yel>R</yel>екурсивное копирование каталогов</td>
+</tr>
+<tr>
+<td>scp <code>-C</code></td>
+<td><yel>C</yel>жатие данных</td>
+</tr>
+<tr>
+<td>scp <code>-v</code></td>
+<td>Подробный <yel>v</yel>ывод</td>
+</tr>
+<tr>
+<td>scp <code>-P</code> 8080</td>
+<td>Указать <yel>P</yel>орт</td>
+</tr>
+<tr>
+<td>scp <code>-B</code></td>
+<td><yel>B</yel>атовый режим <em>(без запроса пароля)</em></td>
+</tr>
+<tr>
+<td>scp <code>-p</code></td>
+<td><yel>С</yel>охранять время и режимы</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="config-sample"><a class="h-anchor" href="#config-sample">#</a>Пример конфигурации</h3>
+<div class="section">
+<pre><code class="hljs hljs language-toml">Host server1
+    HostName 192.168.1.5
+    User root
+    Port 22
+    IdentityFile ~/.ssh/server1.key
+</code></pre>
+<p>Подключение по алиасу</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ssh server1</span>
+</code></pre>
+<p>См.: <a href="https://linux.die.net/man/5/ssh_config" rel="noopener external nofollow noreferrer" target="_blank">Полные опции конфигурации</a></p>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="proxyjump"><a class="h-anchor" href="#proxyjump">#</a>ProxyJump</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ssh -J proxy_host1 remote_host2</span>
+</code></pre>
+<pre><code class="hljs wrap hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ssh -J user@proxy_host1 user@remote_host2</span>
+</code></pre>
+<p>Множественные прыжки (прокси)</p>
+<pre><code class="hljs wrap hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ssh -J user@proxy_host1:port1,user@proxy_host2:port2 user@remote_host3</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="ssh-copy-id"><a class="h-anchor" href="#ssh-copy-id">#</a>ssh-copy-id</h3>
+<div class="section">
+<pre><code class="hljs wrap hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ssh-copy-id user@server</span>
+</code></pre>
+<p>Копировать на сервер по алиасу</p>
+<pre><code class="hljs wrap hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ssh-copy-id server1</span>
+</code></pre>
+<p>Скопировать конкретный ключ</p>
+<pre><code class="hljs wrap hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ssh-copy-id -i ~/.ssh/id_rsa.pub user@server</span>
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap cols-5">
+<h2 id="ssh-keygen"><a class="h-anchor" href="#ssh-keygen">#</a>Генерация ключей SSH</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap col-span-2">
+<h3 id="ssh-keygen-2"><a class="h-anchor" href="#ssh-keygen-2">#</a>ssh-keygen</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ssh-keygen -t rsa -b 4096 -C <span class="hljs-string">"your@mail.com"</span></span>
+</code></pre>
+<hr/>
+<table class="left-text">
+<thead>
+<tr>
+<th>-</th>
+<th>-</th>
+<th>-</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><code>-t</code></td>
+<td><a href="#key-type">Тип</a> ключа</td>
+</tr>
+<tr>
+<td></td>
+<td><code>-b</code></td>
+<td>Размер ключа в битах</td>
+</tr>
+<tr>
+<td></td>
+<td><code>-C</code></td>
+<td>Новый комментарий</td>
+</tr>
+</tbody>
+</table>
+<p>Сгенерировать RSA 4096 бит с email в комментарии или использовать <a href="https://sshkeygenerator.com/" rel="noopener" target="_blank">SSH Key Generator</a></p>
+</div>
+</div>
+<div class="h3-wrap col-span-2 row-span-2">
+<h3 id="generate"><a class="h-anchor" href="#generate">#</a>Генерировать</h3>
+<div class="section">
+<p>Интерактивная генерация ключа</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ssh-keygen</span>
+</code></pre>
+<p>Указать имя файла</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ssh-keygen -f ~/.ssh/filename</span>
+</code></pre>
+<p>Сгенерировать публичный ключ из приватного</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ssh-keygen -y -f private.key &gt; public.pub</span>
+</code></pre>
+<p>Изменить комментарий</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ssh-keygen -c -f ~/.ssh/id_rsa</span>
+</code></pre>
+<p>Изменить пароль приватного ключа</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ssh-keygen -p -f ~/.ssh/id_rsa</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="key-type"><a class="h-anchor" href="#key-type">#</a>Тип ключа</h3>
+<div class="section">
+<ul>
+<li>rsa</li>
+<li>ed25519</li>
+<li>dsa</li>
+<li>ecdsa</li>
+</ul>
+</div>
+</div>
+<div class="h3-wrap col-span-2">
+<h3 id="known-hosts"><a class="h-anchor" href="#known-hosts">#</a>known_hosts</h3>
+<div class="section">
+<p>Поиск в known_hosts</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ssh-keygen -F &lt;ip/hostname&gt;</span>
+</code></pre>
+<p>Удалить из known_hosts</p>
+<pre><code class="hljs hljs language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ssh-keygen -R &lt;ip/hostname&gt;</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="key-format"><a class="h-anchor" href="#key-format">#</a>Формат ключа</h3>
+<div class="section">
+<ul>
+<li>PEM</li>
+<li>PKCS8</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap">
+<h2 id="ssh-tunneling"><a class="h-anchor" href="#ssh-tunneling">#</a>SSH-туннелирование</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap row-span-2">
+<h3 id="ssh-tunnel-options"><a class="h-anchor" href="#ssh-tunnel-options">#</a>Параметры SSH-туннеля</h3>
+<div class="section">
+<table class="left-text">
+<thead>
+<tr>
+<th>Параметр</th>
+<th style="text-align:left">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-L</code></td>
+<td style="text-align:left">Локальный проброс порта</td>
+</tr>
+<tr>
+<td><code>-R</code></td>
+<td style="text-align:left">Удалённый проброс порта</td>
+</tr>
+<tr>
+<td><code>-D</code></td>
+<td style="text-align:left">Динамический проброс порта</td>
+</tr>
+<tr>
+<td><code>-f</code></td>
+<td style="text-align:left">Запуск в фоне</td>
+</tr>
+<tr>
+<td><code>-N</code></td>
+<td style="text-align:left">Не выполнять удалённую команду</td>
+</tr>
+<tr>
+<td><code>-g</code></td>
+<td style="text-align:left">Разрешить удалённым хостам подключаться к проброшенным портам</td>
+</tr>
+</tbody>
+</table>
+<p>Подробнее о флагах выше: <code>man ssh</code></p>
+</div>
+</div>
+<div class="h3-wrap col-span-2">
+<h3 id="local-port-forwarding"><a class="h-anchor" href="#local-port-forwarding">#</a>Переадресация локального порта</h3>
+<div class="section">
+<pre><code class="hljs hljs language-bash"><span class="hljs-comment"># Пробросить локальный порт на удалённый сервер</span>
+ssh -L local_port:remote_host:remote_port user@ssh_server
+
+<span class="hljs-comment"># Пример: проброс локального порта 8080 на удалённый порт 80 на example.com</span>
+ssh -L 8080:example.com:80 user@ssh_server
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap col-span-2">
+<h3 id="dynamic-port-forwarding"><a class="h-anchor" href="#dynamic-port-forwarding">#</a>Динамическая переадресация портов</h3>
+<div class="section">
+<pre><code class="hljs hljs language-bash"><span class="hljs-comment"># Создать SOCKS-прокси на локальном порту</span>
+ssh -D local_port user@ssh_server
+
+<span class="hljs-comment"># Создать SOCKS-прокси на порту 1080 в фоне</span>
+ssh -f -N -D 1080 user@ssh_server
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap col-span-3">
+<h3 id="background-tunnel"><a class="h-anchor" href="#background-tunnel">#</a>Фоновый туннель</h3>
+<div class="section">
+<pre><code class="hljs hljs language-bash"><span class="hljs-comment"># Создать туннель с локальным пробросом порта в фоне</span>
+ssh -f -N -L local_port:remote_host:remote_port user@ssh_server
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap col-span-3">
+<h3 id="multiple-tunnels"><a class="h-anchor" href="#multiple-tunnels">#</a>Несколько туннелей</h3>
+<div class="section">
+<pre><code class="hljs hljs language-bash"><span class="hljs-comment"># Создать несколько туннелей в одной SSH-команде</span>
+ssh -L 8080:example.com:80 -L 3306:db.example.com:3306 user@ssh_server
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap col-span-3">
+<h3 id="combining-options"><a class="h-anchor" href="#combining-options">#</a>Объединение опций</h3>
+<div class="section">
+<pre><code class="hljs hljs language-bash"><span class="hljs-comment"># В фоне, без команды, разрешить удалённый хост, локальный проброс порта, identity_file</span>
+ssh -f -N -g -L 8080:example.com:80 -i ~/.ssh/custom_key user@ssh_server
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap">
+<h2 id="also-see"><a class="h-anchor" href="#also-see">#</a>Смотрите также</h2>
+<div class="h3-wrap-list">
+<ul>
+<li><a href="https://www.cyberciti.biz/faq/create-ssh-config-file-on-linux-unix/" rel="noopener external nofollow noreferrer" target="_blank">Примеры конфигурации OpenSSH</a> <em>(cyberciti.biz)</em></li>
+<li><a href="https://linux.die.net/man/5/ssh_config" rel="noopener external nofollow noreferrer" target="_blank">ssh_config</a> <em>(linux.die.net)</em></li>
+<li><a href="https://man7.org/linux/man-pages/man1/ssh.1.html" rel="noopener external nofollow noreferrer" target="_blank">man ssh</a></li>
+</ul>
+</div>
+</div> </div></div><div class="toc-container" id="toc-container"><nav aria-label="Table of Contents" class="toc-list" id="toc-list" role="navigation"></nav></div><script>window.addEventListener("DOMContentLoaded",function(){"function"==typeof window.initTOC&&window.initTOC()})</script><div class="z-50 fixed inset-0 flex justify-center bg-slate-600/80 dark:bg-slate-900/90 items-start text-sm z-50 overflow-hidden lg:pt-16 lg:pb-20 hidden" id="mysearch"><div class="lg:max-w-screen-lg w-full flex flex-col justify-between bg-white dark:bg-slate-700 shadow-3xl dark:shadow-3xl lg:rounded-lg lg:max-h-832 min-h-320 h-full" id="mysearch-box"><div class="flex items-center h-16 flex-none border-b border-slate-200 dark:border-slate-700"><div class="w-full h-full"><form class="flex items-center w-full h-full outline-none rounded-tl-lg"><label class="h-full w-14 mt-1 ml-1 px-4 flex items-center justify-center transition-colors duration-200 ease-in-out text-indigo-200" for="mysearch-input" id="mysearch-label"><div class="text-2xl text-indigo-500"> <svg fill="currentColor" height="1em" viewbox="0 0 1024 1024" width="1em" xmlns="http://www.w3.org/2000/svg"> <path d="M942.14826666 878.7968l-200.56746667-229.92213333C795.37493333 583.8848 827.73333333 500.5312 827.73333333 409.6 827.73333333 202.27413333 659.59253333 34.13333333 452.26666666 34.13333333 244.87253333 34.13333333 76.79999999 202.27413333 76.79999999 409.6S244.87253333 785.06666667 452.26666666 785.06666667c77.14133333 0 148.82133333-23.3472 208.41813333-63.21493334l199.33866667 228.5568c19.72906667 22.7328 54.272 24.91733333 76.8 5.25653334C959.62453333 935.86773333 961.87733333 901.46133333 942.14826666 878.7968zM179.19999999 409.6c0-150.59626667 122.4704-273.06666667 273.06666667-273.06666667 150.59626667 0 273.06666667 122.4704 273.06666667 273.06666667s-122.4704 273.06666667-273.06666667 273.06666667C301.67039999 682.66666667 179.19999999 560.19626667 179.19999999 409.6z"></path>
+</svg>
+</div></label><div class="relative flex-1"> <input autocapitalize="off" autocomplete="off" autocorrect="off" class="flex-1 font-light h-full bg-transparent focus:text-slate-900 text-slate-500 dark:text-slate-300 placeholder-slate-400 placeholder-opacity-80 shadow-none outline-none truncate text-lg sm:text-2xl caret-color-indigo-400 leading-normalized w-full appearance-none rounded-none transition-colors duration-200 ease-in-out" enterkeyhint="go" id="mysearch-input" maxlength="128" placeholder="Search for cheatsheet" spellcheck="false" type="text"/></div> <button class="items-center justify-center h-full w-14 px-4 text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-100 opacity-75 fill-current cursor-pointer transition-fast-out flex" id="mysearch-clear" type="reset"><i class="icon icon-close text-xs font-bold"></i></button></form></div><div class="w-px h-8 bg-slate-100 dark:bg-slate-400/20 flex-none"></div> <button class="cancel mr-1 px-4 h-full text-slate-500 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-300"> Cancel</button></div><div class="flex flex-grow overflow-hidden lg:rounded-br-lg"><div class="relative w-full flex-none overflow-y-auto lg:w-1/2"><ul id="mysearch-list"></ul></div><div class="preview-panel shadow-inner bg-slate-100 dark:bg-slate-800 lg:block w-1/2 flex-none overflow-y-auto"></div></div></div></div>
+</body><script src="js/maina454.js?_v=1769244903599"></script><script>
+        // Получить все элементы pre > code
+        const codeBlocks = document.querySelectorAll('pre > code');
+        const initInnerHTML = '<svg height="1em" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path> </svg>';
+        const successInnerHTML = '<svg height="1em" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg>';
+        codeBlocks.forEach(function (codeBlock) {
+            // Создать кнопку копирования
+            const copyButton = document.createElement('button');
+            copyButton.className = 'opacity-90 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 p-2 text-white shadow-xl rounded-lg flex items-center absolute top-2 right-2 transition-all duration-200 backdrop-blur-sm';
+            copyButton.innerHTML = initInnerHTML;
+            copyButton.style.opacity = "0";
+            const parent = codeBlock.parentNode;
+
+            parent.style = "position: relative;"
+            parent.insertBefore(copyButton, codeBlock);
+
+            // Обработчик клика по кнопке копирования
+            copyButton.addEventListener('click', () => {
+                navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+                    copyButton.innerHTML = successInnerHTML;
+                    setTimeout(() => {
+                        copyButton.innerHTML = initInnerHTML;
+                    }, 1000);
+                });
+            });
+
+            parent.addEventListener('mouseenter', () => {
+                copyButton.style.opacity = "1";
+            });
+            parent.addEventListener('mouseleave', () => {
+                copyButton.style.opacity = "0";
+            });
+        });
+    </script> </html>

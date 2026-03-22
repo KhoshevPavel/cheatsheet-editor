@@ -1,0 +1,397 @@
+<!DOCTYPE HTML>
+<html class="scrollbar" lang="en" translate="no"><head><meta charset="utf-8"><meta content="IE=Edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="en" http-equiv="content-language"><meta content="en" name="language"><meta content="webkit" name="renderer"><meta content="width=device-width,initial-scale=1,maximum-scale=1" name="viewport"><meta content="/" name="app:pageurl"><title>Curl Command Cheat Sheet &amp; Quick Reference</title><meta content="cheat,sheet,cheatsheets,reference,programming,code table,snippets,linux,command,shortcuts,developers,url,request" name="keywords"><meta content="This Curl cheat sheet contains commands and examples of some common Curl tricks. " name="description"><meta content="Fechin" name="author"><meta content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" name="robots"><meta content="CheatSheets.html" name="article:author"><meta content="2023-01-03T15:18:34.000Z" name="article:published_time"><meta content="2023-01-03T15:18:34.000Z" name="article:modified_time"><meta content="Linux Command" name="article:section"><meta content="url" name="article:tag"><meta content="request" name="article:tag"><meta content="curl.html" property="og:url"><meta content="Curl Command Cheat Sheet &amp; Quick Reference" property="og:title"><meta content="CheatSheets.html" property="og:site_name"><meta content="This Curl cheat sheet contains commands and examples of some common Curl tricks. " property="og:description"><meta content="assets/image/curl-preview5c7c.png?v=m73sr" property="og:image"><meta content="2276" property="og:image:width"><meta content="1240" property="og:image:height"><meta content="Curl Command Cheat Sheet &amp; Quick Reference - " property="og:image:alt"><meta content="article" property="og:type"><meta content="en_US" property="og:locale"><meta content="2023-01-03T15:18:34.000Z" property="article:published_time"><meta content="2023-01-03T15:18:34.000Z" property="article:modified_time"><meta content="CheatSheets.html" property="article:author"><meta content="Linux Command" property="article:section"><meta content="url" property="article:tag"><meta content="request" property="article:tag"><meta content="summary_large_image" name="twitter:card"><meta content="Curl Command Cheat Sheet &amp; Quick Reference" name="twitter:title"><meta content="@Fechin" name="twitter:site"><meta content="@Fechin" name="twitter:creator"><meta content="This Curl cheat sheet contains commands and examples of some common Curl tricks. " name="twitter:description"><meta content="assets/image/curl-previewb131.png?v=p2nkg" name="twitter:image"><meta content="Curl Command Cheat Sheet &amp; Quick Reference - " name="twitter:image:alt"><link href="images/favicon3860.png?v=1" rel="icon"><link href="images/favicon3860.png?v=1" rel="icon shortcut" type="image/png"><link href="curl.html" rel="canonical"><link href="css/stylea454.css?_v=1769244903599" rel="stylesheet"><script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            let html = document.documentElement.classList;
+            html.toggle('dark')
+        }
+    </script></head><body class="bg-slate-100 dark:bg-slate-900"><header class="relative z-10"><div class="max-container z-20 relative"></div></header><div class="mx-auto flex flex-wrap md:py-5 flex-col md:flex-row items-center"><div class="flex flex-col w-full mx-auto items-center text-center my-8"><div class="max-container w-full"><h1 class="text-5xl mb-4"> <span class="text-slate-700 dark:text-slate-300 font-light">Curl</span> <span class="text-slate-400 dark:text-slate-500 font-extralight hidden md:inline">cheatsheet</span></h1><div class="lg:w-3/5 mx-auto intro leading-relaxed text-slate-600"><p>Шпаргалка по curl с командами и примерами основных приёмов.</p></div><div class="pt-5" id="carbon_container"></div></div></div><div id="mdLayout" class="mdLayout w-full max-container">
+<div class="h2-wrap">
+<h2 id="getting-started"><a class="h-anchor" href="#getting-started">#</a>Начало работы</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap">
+<h3 id="introduction"><a class="h-anchor" href="#introduction">#</a>Введение</h3>
+<div class="section">
+<p><code>Curl</code> — инструмент для передачи данных между серверами, поддерживает протоколы:</p>
+<ul class="cols-3 marker-none">
+<li>HTTP</li>
+<li>HTTPS</li>
+<li>FTP</li>
+<li>IMAP</li>
+<li>LDAP</li>
+<li>POP3</li>
+<li>SCP</li>
+<li>SFTP</li>
+<li>SMB</li>
+<li>SMTP</li>
+<li>etc...</li>
+</ul>
+<hr>
+<ul>
+<li><a href="https://github.com/curl/curl" target="_blank" rel="noopener">Репозиторий исходников curl на GitHub</a> <em>(github.com)</em></li>
+<li><a href="https://curl.se/" target="_blank" rel="noopener external nofollow noreferrer">Официальный сайт curl</a> <em>(curl.se)</em></li>
+</ul>
+</div>
+</div>
+<div class="h3-wrap col-span-2">
+<h3 id="options"><a class="h-anchor" href="#options">#</a>Параметры</h3>
+<div class="section">
+<pre><code class="hljs hljs language-bash">-o &lt;file&gt;    <span class="hljs-comment"># записать в файл</span>
+-u user:pass <span class="hljs-comment"># аутентификация</span>
+</code></pre>
+<hr>
+<pre><code class="hljs hljs language-bash">-v   <span class="hljs-comment"># --verbose: подробный вывод при выполнении</span>
+-vv  <span class="hljs-comment"># более подробный вывод</span>
+-s   <span class="hljs-comment"># --silent: не показывать прогресс и ошибки</span>
+-S   <span class="hljs-comment"># --show-error: вместе с -sS показывать только ошибки</span>
+</code></pre>
+<hr>
+<pre><code class="hljs hljs language-bash">-i  <span class="hljs-comment"># включить HTTP-заголовки в вывод</span>
+-I  <span class="hljs-comment"># только заголовок</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="request"><a class="h-anchor" href="#request">#</a>Запрос</h3>
+<div class="section">
+<pre><code class="hljs hljs language-bash">-X POST <span class="hljs-comment"># --request</span>
+-L <span class="hljs-comment"># Если страница перенаправляет, следовать по ссылке</span>
+-F <span class="hljs-comment"># данные HTTP POST для multipart/form-data</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="data"><a class="h-anchor" href="#data">#</a>Данные (--data)</h3>
+<div class="section">
+<pre><code class="hljs hljs language-bash"><span class="hljs-comment"># данные HTTP POST</span>
+<span class="hljs-comment"># URL-кодирование (напр. status="Hello")</span>
+-d <span class="hljs-string">'data'</span> <span class="hljs-comment"># передать файл с данными</span>
+-d @file
+
+<span class="hljs-comment"># отправить данные -d через GET</span>
+-G
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="header-information-headers"><a class="h-anchor" href="#header-information-headers">#</a>Информация в заголовке</h3>
+<div class="section">
+<pre><code class="hljs hljs language-bash">-A &lt;str&gt;      <span class="hljs-comment"># --user-agent</span>
+
+-b name=val   <span class="hljs-comment"># --cookie</span>
+
+-b, --cookie FILE           <span class="hljs-comment"># Загрузить cookies из файла для URL</span>
+-c, --cookie-jar FILE       <span class="hljs-comment"># Сохранить cookies в файл из URL</span>
+
+-H <span class="hljs-string">"X-Foo: y"</span> <span class="hljs-comment"># --header</span>
+
+--compressed  <span class="hljs-comment"># использовать deflate/gzip</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="ssl"><a class="h-anchor" href="#ssl">#</a>SSL</h3>
+<div class="section">
+<pre><code class="hljs hljs language-bash">    --cacert &lt;file&gt;
+    --capath &lt;<span class="hljs-built_in">dir</span>&gt;
+</code></pre>
+<pre><code class="hljs hljs language-bash">-E, --cert &lt;cert&gt; <span class="hljs-comment"># сертификат клиента</span>
+    --cert-type <span class="hljs-comment"># der/pem/eng</span>
+-k, --insecure <span class="hljs-comment"># Для самоподписанных сертификатов</span>
+</code></pre>
+<h4 id="install"><a class="h-anchor" href="#install">#</a>Установка</h4>
+<pre><code class="hljs hljs language-bash">apk add --update curl <span class="hljs-comment"># установить в Alpine Linux</span>
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="h2-wrap cols-6">
+<h2 id="example"><a class="h-anchor" href="#example">#</a>Пример</h2>
+<div class="h3-wrap-list">
+<div class="h3-wrap col-span-4 row-span-2">
+<h3 id="curl-get-head"><a class="h-anchor" href="#curl-get-head">#</a>CURL GET/HEAD</h3>
+<div class="section">
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">команда</th>
+<th style="text-align: left;">описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>curl -I https://</code></td>
+<td style="text-align: left;">curl отправляет запрос</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>curl -v -I https://</code></td>
+<td style="text-align: left;">curl запрос с подробным выводом</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>curl -X GET https://</code></td>
+<td style="text-align: left;">явный HTTP-метод для curl</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>curl --noproxy 127.0.0.1 http://www.stackoverflow.com</code></td>
+<td style="text-align: left;">curl без HTTP-прокси</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>curl --connect-timeout 10 -I -k https://</code></td>
+<td style="text-align: left;">curl без таймаута по умолчанию</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>curl --verbose --header "Host: www.mytest.com:8182" </code></td>
+<td style="text-align: left;">curl с дополнительным заголовком</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>curl -k -v https://www.google.com</code></td>
+<td style="text-align: left;">curl получить ответ с заголовками</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap col-span-2">
+<h3 id="multiple-file-upload"><a class="h-anchor" href="#multiple-file-upload">#</a>Загрузка нескольких файлов</h3>
+<div class="section">
+<pre><code class="hljs hljs language-bash">$ curl -v --include \
+--form key1=value1 \
+    --form upload=@localfilename URL
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap col-span-2">
+<h3 id="prettify-json-output-for-curl-response"><a class="h-anchor" href="#prettify-json-output-for-curl-response">#</a>Форматирование JSON-ответа curl</h3>
+<div class="section">
+<pre><code class="hljs hljs language-bash">$ curl -XGET http://<span class="hljs-variable">${elasticsearch_ip}</span>:9200/_cluster/nodes | python -m json.tool
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap col-span-4">
+<h3 id="curl-post"><a class="h-anchor" href="#curl-post">#</a>CURL POST</h3>
+<div class="section">
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">команда</th>
+<th style="text-align: left;">описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>curl -d "name=username&amp;password=123456" &lt;URL&gt;</code></td>
+<td style="text-align: left;">curl отправить запрос</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>curl &lt;URL&gt; -H "content-type: application/json" -d "{ \"woof\": \"bark\"}"</code></td>
+<td style="text-align: left;">curl отправляет JSON</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap col-span-2">
+<h3 id="curl-script-install-rvm"><a class="h-anchor" href="#curl-script-install-rvm">#</a>Скрипт установки rvm через CURL</h3>
+<div class="section">
+<pre><code class="hljs hljs language-shell">curl -sSL https://get.rvm.io | bash
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap col-span-6">
+<h3 id="curl-advanced"><a class="h-anchor" href="#curl-advanced">#</a>Расширенные примеры CURL</h3>
+<div class="section">
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">команда</th>
+<th style="text-align: left;">описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>curl -L -s http://ipecho.net/plain, curl -L -s http://whatismijnip.nl</code></td>
+<td style="text-align: left;">получить мой публичный IP</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>curl -u $username:$password http://repo.dennyzhang.com/README.txt</code></td>
+<td style="text-align: left;">curl с учётными данными</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>curl -v -F key1=value1 -F upload=@localfilename &lt;URL&gt;</code></td>
+<td style="text-align: left;">загрузка через curl</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>curl -k -v --http2 https://www.google.com/</code></td>
+<td style="text-align: left;">использовать HTTP/2 в curl</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>curl -T cryptopp552.zip -u test:test ftp://10.32.99.187/</code></td>
+<td style="text-align: left;">загрузка через curl по FTP</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>curl -u test:test ftp://10.32.99.187/cryptopp552.zip -o cryptopp552.zip</code></td>
+<td style="text-align: left;">скачивание через curl по FTP</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>curl -v -u admin:admin123 --upload-file package1.zip http://mysever:8081/dir/package1.zip</code></td>
+<td style="text-align: left;">загрузка с учётными данными через curl</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h3-wrap col-span-4">
+<h3 id="check-website-response-time"><a class="h-anchor" href="#check-website-response-time">#</a>Проверка времени ответа сайта</h3>
+<div class="section span-full">
+<pre><code class="hljs hljs language-shell">curl -s -w \
+'\nLookup time:\t%{time_namelookup}\nConnect time:\t%{time_connect}\nAppCon time:\t%{time_appconnect}\nRedirect time:\t%{time_redirect}\nPreXfer time:\t%{time_pretransfer }\nStartXfer time:\t%{time_starttransfer}\n\nTotal time:\t%{time_total}\n' \
+     -o /dev/null https://www.google.com
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap col-span-2">
+<h3 id="use-curl-to-check-if-a-remote-resource-is-available"><a class="h-anchor" href="#use-curl-to-check-if-a-remote-resource-is-available">#</a>Проверка доступности удалённого ресурса</h3>
+<div class="section span-full">
+<pre><code class="hljs hljs language-bash">curl -o /dev/null --silent -Iw <span class="hljs-string">"%{http_code}"</span> https://example.com/my.remote.tarball.gz
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap col-span-3">
+<h3 id="downloading-file"><a class="h-anchor" href="#downloading-file">#</a>Загрузка файла</h3>
+<div class="section">
+<pre><code class="hljs hljs language-bash">curl https://example.com | \
+grep --only-matching <span class="hljs-string">'src="[^"]*.[png]"'</span> | \
+<span class="hljs-built_in">cut</span> -d \" -f2 | \
+<span class="hljs-keyword">while</span> <span class="hljs-built_in">read</span> i; <span class="hljs-keyword">do</span> curl https://example.com/<span class="hljs-string">"<span class="hljs-variable">${i}</span>"</span> \
+-o <span class="hljs-string">"<span class="hljs-variable">${i##*/}</span>"</span>; <span class="hljs-keyword">done</span>
+</code></pre>
+<p>Скачать все PNG-файлы с сайта (с помощью GNU grep)</p>
+</div>
+</div>
+<div class="h3-wrap col-span-3">
+<h3 id="download-the-file-save-the-file-without-changing-its-name"><a class="h-anchor" href="#download-the-file-save-the-file-without-changing-its-name">#</a>Сохранение файла без изменения имени</h3>
+<div class="section">
+<pre><code class="hljs hljs language-bash">curl --remote-name <span class="hljs-string">"https://example.com/linux-distro.iso"</span>
+</code></pre>
+<p>Переименовать файл</p>
+<pre><code class="hljs hljs language-bash">curl --remote-name <span class="hljs-string">"http://example.com/index.html"</span> --output foo.html
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap col-span-3">
+<h3 id="continue-partial-download"><a class="h-anchor" href="#continue-partial-download">#</a>Продолжение прерванной загрузки</h3>
+<div class="section">
+<pre><code class="hljs hljs language-bash">curl --remote-name --continue-at -<span class="hljs-string">"https://example.com/linux-distro.iso"</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap col-span-3">
+<h3 id="download-files-from-multiple-domains"><a class="h-anchor" href="#download-files-from-multiple-domains">#</a>Загрузка с нескольких доменов</h3>
+<div class="section">
+<pre><code class="hljs hljs language-bash">curl <span class="hljs-string">"https://www.{example,w3,iana}.org/index.html"</span> --output <span class="hljs-string">"file_#1.html"</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap col-span-3">
+<h3 id="download-a-series-of-files"><a class="h-anchor" href="#download-a-series-of-files">#</a>Скачивание серии файлов</h3>
+<div class="section">
+<pre><code class="hljs hljs language-bash">curl <span class="hljs-string">"https://{foo,bar}.com/file_[1-4].webp"</span> --output <span class="hljs-string">"#1_#2.webp"</span>
+</code></pre>
+<p>Скачать серию файлов (результат: <code>foo_file1.webp</code>, <code>foo_file2.webp...bar_file1_webp</code> и т.д.)</p>
+</div>
+</div>
+<div class="h3-wrap col-span-3">
+<h3 id="redirect-output-to-file"><a class="h-anchor" href="#redirect-output-to-file">#</a>Перенаправление вывода в файл</h3>
+<div class="section">
+<pre><code class="hljs hljs language-bash">$ curl http://url/file &gt; file
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap col-span-3">
+<h3 id="basic-authentication"><a class="h-anchor" href="#basic-authentication">#</a>Базовая аутентификация</h3>
+<div class="section">
+<pre><code class="hljs hljs language-bash">$ curl --user username:password http://example.com/
+$ curl -u username:password http://example.com/
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap col-span-2">
+<h3 id="write-to-file-instead-of-stdout"><a class="h-anchor" href="#write-to-file-instead-of-stdout">#</a>Запись в файл (вместо stdout)</h3>
+<div class="section">
+<pre><code class="hljs hljs language-bash">$ curl -o file http://url/file
+$ curl --output file http://url/file
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap">
+<h3 id="download-header-information"><a class="h-anchor" href="#download-header-information">#</a>Загрузка информации из заголовков</h3>
+<div class="section">
+<pre><code class="hljs hljs language-bash">$ curl -I url
+<span class="hljs-comment"># показать заголовки</span>
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap col-span-2">
+<h3 id="write-output-to-a-file-named-remote-file"><a class="h-anchor" href="#write-output-to-a-file-named-remote-file">#</a>Запись вывода в файл Remote_file</h3>
+<div class="section">
+<pre><code class="hljs hljs language-bash">$ curl -o file http://url/file
+$ curl --output file http://url/file
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap col-span-2">
+<h3 id="execute-remote-script"><a class="h-anchor" href="#execute-remote-script">#</a>Выполнение удалённого скрипта</h3>
+<div class="section">
+<pre><code class="hljs hljs language-bash">$ curl -s http://url/myscript.sh
+</code></pre>
+</div>
+</div>
+<div class="h3-wrap col-span-2">
+<h3 id="configuration-file"><a class="h-anchor" href="#configuration-file">#</a>Конфигурационный файл</h3>
+<div class="section">
+<pre><code class="hljs hljs language-bash">curl -K file
+<span class="hljs-comment"># прочитать конфигурацию из файла</span>
+curl --config file
+<span class="hljs-variable">$HOME</span>/.curlrc <span class="hljs-comment"># файл конфигурации по умолчанию в UNIX-системах</span>
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div></div><div class="toc-container" id="toc-container"><nav aria-label="Table of Contents" class="toc-list" id="toc-list" role="navigation"></nav></div><script>window.addEventListener("DOMContentLoaded",function(){"function"==typeof window.initTOC&&window.initTOC()})</script><div class="z-50 fixed inset-0 flex justify-center bg-slate-600/80 dark:bg-slate-900/90 items-start text-sm z-50 overflow-hidden lg:pt-16 lg:pb-20 hidden" id="mysearch"><div class="lg:max-w-screen-lg w-full flex flex-col justify-between bg-white dark:bg-slate-700 shadow-3xl dark:shadow-3xl lg:rounded-lg lg:max-h-832 min-h-320 h-full" id="mysearch-box"><div class="flex items-center h-16 flex-none border-b border-slate-200 dark:border-slate-700"><div class="w-full h-full"><form class="flex items-center w-full h-full outline-none rounded-tl-lg"><label class="h-full w-14 mt-1 ml-1 px-4 flex items-center justify-center transition-colors duration-200 ease-in-out text-indigo-200" for="mysearch-input" id="mysearch-label"><div class="text-2xl text-indigo-500"> <svg fill="currentColor" height="1em" viewBox="0 0 1024 1024" width="1em" xmlns="http://www.w3.org/2000/svg"> <path d="M942.14826666 878.7968l-200.56746667-229.92213333C795.37493333 583.8848 827.73333333 500.5312 827.73333333 409.6 827.73333333 202.27413333 659.59253333 34.13333333 452.26666666 34.13333333 244.87253333 34.13333333 76.79999999 202.27413333 76.79999999 409.6S244.87253333 785.06666667 452.26666666 785.06666667c77.14133333 0 148.82133333-23.3472 208.41813333-63.21493334l199.33866667 228.5568c19.72906667 22.7328 54.272 24.91733333 76.8 5.25653334C959.62453333 935.86773333 961.87733333 901.46133333 942.14826666 878.7968zM179.19999999 409.6c0-150.59626667 122.4704-273.06666667 273.06666667-273.06666667 150.59626667 0 273.06666667 122.4704 273.06666667 273.06666667s-122.4704 273.06666667-273.06666667 273.06666667C301.67039999 682.66666667 179.19999999 560.19626667 179.19999999 409.6z"></path>
+</svg>
+</div></label><div class="relative flex-1"> <input autocapitalize="off" autocomplete="off" autocorrect="off" class="flex-1 font-light h-full bg-transparent focus:text-slate-900 text-slate-500 dark:text-slate-300 placeholder-slate-400 placeholder-opacity-80 shadow-none outline-none truncate text-lg sm:text-2xl caret-color-indigo-400 leading-normalized w-full appearance-none rounded-none transition-colors duration-200 ease-in-out" enterkeyhint="go" id="mysearch-input" maxlength="128" placeholder="Search for cheatsheet" spellcheck="false" type="text"></div> <button class="items-center justify-center h-full w-14 px-4 text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-100 opacity-75 fill-current cursor-pointer transition-fast-out flex" id="mysearch-clear" type="reset"><i class="icon icon-close text-xs font-bold"></i></button></form></div><div class="w-px h-8 bg-slate-100 dark:bg-slate-400/20 flex-none"></div> <button class="cancel mr-1 px-4 h-full text-slate-500 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-300"> Cancel</button></div><div class="flex flex-grow overflow-hidden lg:rounded-br-lg"><div class="relative w-full flex-none overflow-y-auto lg:w-1/2"><ul id="mysearch-list"></ul></div><div class="preview-panel shadow-inner bg-slate-100 dark:bg-slate-800 lg:block w-1/2 flex-none overflow-y-auto"></div></div></div></div>
+<script src="js/maina454.js?_v=1769244903599"></script><script>
+        // Получить все элементы pre > code
+        const codeBlocks = document.querySelectorAll('pre > code');
+        const initInnerHTML = '<svg height="1em" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path> </svg>';
+        const successInnerHTML = '<svg height="1em" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg>';
+        codeBlocks.forEach(function (codeBlock) {
+            // Создать кнопку копирования
+            const copyButton = document.createElement('button');
+            copyButton.className = 'opacity-90 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 p-2 text-white shadow-xl rounded-lg flex items-center absolute top-2 right-2 transition-all duration-200 backdrop-blur-sm';
+            copyButton.innerHTML = initInnerHTML;
+            copyButton.style.opacity = "0";
+            const parent = codeBlock.parentNode;
+
+            parent.style = "position: relative;"
+            parent.insertBefore(copyButton, codeBlock);
+
+            // Обработчик клика по кнопке копирования
+            copyButton.addEventListener('click', () => {
+                navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+                    copyButton.innerHTML = successInnerHTML;
+                    setTimeout(() => {
+                        copyButton.innerHTML = initInnerHTML;
+                    }, 1000);
+                });
+            });
+
+            parent.addEventListener('mouseenter', () => {
+                copyButton.style.opacity = "1";
+            });
+            parent.addEventListener('mouseleave', () => {
+                copyButton.style.opacity = "0";
+            });
+        });
+    </script> </body></html>

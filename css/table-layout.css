@@ -1,0 +1,80 @@
+/* Centralized layout controls for cheatsheet blocks and tables. */
+
+.mdLayout .h2-wrap > .h3-wrap-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Zebra striping for all table bodies */
+.mdLayout table > tbody > tr:nth-child(odd) > td {
+  background-color: #ffffff;
+}
+.mdLayout table > tbody > tr:nth-child(even) > td {
+  background-color: #f8fafc;
+}
+.mdLayout table > tbody > tr:nth-child(odd) > td:is(.dark *) {
+  background-color: rgb(30 41 59 / 1);
+}
+.mdLayout table > tbody > tr:nth-child(even) > td:is(.dark *) {
+  background-color: rgb(51 65 85 / 1);
+}
+
+@media (min-width: 1024px) {
+  .mdLayout .h2-wrap > .h3-wrap-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.75rem;
+  }
+
+  /* Parent-level column presets */
+  .mdLayout .h2-wrap.cols-1 > .h3-wrap-list { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+  .mdLayout .h2-wrap.cols-2 > .h3-wrap-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mdLayout .h2-wrap.cols-3 > .h3-wrap-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .mdLayout .h2-wrap.cols-4 > .h3-wrap-list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .mdLayout .h2-wrap.cols-5 > .h3-wrap-list { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .mdLayout .h2-wrap.cols-6 > .h3-wrap-list { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+
+  /* Per-list override (stronger than parent cols-N) */
+  .mdLayout .h2-wrap > .h3-wrap-list.cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }
+  .mdLayout .h2-wrap > .h3-wrap-list.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .mdLayout .h2-wrap > .h3-wrap-list.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+
+  /*
+    Default behavior for tables:
+    - each table occupies full available row in the grid
+    - width is normalized to avoid accidental tiny inline widths from editors
+  */
+  .mdLayout .h2-wrap > .h3-wrap-list > table {
+    grid-column: 1 / -1;
+    width: 100% !important;
+  }
+
+  /* Manual span controls for any direct grid item: .h3-wrap, table, pre, etc. */
+  .mdLayout .h2-wrap > .h3-wrap-list > .span-1 { grid-column: span 1 / span 1 !important; }
+  .mdLayout .h2-wrap > .h3-wrap-list > .span-2 { grid-column: span 2 / span 2 !important; }
+  .mdLayout .h2-wrap > .h3-wrap-list > .span-3 { grid-column: span 3 / span 3 !important; }
+  .mdLayout .h2-wrap > .h3-wrap-list > .span-full { grid-column: 1 / -1 !important; }
+
+  /*
+    Allow controlling width from inner section blocks:
+    <div class="h3-wrap"><div class="section span-2">...</div></div>
+  */
+  .mdLayout .h2-wrap > .h3-wrap-list > .h3-wrap:has(> .section.span-1) {
+    grid-column: span 1 / span 1 !important;
+  }
+  .mdLayout .h2-wrap > .h3-wrap-list > .h3-wrap:has(> .section.span-2) {
+    grid-column: span 2 / span 2 !important;
+  }
+  .mdLayout .h2-wrap > .h3-wrap-list > .h3-wrap:has(> .section.span-3) {
+    grid-column: span 3 / span 3 !important;
+  }
+  .mdLayout .h2-wrap > .h3-wrap-list > .h3-wrap:has(> .section.span-full) {
+    grid-column: 1 / -1 !important;
+  }
+
+  /* If section is direct child of h3-wrap-list, spans also work. */
+  .mdLayout .h2-wrap > .h3-wrap-list > .section.span-1 { grid-column: span 1 / span 1 !important; }
+  .mdLayout .h2-wrap > .h3-wrap-list > .section.span-2 { grid-column: span 2 / span 2 !important; }
+  .mdLayout .h2-wrap > .h3-wrap-list > .section.span-3 { grid-column: span 3 / span 3 !important; }
+  .mdLayout .h2-wrap > .h3-wrap-list > .section.span-full { grid-column: 1 / -1 !important; }
+}
