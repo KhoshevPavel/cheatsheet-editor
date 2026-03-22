@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Local Cheatsheet Editor</title>
+<script src="https://cdn.jsdelivr.net/npm/tinymce@6.8.5/tinymce.min.js" referrerpolicy="origin"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/lib/codemirror.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/theme/neo.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/addon/dialog/dialog.min.css">
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/lib/codemirror.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/mode/xml/xml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/mode/javascript/javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/mode/css/css.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/addon/edit/closetag.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/addon/edit/closebrackets.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/addon/search/searchcursor.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/addon/search/search.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/addon/dialog/dialog.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-beautify@1.15.1/js/lib/beautify-html.min.js"></script>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f8fafc;
+    --panel: #ffffff;
+    --line: #e2e8f0;
+    --text: #0f172a;
+    --muted: #64748b;
+    --accent: #4f46e5;
+    --accent-soft: #eef2ff;
+    --danger: #dc2626;
+    --success: #16a34a;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--text); background: var(--bg); }
+  button, input, textarea { font: inherit; }
+  button { cursor: pointer; }
+
+  .app {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 340px minmax(0, 1fr);
+  }
+
+  .sidebar {
+    border-right: 1px solid var(--line);
+    background: var(--panel);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .sidebar-head, .editor-head {
+    padding: 1rem;
+    border-bottom: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+
+  .title {
+    margin: 0 0 0.25rem;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .subtle {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.45;
+  }
+
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.9rem;
+  }
+
+  .btn, .tab {
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--text);
+    border-radius: 10px;
+    padding: 0.55rem 0.8rem;
+    min-height: 2.3rem;
+    transition: 0.15s ease;
+  }
+
+  .btn:hover, .tab:hover {
+    border-color: #cbd5e1;
+    background: #f8fafc;
+  }
+
+  .btn.primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  .btn.primary:hover { background: #4338ca; }
+  .btn:disabled { opacity: 0.6; cursor: default; }
+
+  .search-wrap {
+    padding: 0.9rem 1rem 0.75rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .search-input, .source {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #fff;
+    color: var(--text);
+    padding: 0.7rem 0.8rem;
+  }
+
+  .cards {
+    padding: 0.75rem;
+    overflow: auto;
+    display: grid;
+    gap: 0.65rem;
+    align-content: start;
+  }
+
+  .card {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: #fff;
+    padding: 0.85rem 2.2rem 0.85rem 0.85rem;
+    text-align: left;
+    display: grid;
+    gap: 0.35rem;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .card-delete {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 1.65rem;
+    height: 1.65rem;
+    border: none;
+    border-radius: 7px;
+    background: transparent;
+    color: #94a3b8;
+    font-size: 1rem;
+    line-height: 1;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.15s, background 0.15s, color 0.15s;
+    cursor: pointer;
+  }
+
+  .card:hover .card-delete {
+    opacity: 1;
+  }
+
+  .card-delete:hover {
+    background: #fee2e2;
+    color: var(--danger);
+    opacity: 1;
+  }
+
+  .card:hover {
+    border-color: #c7d2fe;
+    box-shadow: 0 8px 24px rgba(79, 70, 229, 0.08);
+  }
+
+  .card.active {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  .card-title {
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .card-meta {
+    color: var(--muted);
+    font-size: 0.78rem;
+    word-break: break-all;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    border-radius: 999px;
+    background: #f1f5f9;
+    color: #334155;
+    padding: 0.22rem 0.55rem;
+    font-size: 0.72rem;
+  }
+
+  .editor {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+  }
+
+  .editor-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .editor-main {
+    min-height: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem 0;
+  }
+
+  .tab.active {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-color: #c7d2fe;
+  }
+
+  .panel {
+    display: none;
+    min-height: 0;
+    flex: 1;
+    padding: 1rem;
+  }
+
+  .panel.active {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* TinyMCE: область редактирования заполняет панель; пустое полотно под контентом остаётся «кликабельным» внутри iframe */
+  #visualPanel.panel.active .tox-tinymce {
+    flex: 1;
+    min-height: 0;
+    display: flex !important;
+    flex-direction: column;
+  }
+
+  #visualPanel .tox-editor-header {
+    flex-shrink: 0;
+  }
+
+  #visualPanel .tox-edit-area {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #visualPanel .tox-edit-area iframe {
+    flex: 1 1 auto;
+    min-height: 200px;
+    width: 100% !important;
+    border: 0;
+  }
+
+  .source-wrap {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    height: 100%;
+    gap: 0.55rem;
+  }
+
+  .source-tools {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #fff;
+    padding: 0.45rem;
+  }
+
+  .source-btn {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--text);
+    padding: 0.35rem 0.55rem;
+    min-height: 1.9rem;
+  }
+  .source-btn:hover {
+    border-color: #cbd5e1;
+    background: #f8fafc;
+  }
+
+  .source {
+    display: none;
+  }
+
+  .CodeMirror {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    height: 100%;
+    min-height: 420px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .CodeMirror-gutters {
+    border-right: 1px solid var(--line);
+    background: #f8fafc;
+  }
+
+  #editorHost {
+    min-height: 0;
+    flex: 1;
+  }
+
+  .placeholder {
+    height: 100%;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    color: var(--muted);
+    padding: 2rem;
+  }
+
+  .placeholder-box {
+    max-width: 560px;
+    border: 1px dashed #cbd5e1;
+    border-radius: 18px;
+    background: #fff;
+    padding: 2rem;
+  }
+
+  .status {
+    color: var(--muted);
+    font-size: 0.82rem;
+    min-height: 1.25rem;
+  }
+
+  .status.success { color: var(--success); }
+  .status.error { color: var(--danger); }
+  .hidden { display: none !important; }
+
+  @media (max-width: 1100px) {
+    .app { grid-template-columns: 300px minmax(0, 1fr); }
+  }
+
+  @media (max-width: 900px) {
+    .app {
+      grid-template-columns: 1fr;
+      grid-template-rows: 42vh 1fr;
+    }
+    .sidebar { border-right: none; border-bottom: 1px solid var(--line); }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="sidebar-head">
+      <h1 class="title">Cheatsheet Editor</h1>
+      <p class="subtle">Локальный редактор HTML-шпаргалок. Откройте папку, выберите нужный файл плиткой и редактируйте его в TinyMCE с layout-кнопками.</p>
+      <div class="toolbar">
+        <button class="btn primary" id="openFolderBtn" type="button">Открыть папку</button>
+        <button class="btn" id="reloadBtn" type="button" disabled>Обновить список</button>
+      </div>
+    </div>
+    <div class="search-wrap">
+      <input class="search-input" id="searchInput" type="search" placeholder="Поиск по названию или пути" disabled>
+    </div>
+    <div class="cards" id="fileCards">
+      <div class="subtle">Список файлов появится после выбора каталога.</div>
+    </div>
+  </aside>
+
+  <main class="editor">
+    <div class="editor-head">
+      <div>
+        <h2 class="title" id="currentTitle">Файл не выбран</h2>
+        <p class="subtle" id="currentPath">Откройте папку `collector/cheatsheets/cheatsheets` и выберите шпаргалку слева.</p>
+      </div>
+      <div>
+        <div class="toolbar" style="justify-content:flex-end">
+          <button class="btn" id="saveBtn" type="button" disabled>Сохранить</button>
+        </div>
+        <div class="status" id="statusText"></div>
+      </div>
+    </div>
+
+    <div class="editor-main" id="editorMain">
+      <div class="placeholder" id="emptyState">
+        <div class="placeholder-box">
+          <h3 style="margin-top:0">Как пользоваться</h3>
+          <p class="subtle">1. Нажмите <b>Открыть папку</b> и выберите каталог со шпаргалками.</p>
+          <p class="subtle">2. Слева появятся плитки всех `*.html` файлов.</p>
+          <p class="subtle">3. Выберите файл, редактируйте визуально или в HTML и нажмите <b>Сохранить</b>.</p>
+          <p class="subtle">Для записи обратно в файлы нужен Chromium-браузер с поддержкой File System Access API.</p>
+        </div>
+      </div>
+
+      <div class="tabs hidden" id="tabs">
+        <button class="tab active" type="button" data-tab="visual">Визуально</button>
+        <button class="tab" type="button" data-tab="source">HTML</button>
+      </div>
+
+      <section class="panel active hidden" id="visualPanel">
+        <textarea id="tinyEditor"></textarea>
+      </section>
+
+      <section class="panel hidden" id="sourcePanel">
+        <div class="source-wrap">
+          <div class="source-tools">
+            <button class="source-btn" id="sourceFormatBtn" type="button">Формат HTML</button>
+            <button class="source-btn" id="sourceFindBtn" type="button">Поиск</button>
+            <button class="source-btn" id="sourceTagBtn" type="button">К тегу</button>
+            <span class="subtle">Ctrl/Cmd+F, Ctrl/Cmd+H, Alt+F</span>
+          </div>
+          <textarea class="source" id="sourceEditor" spellcheck="false"></textarea>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<script>
+(() => {
+  const state = {
+    folderHandle: null,
+    files: [],
+    currentFile: null,
+    currentRawHtml: '',
+    originalRawHtml: '',
+    visualTabHtml: '',
+    currentTab: 'visual',
+    editorReady: false,
+    dirty: false,
+  };
+
+  const editorHtmlName = 'local-cheatsheet-editor.html';
+
+  // --- IndexedDB: persist folder handle across page loads ---
+  function dbOpen() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open('cheatsheet-editor', 1);
+      req.onupgradeneeded = e => e.target.result.createObjectStore('kv');
+      req.onsuccess = e => resolve(e.target.result);
+      req.onerror = e => reject(e.target.error);
+    });
+  }
+  async function dbGet(key) {
+    try {
+      const db = await dbOpen();
+      return await new Promise(res => {
+        const r = db.transaction('kv').objectStore('kv').get(key);
+        r.onsuccess = () => res(r.result ?? null);
+        r.onerror = () => res(null);
+      });
+    } catch { return null; }
+  }
+  async function dbSet(key, value) {
+    try {
+      const db = await dbOpen();
+      await new Promise((res, rej) => {
+        const tx = db.transaction('kv', 'readwrite');
+        tx.objectStore('kv').put(value, key);
+        tx.oncomplete = res; tx.onerror = rej;
+      });
+    } catch {}
+  }
+
+  // Resolve a file handle by relativePath inside folderHandle (creates if missing)
+  async function resolveFileHandle(relativePath) {
+    if (!state.folderHandle) return null;
+    try {
+      const parts = relativePath.split('/');
+      let dir = state.folderHandle;
+      for (let i = 0; i < parts.length - 1; i++) {
+        dir = await dir.getDirectoryHandle(parts[i], { create: true });
+      }
+      return await dir.getFileHandle(parts[parts.length - 1], { create: true });
+    } catch { return null; }
+  }
+
+  async function applyFolderHandle(handle) {
+    state.folderHandle = handle;
+    state.files = await walkDirectory(handle);
+    // Проверяем ПОСЛЕ walkDirectory — state.currentFile мог появиться пока шло сканирование
+    const hasOpenFile = !!state.currentFile;
+    const matched = state.currentFile
+      ? state.files.find(f => f.relativePath === state.currentFile.relativePath)
+      : null;
+    if (matched) {
+      state.currentFile = matched;
+    }
+    els.reloadBtn.disabled = false;
+    els.searchInput.disabled = false;
+    renderFileCards();
+    if (!state.currentFile) {
+      els.currentTitle.textContent = 'Файл не выбран';
+      els.currentPath.textContent = `Каталог: ${handle.name}`;
+    }
+  }
+
+  const SECTION_SPAN_CLASSES = ['span-1', 'span-2', 'span-3', 'span-full'];
+  const H3_LIST_COLS_CLASSES = ['cols-1', 'cols-2', 'cols-3'];
+  const H2_WRAP_COLS_CLASSES = ['cols-1', 'cols-2', 'cols-3', 'cols-4', 'cols-5', 'cols-6'];
+  const BUILTIN_FILE_NAMES = [
+    '1password.html', 'adobe-lightroom.html', 'adobe-photoshop.html', 'adobe-xd.html', 'affinity-designer.html',
+    'affinity-photo.html', 'ai.html', 'airtable.html', 'alan-ai.html', 'alpine-linux.html', 'android-studio.html',
+    'apex-legends.html', 'apple-music.html', 'arduino.html', 'arduino-programming.html', 'asana.html', 'ascii-code.html',
+    'aspect-ratio.html', 'atom.html', 'audacity.html', 'awk.html', 'bash.html', 'bear-notes.html', 'bitbucket.html',
+    'blender.html', 'brave.html', 'calculate-the-mod-of-collection-.html', 'canvas.html', 'chatgpt.html',
+    'CheatSheets.html', 'chmod.html', 'chrome-devtools.html', 'c.html', 'code-editor-ios.html', 'color-picker.html',
+    'colorscreen.html', 'conventional-commits.html', 'cpp.html', 'cron.html', 'cs.html', 'css3.html', 'curl.html',
+    'dart.html', 'django.html', 'docker.html', 'ejs.html', 'emacs.html', 'emmet.html', 'emoji.html', 'es6.html',
+    'express.html', 'fastapi.html', 'feedly.html', 'figma.html', 'filezilla.html', 'finder.html', 'find.html',
+    'firefox.html', 'flask.html', 'fortnite.html', 'framer-x.html', 'gimp.html', 'git.html', 'github-actions.html',
+    'github-cli.html', 'github.html', 'gitlab.html', 'gmail.html', 'gnome-desktop.html', 'gnupg.html', 'go.html',
+    'google-chrome.html', 'google-drive.html', 'google-search.html', 'gospinwheel.html', 'graphql.html', 'grep.html',
+    'guitar-pro.html', 'homebrew.html', 'hook.html', 'html-char.html', 'html.html', 'htmx.html', 'http-status-code.html',
+    'idea.html', 'index.html', 'ini.html', 'iso-639-1.html', 'java.html', 'javascript.html', 'jira.html', 'jquery.html',
+    'json.html', 'kanbanmail.html', 'kotlin.html', 'kubernetes.html', 'laravel.html', 'latex.html', 'lsof.html',
+    'lua.html', 'markdown.html', 'matlab.html', 'matplotlib2.html', 'matplotlib.html', 'microsoft-teams.html',
+    'mime.html', 'minecraft-bedrock.html', 'minecraft-java.html', 'missive.html', 'mitmproxy.html', 'monday.html',
+    'mongodb.html', 'ms-settings_startupapps.html', 'mysql.html', 'nc.html', 'neo4j.html', 'netstat.html',
+    'networkports.html', 'nginx.html', 'nim.html', 'nix.html', 'nmap.html', 'npm.html', 'numpy.html', 'obsidian.html',
+    'ocaml.html', 'openssl.html', 'origami.html', 'outlook.html', 'pandas.html', 'pandoc.html', 'perl.html', 'php.html',
+    'phpstorm.html', 'pm2.html', 'pocket.html', 'postgres.html', 'postman.html', 'powershell.html', 'principle.html',
+    'proto-io.html', 'putty.html', 'python.html', 'pytorch.html', 'quickref.html', 'quip.html', 'react.html',
+    'reddit.html', 'redis.html', 'regex.html', 'resolutions.html', 'roam.html', 'ruby.html', 'rust.html', 'sass.html',
+    'screen.html', 'sdkman.html', 'sed.html', 'selenium.html', 'sequel-pro.html', 'shopify.html', 'sketch.html',
+    'sketchup.html', 'skype.html', 'slack.html', 'socket-io.html', 'soundcloud.html', 'spotify.html', 'ssh.html',
+    'sublime-text.html', 'superhuman.html', 'svelte.html', 'swift.html', 'symfony.html', 'systemd.html', 'table-plus.html',
+    'taskset.html', 'telegram.html', 'telnet.html', 'tensorflow.html', 'terraform.html', 'ticktick.html', 'tmux.html',
+    'todoist.html', 'toml.html', 'transmit.html', 'trello.html', 'twitter.html', 'typescript.html', 'unity-3d.html',
+    'unity-shader-graph.html', 'unreal-engine.html', 'vhdl.html', 'vim.html', 'vivaldi.html', 'vlc.html', 'vscode.html',
+    'vue.html', 'webflow.html', 'webstorm.html', 'windows-cmd.html', 'wordpress.html', 'xpath.html', 'yaml.html',
+    'youtube.html', 'zed.html', 'zoom.html'
+  ];
+
+  const els = {
+    openFolderBtn: document.getElementById('openFolderBtn'),
+    reloadBtn: document.getElementById('reloadBtn'),
+    searchInput: document.getElementById('searchInput'),
+    fileCards: document.getElementById('fileCards'),
+    currentTitle: document.getElementById('currentTitle'),
+    currentPath: document.getElementById('currentPath'),
+    saveBtn: document.getElementById('saveBtn'),
+    statusText: document.getElementById('statusText'),
+    emptyState: document.getElementById('emptyState'),
+    tabs: document.getElementById('tabs'),
+    visualPanel: document.getElementById('visualPanel'),
+    sourcePanel: document.getElementById('sourcePanel'),
+    sourceEditor: document.getElementById('sourceEditor'),
+    sourceFormatBtn: document.getElementById('sourceFormatBtn'),
+    sourceFindBtn: document.getElementById('sourceFindBtn'),
+    sourceTagBtn: document.getElementById('sourceTagBtn'),
+  };
+  let sourceCodeEditor = null;
+
+  function getSourceValue() {
+    return sourceCodeEditor ? sourceCodeEditor.getValue() : els.sourceEditor.value;
+  }
+
+  function setSourceValue(value) {
+    els.sourceEditor.value = value;
+    if (sourceCodeEditor) sourceCodeEditor.setValue(value);
+  }
+
+  function setStatus(text, tone = '') {
+    els.statusText.textContent = text || '';
+    els.statusText.className = tone ? `status ${tone}` : 'status';
+  }
+
+  function escapeHtml(text) {
+    return String(text || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function setDirty(next) {
+    state.dirty = !!next;
+    const suffix = state.dirty ? ' *' : '';
+    const title = state.currentFile ? state.currentFile.title : 'Файл не выбран';
+    els.currentTitle.textContent = title + suffix;
+    els.saveBtn.disabled = !state.currentFile || !state.dirty;
+  }
+
+  function humanizeFileName(name) {
+    const base = name.replace(/\.html$/i, '');
+    return base
+      .replace(/[-_]+/g, ' ')
+      .replace(/\b\w/g, char => char.toUpperCase());
+  }
+
+  function buildBuiltinFiles() {
+    return BUILTIN_FILE_NAMES.map(name => ({
+      name,
+      relativePath: name,
+      title: humanizeFileName(name),
+      handle: null,
+    }));
+  }
+
+  function isFullHtmlDoc(html) {
+    return /<!doctype|<html[\s>]/i.test((html || '').trimStart());
+  }
+
+  function extractByRegex(html) {
+    const tagMatch = html.match(/<div[^>]+\bid=["']mdLayout["'][^>]*>/i);
+    if (!tagMatch) return null;
+    const start = tagMatch.index;
+    let depth = 0;
+    for (let i = start; i < html.length; i++) {
+      if (html[i] !== '<') continue;
+      if (/^<div[\s>]/i.test(html.slice(i, i + 5))) {
+        depth++;
+      } else if (/^<\/div>/i.test(html.slice(i, i + 6))) {
+        depth--;
+        if (depth === 0) {
+          const end = html.indexOf('>', i) + 1;
+          return html.slice(start, end);
+        }
+      }
+    }
+    return null;
+  }
+
+  function extractVisualHtml(html) {
+    if (!isFullHtmlDoc(html)) return html || '';
+    const byRegex = extractByRegex(html);
+    if (byRegex) return byRegex;
+    try {
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      const mdLayout = doc.getElementById('mdLayout');
+      if (mdLayout && mdLayout.outerHTML) return mdLayout.outerHTML;
+      return doc.body ? doc.body.innerHTML : html;
+    } catch {
+      return html || '';
+    }
+  }
+
+  function rebuildFullHtml(visualContent) {
+    if (!isFullHtmlDoc(state.currentRawHtml)) return visualContent;
+    try {
+      const doc = new DOMParser().parseFromString(state.currentRawHtml, 'text/html');
+      const mdLayout = doc.getElementById('mdLayout');
+      if (mdLayout) {
+        const tmp = document.createElement('div');
+        tmp.innerHTML = visualContent;
+        const newMd = tmp.querySelector('#mdLayout');
+        if (newMd) mdLayout.replaceWith(newMd);
+        else mdLayout.innerHTML = visualContent;
+      } else if (doc.body) {
+        doc.body.innerHTML = visualContent;
+      }
+      return '<!DOCTYPE HTML>\n' + doc.documentElement.outerHTML;
+    } catch {
+      return visualContent;
+    }
+  }
+
+  function parseTitle(html, fallbackName) {
+    const match = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+    if (!match) return fallbackName;
+    const div = document.createElement('div');
+    div.innerHTML = match[1];
+    return (div.textContent || fallbackName).trim() || fallbackName;
+  }
+
+  function showEditorPanels() {
+    if (els.emptyState.parentNode) els.emptyState.remove();
+    els.tabs.classList.remove('hidden');
+    els.visualPanel.classList.remove('hidden');
+    els.sourcePanel.classList.remove('hidden');
+  }
+
+  async function walkDirectory(dirHandle) {
+    const out = [];
+    for await (const entry of dirHandle.values()) {
+      if (entry.kind !== 'file') continue;
+      if (!entry.name.toLowerCase().endsWith('.html')) continue;
+      if (entry.name === editorHtmlName) continue;
+      out.push({
+        name: entry.name,
+        relativePath: entry.name,
+        handle: entry,
+        title: entry.name.replace(/\.html$/i, ''),
+      });
+    }
+    return out.sort((a, b) => a.relativePath.localeCompare(b.relativePath));
+  }
+
+  async function deleteFile(relativePath) {
+    const fileEntry = state.files.find(f => f.relativePath === relativePath);
+    if (!fileEntry) return;
+
+    if (!state.folderHandle) {
+      setStatus('Откройте папку чтобы иметь возможность удалять файлы', 'error');
+      return;
+    }
+
+    const confirmed = window.confirm(
+      `Удалить файл «${fileEntry.title}» (${relativePath})?\n\nЭто действие нельзя отменить.`
+    );
+    if (!confirmed) return;
+
+    try {
+      const parts = relativePath.split('/');
+      if (parts.length === 1) {
+        await state.folderHandle.removeEntry(parts[0]);
+      } else {
+        let dir = state.folderHandle;
+        for (let i = 0; i < parts.length - 1; i++) {
+          dir = await dir.getDirectoryHandle(parts[i]);
+        }
+        await dir.removeEntry(parts[parts.length - 1]);
+      }
+
+      state.files = state.files.filter(f => f.relativePath !== relativePath);
+
+      if (state.currentFile && state.currentFile.relativePath === relativePath) {
+        state.currentFile = null;
+        state.currentRawHtml = '';
+        state.originalRawHtml = '';
+        state.dirty = false;
+        const editor = tinymce.get('tinyEditor');
+        if (editor) editor.setContent('');
+        setSourceValue('');
+        els.currentTitle.textContent = 'Файл не выбран';
+        els.currentPath.textContent = state.folderHandle ? `Каталог: ${state.folderHandle.name}` : '';
+        els.saveBtn.disabled = true;
+        try { localStorage.removeItem('cheatsheet-lastFile'); } catch {}
+      }
+
+      renderFileCards();
+      setStatus(`Файл удалён: ${relativePath}`, 'success');
+    } catch (error) {
+      if (error?.name === 'AbortError') return;
+      console.error(error);
+      setStatus(`Ошибка при удалении: ${error.message || error}`, 'error');
+    }
+  }
+
+  function renderFileCards() {
+    const query = (els.searchInput.value || '').trim().toLowerCase();
+    const files = state.files.filter(file => {
+      if (!query) return true;
+      return file.title.toLowerCase().includes(query) || file.relativePath.toLowerCase().includes(query);
+    });
+
+    if (!files.length) {
+      els.fileCards.innerHTML = '<div class="subtle">Ничего не найдено.</div>';
+      return;
+    }
+
+    const canDelete = !!state.folderHandle;
+
+    els.fileCards.innerHTML = files.map(file => {
+      const active = state.currentFile && state.currentFile.relativePath === file.relativePath ? ' active' : '';
+      const deleteBtn = canDelete
+        ? `<button class="card-delete" type="button" data-path="${escapeHtml(file.relativePath)}" title="Удалить файл">✕</button>`
+        : '';
+      return `
+        <div class="card${active}" tabindex="0" role="button" data-path="${escapeHtml(file.relativePath)}">
+          <div class="card-title">${escapeHtml(file.title)}</div>
+          <div class="card-meta">${escapeHtml(file.relativePath)}</div>
+          <span class="pill">${escapeHtml(file.name)}</span>
+          ${deleteBtn}
+        </div>
+      `;
+    }).join('');
+
+    els.fileCards.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('click', async (e) => {
+        if (e.target.closest('.card-delete')) return;
+        const target = state.files.find(item => item.relativePath === card.dataset.path);
+        if (target) await openFile(target);
+      });
+      card.addEventListener('keydown', async (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const target = state.files.find(item => item.relativePath === card.dataset.path);
+          if (target) await openFile(target);
+        }
+      });
+    });
+
+    els.fileCards.querySelectorAll('.card-delete').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        await deleteFile(btn.dataset.path);
+      });
+    });
+  }
+
+  function syncVisualToSource() {
+    const editor = tinymce.get('tinyEditor');
+    if (!editor || !state.currentFile) return;
+    editor.getBody()?.querySelectorAll('[data-drag-handle]').forEach(h => h.remove());
+    const rebuilt = rebuildFullHtml(editor.getContent());
+    state.currentRawHtml = rebuilt;
+    setSourceValue(rebuilt);
+    editor._ensureHandles?.();
+  }
+
+  function syncSourceToVisual() {
+    const editor = tinymce.get('tinyEditor');
+    if (!editor || !state.currentFile) return;
+    state.currentRawHtml = getSourceValue();
+    editor.setContent(extractVisualHtml(state.currentRawHtml));
+  }
+
+  function switchTab(nextTab) {
+    if (!state.currentFile || nextTab === state.currentTab) return;
+    if (nextTab === 'source') syncVisualToSource();
+    if (nextTab === 'visual') syncSourceToVisual();
+    state.currentTab = nextTab;
+    document.querySelectorAll('.tab').forEach(tab => tab.classList.toggle('active', tab.dataset.tab === nextTab));
+    els.visualPanel.classList.toggle('active', nextTab === 'visual');
+    els.sourcePanel.classList.toggle('active', nextTab === 'source');
+    if (nextTab === 'source' && sourceCodeEditor) {
+      setTimeout(() => sourceCodeEditor.refresh(), 0);
+    }
+  }
+
+  async function openFile(fileMeta) {
+    if (state.dirty) {
+      const ok = window.confirm('Есть несохранённые изменения. Открыть другой файл и потерять их?');
+      if (!ok) return;
+    }
+
+    try {
+      let raw = '';
+      if (fileMeta.handle) {
+        const file = await fileMeta.handle.getFile();
+        raw = await file.text();
+      } else {
+        const response = await fetch(`../${encodeURIComponent(fileMeta.relativePath).replace(/%2F/g, '/')}`);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        raw = await response.text();
+      }
+      state.currentFile = fileMeta;
+      state.originalRawHtml = raw;
+      state.currentRawHtml = raw;
+      state.currentTab = 'visual';
+      showEditorPanels();
+      els.currentTitle.textContent = fileMeta.title;
+      els.currentPath.textContent = fileMeta.relativePath;
+      setSourceValue(raw);
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.toggle('active', tab.dataset.tab === 'visual'));
+      els.visualPanel.classList.add('active');
+      els.sourcePanel.classList.remove('active');
+      const editor = tinymce.get('tinyEditor');
+      if (editor) editor.setContent(extractVisualHtml(raw));
+      state.currentFile.title = parseTitle(raw, fileMeta.title);
+      setDirty(false);
+      renderFileCards();
+      try { localStorage.setItem('cheatsheet-lastFile', fileMeta.relativePath); } catch {}
+      setStatus(`Открыт ${fileMeta.relativePath}`, 'success');
+    } catch (error) {
+      console.error(error);
+      setStatus(`Не удалось открыть файл: ${error.message || error}`, 'error');
+    }
+  }
+
+  async function saveCurrentFile() {
+    if (!state.currentFile) return;
+    try {
+      if (state.currentTab === 'visual') {
+        syncVisualToSource();
+      } else {
+        state.currentRawHtml = getSourceValue();
+      }
+
+      if (!state.currentFile.handle && state.folderHandle) {
+        const h = await resolveFileHandle(state.currentFile.relativePath);
+        if (h) {
+          state.currentFile.handle = h;
+          const idx = state.files.findIndex(f => f.relativePath === state.currentFile.relativePath);
+          if (idx !== -1) state.files[idx].handle = h;
+        }
+      }
+
+      if (!state.currentFile.handle) {
+        setStatus('Нажмите "Открыть папку" чтобы разрешить запись файлов', 'error');
+        return;
+      }
+
+      const writable = await state.currentFile.handle.createWritable();
+      await writable.write(state.currentRawHtml);
+      await writable.close();
+
+      state.originalRawHtml = state.currentRawHtml;
+      state.currentFile.title = parseTitle(state.currentRawHtml, state.currentFile.name.replace(/\.html$/i, ''));
+      setDirty(false);
+      setStatus(`Сохранено: ${state.currentFile.relativePath}`, 'success');
+    } catch (error) {
+      if (error?.name === 'AbortError') return;
+      console.error(error);
+      setStatus(`Ошибка сохранения: ${error.message || error}`, 'error');
+    }
+  }
+
+  function markDirtyFromVisual() {
+    if (!state.currentFile) return;
+    setDirty(true);
+    setStatus('Есть несохранённые изменения');
+  }
+
+  function formatSourceHtml() {
+    if (!sourceCodeEditor) return;
+    if (typeof html_beautify !== 'function') {
+      setStatus('Форматтер HTML не загрузился', 'error');
+      return;
+    }
+    const before = sourceCodeEditor.getValue();
+    const after = html_beautify(before, {
+      indent_size: 2,
+      preserve_newlines: true,
+      max_preserve_newlines: 2,
+      wrap_line_length: 0,
+      end_with_newline: false,
+    });
+    if (after !== before) {
+      sourceCodeEditor.setValue(after);
+      state.currentRawHtml = after;
+      setDirty(true);
+      setStatus('HTML отформатирован');
+    }
+  }
+
+  function jumpToTag() {
+    if (!sourceCodeEditor) return;
+    const tag = (window.prompt('Имя тега (например: table, section, h2, code)') || '').trim().toLowerCase();
+    if (!tag) return;
+    const cursor = sourceCodeEditor.getCursor();
+    const rx = new RegExp(`<${tag}\\b`, 'i');
+    let next = sourceCodeEditor.getSearchCursor(rx, cursor);
+    if (!next.findNext()) {
+      next = sourceCodeEditor.getSearchCursor(rx, { line: 0, ch: 0 });
+      if (!next.findNext()) {
+        setStatus(`Тег <${tag}> не найден`);
+        return;
+      }
+    }
+    sourceCodeEditor.setSelection(next.from(), next.to());
+    sourceCodeEditor.scrollIntoView({ from: next.from(), to: next.to() }, 80);
+    sourceCodeEditor.focus();
+    setStatus(`Найден тег <${tag}>`, 'success');
+  }
+
+  function initSourceEditor() {
+    if (typeof CodeMirror === 'undefined') return;
+    sourceCodeEditor = CodeMirror.fromTextArea(els.sourceEditor, {
+      mode: 'htmlmixed',
+      theme: 'neo',
+      lineNumbers: true,
+      lineWrapping: true,
+      autoCloseTags: true,
+      autoCloseBrackets: true,
+      indentUnit: 2,
+      tabSize: 2,
+      extraKeys: {
+        'Ctrl-S': () => saveCurrentFile(),
+        'Cmd-S': () => saveCurrentFile(),
+        'Ctrl-F': 'findPersistent',
+        'Cmd-F': 'findPersistent',
+        'Ctrl-H': 'replace',
+        'Cmd-H': 'replace',
+        'Alt-F': () => formatSourceHtml(),
+      },
+    });
+    sourceCodeEditor.on('change', (cm, changeObj) => {
+      // setValue() помечает изменения origin='setValue' — это программный сброс, не правки пользователя
+      if (changeObj.origin === 'setValue') return;
+      els.sourceEditor.value = cm.getValue();
+      if (!state.currentFile || state.currentTab !== 'source') return;
+      state.currentRawHtml = cm.getValue();
+      setDirty(true);
+      setStatus('Есть несохранённые изменения');
+    });
+  }
+
+  function initTinyEditor() {
+    tinymce.init({
+      selector: '#tinyEditor',
+      height: '100%',
+      menubar: false,
+      promotion: false,
+      plugins: 'advlist autolink lists link image code codesample fullscreen table charmap searchreplace visualblocks',
+      toolbar: 'undo redo | blocks | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image charmap | table tableprops tablecellprops tablerowprops | addsection sectionspan h3wrapspan h3grid h2grid | code codesample visualblocks searchreplace fullscreen',
+      toolbar_mode: 'wrap',
+      quickbars_selection_toolbar: false,
+      quickbars_insert_toolbar: false,
+      quickbars_image_toolbar: false,
+      table_toolbar: 'tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol | tablemergecells tablesplitcells | tabledelete',
+      content_css: ['../css/stylea454.css', '../css/table-layout.css'],
+      body_class: 'wrap mdLayout',
+      extended_valid_elements: 'div[class|id|style]',
+      content_style: 'html{height:100%;}body{font-family:system-ui;padding:1rem;box-sizing:border-box;min-height:100%;cursor:text;}.mdLayout{max-width:100%;}pre{ background: #f8f9fa !important; color: #334155 !important; border: 1px solid #e2e8f0; padding: 1em; border-radius: 0.5rem; overflow-x: auto; } pre[class*="language-"] { background: #f8f9fa !important; color: #334155 !important; } code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; } pre code { background: transparent !important; color: #334155 !important; padding: 0; } .hljs-keyword { color: #4338ca !important; font-weight: 600; } .hljs-string { color: #047857 !important; font-weight: 500; } .hljs-comment { color: #7c8da6 !important; font-style: italic; } .hljs-number, .hljs-literal { color: #1d4ed8 !important; font-weight: 500; } .hljs-title, .hljs-name { color: #7c3aed !important; font-weight: 600; } .hljs-attr, .hljs-attribute { color: #0e7490 !important; font-weight: 500; } .hljs-variable { color: #6d28d9 !important; } .hljs-built_in, .hljs-type { color: #2563eb !important; font-weight: 500; } .hljs-meta { color: #9333ea !important; font-weight: 500; } .hljs-addition { color: #047857 !important; font-weight: 500; } .hljs-deletion { color: #be123c !important; font-weight: 500; } .hljs-punctuation { color: #4338ca !important; } .hljs-property { color: #0891b2 !important; font-weight: 500; } .hljs-params { color: #6d28d9 !important; } .hljs-doctag { color: #059669 !important; font-weight: 500; } .hljs-quote { color: #7c8da6 !important; } table { border-collapse: collapse; width: 100%; } th, td { border: 1px solid #e2e8f0; padding: 8px 12px; } .h3-wrap { position: relative !important; overflow: visible !important; } .h3-drag-handle { position: absolute !important; top: 3px !important; left: 3px !important; width: 18px !important; height: 18px !important; cursor: grab !important; color: #6366f1 !important; background: rgba(99,102,241,.12) !important; display: flex !important; align-items: center !important; justify-content: center !important; border-radius: 6px !important; user-select: none !important; -webkit-user-select: none !important; opacity: 1 !important; transition: background .15s, color .15s, box-shadow .15s !important; touch-action: none !important; z-index: 100 !important; box-shadow: 0 1px 3px rgba(0,0,0,.12) !important; } .h3-drag-handle:hover { background: rgba(79,70,229,.22) !important; color: #4338ca !important; box-shadow: 0 2px 6px rgba(79,70,229,.25) !important; } .h3-drag-handle:active { cursor: grabbing !important; } .h3-drag-placeholder { min-height: 48px; border: 3px dashed #6366f1; border-radius: 14px; background: repeating-linear-gradient(-45deg, rgba(99,102,241,.06), rgba(99,102,241,.06) 8px, rgba(99,102,241,.12) 8px, rgba(99,102,241,.12) 16px); box-sizing: border-box; pointer-events: none; position: relative; transition: height .1s ease; } .h3-drag-placeholder::after { content: "\\2193  Отпустите здесь  \\2193"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #6366f1; font-weight: 600; font-size: 13px; letter-spacing: .3px; opacity: .8; } .h3-drag-ghost { background: #fff; border: 2px solid #6366f1; border-radius: 12px; box-shadow: 0 20px 50px rgba(79,70,229,.3), 0 6px 16px rgba(0,0,0,.15); overflow: hidden; max-height: 200px; transform: rotate(1.5deg); opacity: .85; } .h3-wrap--grab-source { outline: 3px solid #818cf8 !important; outline-offset: 3px !important; border-radius: 10px; } .h3-drag-handle--active { background: #6366f1 !important; color: #fff !important; transform: scale(1.4) !important; box-shadow: 0 0 0 5px rgba(99,102,241,.3) !important; } .h3-wrap--just-dropped { animation: ddDropLand .35s ease !important; } @keyframes ddDropLand { 0% { box-shadow: 0 0 0 6px rgba(99,102,241,.4); transform: scale(1.02); } 100% { box-shadow: none; transform: none; } }',
+      setup(ed) {
+        function findActiveSection() {
+          const node = ed.selection.getNode();
+          return ed.dom.getParent(node, '.section');
+        }
+
+        function findActiveH3WrapList() {
+          return ed.dom.getParent(ed.selection.getNode(), '.h3-wrap-list');
+        }
+
+        function findActiveH3Wrap() {
+          return ed.dom.getParent(ed.selection.getNode(), '.h3-wrap');
+        }
+
+        function findActiveH2Wrap() {
+          return ed.dom.getParent(ed.selection.getNode(), '.h2-wrap');
+        }
+
+        function setSectionSpan(spanClass) {
+          const section = findActiveSection();
+          if (!section) {
+            ed.notificationManager.open({ text: 'Поставьте курсор внутрь нужного блока .section', type: 'warning', timeout: 2000 });
+            return;
+          }
+          SECTION_SPAN_CLASSES.forEach(cls => ed.dom.removeClass(section, cls));
+          if (spanClass) ed.dom.addClass(section, spanClass);
+          ed.nodeChanged();
+          markDirtyFromVisual();
+        }
+
+        function setH3WrapListCols(colsClass) {
+          const list = findActiveH3WrapList();
+          if (!list) {
+            ed.notificationManager.open({ text: 'Поставьте курсор внутрь контейнера .h3-wrap-list', type: 'warning', timeout: 2000 });
+            return;
+          }
+          H3_LIST_COLS_CLASSES.forEach(cls => ed.dom.removeClass(list, cls));
+          if (colsClass) ed.dom.addClass(list, colsClass);
+          ed.nodeChanged();
+          markDirtyFromVisual();
+        }
+
+        function setH3WrapSpan(spanClass) {
+          const wrap = findActiveH3Wrap();
+          if (!wrap) {
+            ed.notificationManager.open({ text: 'Поставьте курсор внутрь контейнера .h3-wrap', type: 'warning', timeout: 2000 });
+            return;
+          }
+          SECTION_SPAN_CLASSES.forEach(cls => ed.dom.removeClass(wrap, cls));
+          if (spanClass) ed.dom.addClass(wrap, spanClass);
+          ed.nodeChanged();
+          markDirtyFromVisual();
+        }
+
+        function setH2WrapCols(colsClass) {
+          const wrap = findActiveH2Wrap();
+          if (!wrap) {
+            ed.notificationManager.open({ text: 'Поставьте курсор внутрь контейнера .h2-wrap', type: 'warning', timeout: 2000 });
+            return;
+          }
+          H2_WRAP_COLS_CLASSES.forEach(cls => ed.dom.removeClass(wrap, cls));
+          if (colsClass) ed.dom.addClass(wrap, colsClass);
+          ed.nodeChanged();
+          markDirtyFromVisual();
+        }
+
+        // Найти позицию для вставки нового h3-wrap:
+        // возвращает { list: <h3-wrap-list>, after: <h3-wrap|null> }
+        function findCardInsertPoint() {
+          const body = ed.getBody();
+          const root = ed.dom.select('#mdLayout', body)[0] || body;
+
+          // 1. Курсор внутри h3-wrap — вставить после него
+          const inWrap = ed.dom.getParent(ed.selection.getNode(), '.h3-wrap');
+          if (inWrap && inWrap.parentNode) {
+            return { list: inWrap.parentNode, after: inWrap };
+          }
+
+          // 2. Курсор внутри h3-wrap-list, но между карточками
+          const inList = ed.dom.getParent(ed.selection.getNode(), '.h3-wrap-list');
+          if (inList) {
+            const rng = ed.selection.getRng();
+            let sc = rng.startContainer;
+            if (sc.nodeType === Node.TEXT_NODE) sc = sc.parentNode;
+            while (sc && sc.parentNode && sc.parentNode !== inList) sc = sc.parentNode;
+            return { list: inList, after: (sc && sc.parentNode === inList) ? sc : null };
+          }
+
+          // 3. Fallback — в конец последнего h3-wrap-list
+          const allLists = ed.dom.select('.h3-wrap-list', root);
+          if (!allLists.length) return null;
+          const lastList = allLists[allLists.length - 1];
+          const wrapsInLast = Array.from(lastList.children).filter(
+            c => c.nodeType === 1 && ed.dom.hasClass(c, 'h3-wrap')
+          );
+          return { list: lastList, after: wrapsInLast[wrapsInLast.length - 1] || null };
+        }
+
+        function insertCardAtPoint(point, sectionHtml) {
+          if (!point) {
+            ed.notificationManager.open({
+              text: 'В документе нет контейнера .h3-wrap-list. Переключитесь в HTML-режим и добавьте структуру вручную.',
+              type: 'warning',
+              timeout: 4000,
+            });
+            return;
+          }
+
+          const doc = ed.getDoc();
+          const newWrap = doc.createElement('div');
+          newWrap.className = 'h3-wrap';
+          newWrap.innerHTML = `<h3>Новый раздел</h3><div class="section">${sectionHtml}</div>`;
+
+          const { list, after } = point;
+          if (after && after.parentNode === list) {
+            after.parentNode.insertBefore(newWrap, after.nextSibling);
+          } else {
+            list.appendChild(newWrap);
+          }
+
+          ed.focus();
+          const h3 = newWrap.querySelector('h3');
+          if (h3) {
+            ed.selection.select(h3, true);
+            ed.selection.collapse(false);
+          }
+          ed.nodeChanged();
+          markDirtyFromVisual();
+        }
+
+        ed.ui.registry.addMenuButton('addsection', {
+          text: '➕ Карточка',
+          tooltip: 'Вставить новую карточку (h3-wrap + section) после текущей',
+          fetch(callback) {
+            // Вычисляем точку вставки здесь — курсор ещё действителен.
+            // В onAction передаём готовые DOM-ссылки, не касаясь selection.
+            const point = findCardInsertPoint();
+            const run = (html) => () => insertCardAtPoint(point, html);
+            callback([
+              { type: 'menuitem', text: 'С текстом (параграф)',  onAction: run('<p>Текст карточки</p>') },
+              { type: 'menuitem', text: 'С блоком кода (pre)',   onAction: run('<pre>код</pre>') },
+              { type: 'menuitem', text: 'Пустая',                onAction: run('<p>&nbsp;</p>') },
+            ]);
+          },
+        });
+
+        ed.ui.registry.addMenuButton('sectionspan', {
+          text: '📐 Секция',
+          tooltip: 'Ширина блока .section',
+          fetch(callback) {
+            callback([
+              { type: 'menuitem', text: '① 1 колонка', onAction: () => setSectionSpan('span-1') },
+              { type: 'menuitem', text: '② 2 колонки', onAction: () => setSectionSpan('span-2') },
+              { type: 'menuitem', text: '③ 3 колонки', onAction: () => setSectionSpan('span-3') },
+              { type: 'menuitem', text: '⟷ На всю ширину', onAction: () => setSectionSpan('span-full') },
+              { type: 'menuitem', text: '↺ Авто', onAction: () => setSectionSpan('') },
+            ]);
+          },
+        });
+
+        ed.ui.registry.addMenuButton('h3wrapspan', {
+          text: '🧩 Карточка',
+          tooltip: 'Ширина .h3-wrap',
+          fetch(callback) {
+            callback([
+              { type: 'menuitem', text: '① 1 колонка', onAction: () => setH3WrapSpan('span-1') },
+              { type: 'menuitem', text: '② 2 колонки', onAction: () => setH3WrapSpan('span-2') },
+              { type: 'menuitem', text: '③ 3 колонки', onAction: () => setH3WrapSpan('span-3') },
+              { type: 'menuitem', text: '⟷ На всю ширину', onAction: () => setH3WrapSpan('span-full') },
+              { type: 'menuitem', text: '↺ Авто', onAction: () => setH3WrapSpan('') },
+            ]);
+          },
+        });
+
+        ed.ui.registry.addMenuButton('h3grid', {
+          text: '🔲 Сетка карточек',
+          tooltip: 'Колонки в .h3-wrap-list',
+          fetch(callback) {
+            callback([
+              { type: 'menuitem', text: '① 1 колонка', onAction: () => setH3WrapListCols('cols-1') },
+              { type: 'menuitem', text: '② 2 колонки', onAction: () => setH3WrapListCols('cols-2') },
+              { type: 'menuitem', text: '③ 3 колонки', onAction: () => setH3WrapListCols('cols-3') },
+              { type: 'menuitem', text: '↺ Авто', onAction: () => setH3WrapListCols('') },
+            ]);
+          },
+        });
+
+        ed.ui.registry.addMenuButton('h2grid', {
+          text: '🗂 Сетка секции',
+          tooltip: 'Колонки в .h2-wrap',
+          fetch(callback) {
+            callback([
+              { type: 'menuitem', text: '① 1 колонка', onAction: () => setH2WrapCols('cols-1') },
+              { type: 'menuitem', text: '② 2 колонки', onAction: () => setH2WrapCols('cols-2') },
+              { type: 'menuitem', text: '③ 3 колонки', onAction: () => setH2WrapCols('cols-3') },
+              { type: 'menuitem', text: '④ 4 колонки', onAction: () => setH2WrapCols('cols-4') },
+              { type: 'menuitem', text: '⑤ 5 колонок', onAction: () => setH2WrapCols('cols-5') },
+              { type: 'menuitem', text: '⑥ 6 колонок', onAction: () => setH2WrapCols('cols-6') },
+              { type: 'menuitem', text: '↺ Авто', onAction: () => setH2WrapCols('') },
+            ]);
+          },
+        });
+
+        ed.ui.registry.addButton('sectionspan1', { text: '📐1', onAction: () => setSectionSpan('span-1') });
+        ed.ui.registry.addButton('sectionspan2', { text: '📐2', onAction: () => setSectionSpan('span-2') });
+        ed.ui.registry.addButton('sectionspan3', { text: '📐3', onAction: () => setSectionSpan('span-3') });
+        ed.ui.registry.addButton('sectionspanfull', { text: '📐⟷', onAction: () => setSectionSpan('span-full') });
+        ed.ui.registry.addButton('sectionspanauto', { text: '📐↺', onAction: () => setSectionSpan('') });
+        ed.ui.registry.addButton('h3wrapspan1', { text: '🧩1', onAction: () => setH3WrapSpan('span-1') });
+        ed.ui.registry.addButton('h3wrapspan2', { text: '🧩2', onAction: () => setH3WrapSpan('span-2') });
+        ed.ui.registry.addButton('h3wrapspan3', { text: '🧩3', onAction: () => setH3WrapSpan('span-3') });
+        ed.ui.registry.addButton('h3wrapspanauto', { text: '🧩↺', onAction: () => setH3WrapSpan('') });
+        ed.ui.registry.addButton('h3grid1', { text: '🔲1', onAction: () => setH3WrapListCols('cols-1') });
+        ed.ui.registry.addButton('h3grid2', { text: '🔲2', onAction: () => setH3WrapListCols('cols-2') });
+        ed.ui.registry.addButton('h3grid3', { text: '🔲3', onAction: () => setH3WrapListCols('cols-3') });
+        ed.ui.registry.addButton('h3gridauto', { text: '🔲↺', onAction: () => setH3WrapListCols('') });
+        ed.ui.registry.addButton('h2grid1', { text: '🗂1', onAction: () => setH2WrapCols('cols-1') });
+        ed.ui.registry.addButton('h2grid2', { text: '🗂2', onAction: () => setH2WrapCols('cols-2') });
+        ed.ui.registry.addButton('h2grid3', { text: '🗂3', onAction: () => setH2WrapCols('cols-3') });
+        ed.ui.registry.addButton('h2gridauto', { text: '🗂↺', onAction: () => setH2WrapCols('') });
+
+        ed.ui.registry.addContextToolbar('sectionspan-toolbar', {
+          predicate(node) { return !!ed.dom.getParent(node, '.section, .h3-wrap'); },
+          items: 'sectionspan1 sectionspan2 sectionspan3 sectionspanfull sectionspanauto',
+          position: 'node',
+          scope: 'node',
+        });
+
+        ed.ui.registry.addContextToolbar('h3grid-toolbar', {
+          predicate(node) { return !!ed.dom.getParent(node, '.h3-wrap-list'); },
+          items: 'h3grid1 h3grid2 h3grid3 h3gridauto',
+          position: 'node',
+          scope: 'node',
+        });
+
+        ed.ui.registry.addContextToolbar('h3wrapspan-toolbar', {
+          predicate(node) { return !!ed.dom.getParent(node, '.h3-wrap'); },
+          items: 'h3wrapspan1 h3wrapspan2 h3wrapspan3 h3wrapspanauto',
+          position: 'node',
+          scope: 'node',
+        });
+
+        ed.ui.registry.addContextToolbar('h2grid-toolbar', {
+          predicate(node) { return !!ed.dom.getParent(node, '.h2-wrap'); },
+          items: 'h2grid1 h2grid2 h2grid3 h2gridauto',
+          position: 'node',
+          scope: 'node',
+        });
+
+        function initDragDrop() {
+          const HATTR = 'data-drag-handle';
+          const THRESHOLD = 2;
+          const HOLD_MS = 60;
+          const iDoc = ed.getDoc();
+          const iBody = ed.getBody();
+          const hostDoc = document;
+          const hostBody = document.body;
+
+          // ── handles ──────────────────────────────────────────────
+          function makeHandle() {
+            const h = iDoc.createElement('div');
+            h.setAttribute(HATTR, '1');
+            h.setAttribute('contenteditable', 'false');
+            h.className = 'h3-drag-handle';
+            h.title = 'Удерживайте для перетаскивания';
+            h.innerHTML = '<svg width="8" height="12" viewBox="0 0 8 12" fill="currentColor"><circle cx="2" cy="2" r="1.2"/><circle cx="6" cy="2" r="1.2"/><circle cx="2" cy="6" r="1.2"/><circle cx="6" cy="6" r="1.2"/><circle cx="2" cy="10" r="1.2"/><circle cx="6" cy="10" r="1.2"/></svg>';
+            return h;
+          }
+          function ensureHandles(root) {
+            (root || iBody).querySelectorAll('.h3-wrap').forEach(w => {
+              if (!w.querySelector('[' + HATTR + ']')) w.insertBefore(makeHandle(), w.firstChild);
+            });
+          }
+          ed._ensureHandles = ensureHandles;
+          ensureHandles();
+
+          const mo = new MutationObserver(muts => {
+            muts.forEach(m => m.addedNodes.forEach(n => {
+              if (n.nodeType !== 1) return;
+              if (n.classList?.contains('h3-wrap') && !n.querySelector('[' + HATTR + ']'))
+                n.insertBefore(makeHandle(), n.firstChild);
+              n.querySelectorAll?.('.h3-wrap').forEach(w => {
+                if (!w.querySelector('[' + HATTR + ']')) w.insertBefore(makeHandle(), w.firstChild);
+              });
+            }));
+          });
+          mo.observe(iBody, { childList: true, subtree: true });
+
+          // ── overlay on HOST page ─────────────────────────────────
+          // Covers everything during drag → receives all pointer events
+          // because iframe gets pointer-events:none.
+          const overlay = hostDoc.createElement('div');
+          overlay.style.cssText = 'display:none;position:fixed;inset:0;z-index:999998;cursor:grabbing;';
+          hostBody.appendChild(overlay);
+
+          // ── ghost on HOST page ───────────────────────────────────
+          const ghost = hostDoc.createElement('div');
+          ghost.style.cssText = 'display:none;position:fixed;pointer-events:none;z-index:999999;';
+          hostBody.appendChild(ghost);
+
+          // ── placeholder in iframe DOM ────────────────────────────
+          const placeholder = iDoc.createElement('div');
+          placeholder.className = 'h3-drag-placeholder';
+          placeholder.setAttribute('contenteditable', 'false');
+
+          let ds = null;
+          let scrollRAF = null;
+
+          // ── coordinate helpers ───────────────────────────────────
+          function ifrRect() {
+            const ifr = ed.iframeElement;
+            return ifr ? ifr.getBoundingClientRect() : { left: 0, top: 0, right: 0, bottom: 0, width: 0, height: 0 };
+          }
+          function hostToIframe(hx, hy) {
+            const r = ifrRect();
+            return { ix: hx - r.left, iy: hy - r.top };
+          }
+
+          // ── find target list (2D distance) ──────────────────────
+          function findList(ix, iy) {
+            let best = null, bestDist = Infinity;
+            for (const list of iBody.querySelectorAll('.h3-wrap-list')) {
+              const r = list.getBoundingClientRect();
+              const dx = ix < r.left ? r.left - ix : ix > r.right ? ix - r.right : 0;
+              const dy = iy < r.top ? r.top - iy : iy > r.bottom ? iy - r.bottom : 0;
+              const d = Math.hypot(dx, dy);
+              if (d < bestDist) { bestDist = d; best = list; }
+            }
+            return bestDist < 120 ? best : null;
+          }
+
+          // ── grid-aware drop position ────────────────────────────
+          function findDropRef(ix, iy, list) {
+            const cards = Array.from(list.children).filter(
+              c => c.nodeType === 1 && (c.classList.contains('h3-wrap') || c === placeholder)
+            );
+            if (!cards.length) return null;
+
+            const items = cards.map(c => ({ el: c, r: c.getBoundingClientRect() }));
+            const rows = [];
+            let row = [items[0]];
+            for (let i = 1; i < items.length; i++) {
+              if (Math.abs(items[i].r.top - row[0].r.top) < 30) {
+                row.push(items[i]);
+              } else {
+                rows.push(row);
+                row = [items[i]];
+              }
+            }
+            rows.push(row);
+
+            for (let ri = 0; ri < rows.length; ri++) {
+              const cur = rows[ri];
+              const rowBot = Math.max(...cur.map(c => c.r.bottom));
+              const rowMid = (cur[0].r.top + rowBot) / 2;
+              if (iy < rowMid || ri === rows.length - 1) {
+                for (const { el, r } of cur) {
+                  if (ix <= r.left + r.width * 0.5) return el;
+                }
+                return ri < rows.length - 1 ? rows[ri + 1][0].el : null;
+              }
+            }
+            return null;
+          }
+
+          function putPlaceholder(list, ref) {
+            if (ref === placeholder) return;
+            if (placeholder.parentNode === list &&
+                placeholder.nextElementSibling === (ref || null)) return;
+            if (ref) list.insertBefore(placeholder, ref);
+            else     list.appendChild(placeholder);
+          }
+
+          // ── auto-scroll ──────────────────────────────────────────
+          function autoScroll(iy) {
+            cancelAnimationFrame(scrollRAF);
+            const ifr = ed.iframeElement;
+            const ifrH = ifr?.clientHeight || 600;
+            const EDGE = 70, SPEED = 16;
+            let dy = 0;
+            if (iy < EDGE) dy = -SPEED;
+            else if (iy > ifrH - EDGE) dy = SPEED;
+            if (!dy) return;
+
+            const ifrEl = iDoc.scrollingElement || iDoc.documentElement;
+            ifrEl.scrollTop += dy;
+
+            const hostEl = hostDoc.scrollingElement || hostDoc.documentElement;
+            const cursorHostY = iy + (ifr ? ifr.getBoundingClientRect().top : 0);
+            const viewH = window.innerHeight;
+            if (cursorHostY < EDGE || cursorHostY > viewH - EDGE) {
+              hostEl.scrollTop += dy;
+            }
+
+            scrollRAF = requestAnimationFrame(() => {
+              if (!ds?.active) return;
+              autoScroll(iy);
+              const hx = ds.curHX || ds.startHX;
+              const hy = ds.curHY || ds.startHY;
+              const iv = hostToIframe(hx, hy);
+              const list = findList(iv.ix, iv.iy);
+              if (list) putPlaceholder(list, findDropRef(iv.ix, iv.iy, list));
+            });
+          }
+
+          // ── build ghost content ──────────────────────────────────
+          function buildGhost(wrap, w) {
+            const esc = s => s.replace(/</g, '&lt;');
+            const title = (wrap.querySelector('h3')?.textContent || '').trim() || 'Карточка';
+            const snip = (wrap.querySelector('.section')?.textContent || '').trim().slice(0, 90);
+            ghost.innerHTML =
+              '<div style="padding:14px 18px;font-family:system-ui,sans-serif;min-width:180px;max-width:340px;">' +
+                '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">' +
+                  '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round"><polyline points="5 9 2 12 5 15"/><polyline points="9 5 12 2 15 5"/><polyline points="15 19 12 22 9 19"/><polyline points="19 9 22 12 19 15"/></svg>' +
+                  '<span style="font-weight:700;font-size:15px;color:#312e81;">' + esc(title) + '</span>' +
+                '</div>' +
+                (snip ? '<div style="font-size:12px;color:#64748b;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + esc(snip) + '</div>' : '') +
+                '<div style="margin-top:8px;font-size:11px;color:#6366f1;font-weight:600;letter-spacing:.3px;">Перетащите в нужное место</div>' +
+              '</div>';
+            ghost.style.cssText =
+              'display:block;position:fixed;pointer-events:none;z-index:999999;' +
+              'background:#fff;border:2px solid #6366f1;border-radius:14px;' +
+              'box-shadow:0 20px 50px rgba(79,70,229,.35),0 8px 20px rgba(0,0,0,.12);' +
+              'transform:rotate(1.5deg) scale(1.02);opacity:.94;' +
+              'width:' + Math.min(w, 340) + 'px;';
+          }
+
+          // ── drag lifecycle ──────────────────────────────────────
+          function onPointerDown(e) {
+            const handle = e.target.closest?.('[' + HATTR + ']');
+            if (!handle) return;
+            const wrap = handle.closest?.('.h3-wrap');
+            if (!wrap) return;
+            e.preventDefault();
+            e.stopPropagation();
+
+            const ir = ifrRect();
+            const wr = wrap.getBoundingClientRect();
+            handle.classList.add('h3-drag-handle--active');
+            wrap.classList.add('h3-wrap--grab-source');
+
+            ds = {
+              wrap, handle,
+              offsetX: e.clientX - wr.left,
+              offsetY: e.clientY - wr.top,
+              startHX: e.clientX + ir.left,
+              startHY: e.clientY + ir.top,
+              w: wr.width, h: wr.height,
+              origParent: wrap.parentElement,
+              origNext: wrap.nextSibling,
+              active: false,
+              holdTimer: null,
+            };
+
+            ed.iframeElement.style.pointerEvents = 'none';
+            overlay.style.display = 'block';
+            overlay.addEventListener('pointermove', onPointerMove);
+            overlay.addEventListener('pointerup', onPointerUp);
+
+            ds.holdTimer = setTimeout(() => {
+              if (ds && !ds.active) activateDrag(ds.curHX || ds.startHX, ds.curHY || ds.startHY);
+            }, HOLD_MS);
+          }
+
+          function activateDrag(hx, hy) {
+            if (!ds || ds.active) return;
+            ds.active = true;
+            clearTimeout(ds.holdTimer);
+            const { wrap, w, h } = ds;
+
+            placeholder.style.height = h + 'px';
+            wrap.parentNode.insertBefore(placeholder, wrap);
+            wrap.remove();
+
+            buildGhost(wrap, w);
+            ghost.style.left = (hx - ds.offsetX) + 'px';
+            ghost.style.top  = (hy - ds.offsetY) + 'px';
+
+            iBody.style.userSelect = 'none';
+            iBody.style.webkitUserSelect = 'none';
+          }
+
+          function onPointerMove(e) {
+            if (!ds) return;
+            e.preventDefault();
+            const hx = e.clientX, hy = e.clientY;
+
+            if (!ds.active) {
+              ds.curHX = hx;
+              ds.curHY = hy;
+              if (Math.hypot(hx - ds.startHX, hy - ds.startHY) >= THRESHOLD) activateDrag(hx, hy);
+              return;
+            }
+
+            ghost.style.left = (hx - ds.offsetX) + 'px';
+            ghost.style.top  = (hy - ds.offsetY) + 'px';
+
+            const { ix, iy } = hostToIframe(hx, hy);
+            autoScroll(iy);
+            const list = findList(ix, iy);
+            if (list) putPlaceholder(list, findDropRef(ix, iy, list));
+          }
+
+          function onPointerUp() {
+            if (!ds) return;
+            clearTimeout(ds.holdTimer);
+            cancelAnimationFrame(scrollRAF);
+
+            if (ds.active) {
+              const landed = ds.wrap;
+              if (placeholder.parentNode) {
+                placeholder.parentNode.replaceChild(landed, placeholder);
+                landed.classList.add('h3-wrap--just-dropped');
+                setTimeout(() => landed.classList.remove('h3-wrap--just-dropped'), 400);
+              } else {
+                restoreOriginal();
+              }
+              ghost.style.display = 'none';
+              ed.nodeChanged();
+              markDirtyFromVisual();
+            }
+            teardown();
+          }
+
+          function restoreOriginal() {
+            if (!ds) return;
+            const { wrap, origParent, origNext } = ds;
+            if (origNext?.isConnected && origNext.parentNode === origParent)
+              origParent.insertBefore(wrap, origNext);
+            else
+              origParent.appendChild(wrap);
+          }
+
+          function teardown() {
+            if (!ds) return;
+            const { handle, wrap, holdTimer } = ds;
+            clearTimeout(holdTimer);
+            ghost.style.display = 'none';
+            overlay.style.display = 'none';
+            placeholder.remove();
+            handle?.classList?.remove('h3-drag-handle--active');
+            wrap?.classList?.remove('h3-wrap--grab-source');
+            iBody.style.userSelect = '';
+            iBody.style.webkitUserSelect = '';
+            ed.iframeElement.style.pointerEvents = '';
+            overlay.removeEventListener('pointermove', onPointerMove);
+            overlay.removeEventListener('pointerup', onPointerUp);
+            cancelAnimationFrame(scrollRAF);
+            ds = null;
+          }
+
+          iDoc.addEventListener('pointerdown', onPointerDown, true);
+
+          const onEscape = e => {
+            if (e.key === 'Escape' && ds) { if (ds.active) restoreOriginal(); teardown(); }
+          };
+          iDoc.addEventListener('keydown', onEscape, true);
+          hostDoc.addEventListener('keydown', onEscape, true);
+
+          ed.on('remove', () => {
+            mo.disconnect();
+            ghost.remove();
+            overlay.remove();
+            iDoc.removeEventListener('pointerdown', onPointerDown, true);
+            iDoc.removeEventListener('keydown', onEscape, true);
+            hostDoc.removeEventListener('keydown', onEscape, true);
+            teardown();
+          });
+        }
+
+        ed.on('init', () => {
+          state.editorReady = true;
+
+          function syncEditCanvas() {
+            const container = ed.getContainer();
+            const editArea = container && container.querySelector('.tox-edit-area');
+            const ifr = ed.iframeElement;
+            if (!editArea || !ifr) return;
+            const h = editArea.clientHeight;
+            if (h < 48) return;
+            ifr.style.height = `${h}px`;
+            try {
+              const doc = ifr.contentDocument;
+              if (doc && doc.body) {
+                doc.documentElement.style.height = '100%';
+                doc.body.style.minHeight = `${h}px`;
+              }
+            } catch (_) {}
+          }
+
+          const panel = document.getElementById('visualPanel');
+          let ro = null;
+          if (panel && typeof ResizeObserver !== 'undefined') {
+            ro = new ResizeObserver(() => syncEditCanvas());
+            ro.observe(panel);
+          }
+          const onWinResize = () => syncEditCanvas();
+          window.addEventListener('resize', onWinResize);
+          requestAnimationFrame(() => syncEditCanvas());
+
+          ed.on('SetContent', () => {
+            requestAnimationFrame(syncEditCanvas);
+          });
+
+          const editAreaEl = ed.getContainer()?.querySelector('.tox-edit-area');
+          if (editAreaEl) {
+            editAreaEl.addEventListener(
+              'mousedown',
+              (e) => {
+                if (e.button !== 0) return;
+                const ifr = ed.iframeElement;
+                if (!ifr) return;
+                if (e.target === ifr || e.target.closest?.('iframe') === ifr) return;
+                ed.focus();
+                const body = ed.getBody();
+                if (body) {
+                  ed.selection.select(body, true);
+                  ed.selection.collapse(false);
+                }
+              },
+              true
+            );
+          }
+
+          ed.on('remove', () => {
+            if (ro) ro.disconnect();
+            window.removeEventListener('resize', onWinResize);
+          });
+
+          initDragDrop();
+        });
+
+        ed.on('change input undo redo SetContent', event => {
+          if (!state.currentFile) return;
+          if (event.type === 'SetContent' && !state.dirty) return;
+          markDirtyFromVisual();
+        });
+      }
+    });
+  }
+
+  els.openFolderBtn.addEventListener('click', async () => {
+    if (!window.showDirectoryPicker) {
+      setStatus('Этот редактор требует Chromium/Chrome/Edge с поддержкой File System Access API.', 'error');
+      return;
+    }
+    try {
+      // Сначала пробуем восстановить сохранённый handle (один клик вместо выбора папки)
+      const saved = await dbGet('folderHandle');
+      let handle = null;
+      if (saved) {
+        const perm = await saved.requestPermission({ mode: 'readwrite' });
+        if (perm === 'granted') handle = saved;
+      }
+      if (!handle) {
+        handle = await window.showDirectoryPicker({ mode: 'readwrite' });
+      }
+      await dbSet('folderHandle', handle);
+      await applyFolderHandle(handle);
+      setStatus(`Загружено файлов: ${state.files.length}`, 'success');
+    } catch (error) {
+      if (error && error.name === 'AbortError') return;
+      console.error(error);
+      setStatus(`Не удалось открыть папку: ${error.message || error}`, 'error');
+    }
+  });
+
+  els.reloadBtn.addEventListener('click', async () => {
+    if (!state.folderHandle) return;
+    try {
+      state.files = await walkDirectory(state.folderHandle);
+      renderFileCards();
+      setStatus(`Список обновлён: ${state.files.length} файлов`, 'success');
+    } catch (error) {
+      console.error(error);
+      setStatus(`Не удалось обновить список: ${error.message || error}`, 'error');
+    }
+  });
+
+  els.searchInput.addEventListener('input', renderFileCards);
+
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+  });
+
+  els.sourceEditor.addEventListener('input', () => {
+    if (sourceCodeEditor) return;
+    if (!state.currentFile || state.currentTab !== 'source') return;
+    state.currentRawHtml = els.sourceEditor.value;
+    setDirty(true);
+    setStatus('Есть несохранённые изменения');
+  });
+  els.sourceFormatBtn.addEventListener('click', formatSourceHtml);
+  els.sourceFindBtn.addEventListener('click', () => {
+    if (!sourceCodeEditor) return;
+    sourceCodeEditor.execCommand('findPersistent');
+    sourceCodeEditor.focus();
+  });
+  els.sourceTagBtn.addEventListener('click', jumpToTag);
+
+  els.saveBtn.addEventListener('click', saveCurrentFile);
+
+  state.files = buildBuiltinFiles();
+  els.searchInput.disabled = false;
+  renderFileCards();
+  setStatus('Загрузка...');
+
+  // Восстанавливаем папку и последний открытый файл
+  async function autoRestore() {
+    const saved = await dbGet('folderHandle');
+    if (!saved) {
+      setStatus('Плитки загружены из встроенного списка. Нажмите "Открыть папку" для сохранения.');
+      return;
+    }
+    try {
+      const perm = await saved.queryPermission({ mode: 'readwrite' });
+      if (perm !== 'granted') {
+        setStatus(`Нажмите "Открыть папку" — доступ к "${saved.name}" требует подтверждения`);
+        return;
+      }
+      await applyFolderHandle(saved);
+      setStatus(`Папка "${saved.name}" восстановлена (${state.files.length} файлов)`, 'success');
+
+      // Автооткрытие последнего редактируемого файла
+      const lastPath = localStorage.getItem('cheatsheet-lastFile');
+      if (lastPath) {
+        const match = state.files.find(f => f.relativePath === lastPath);
+        if (match) {
+          // Ждём готовности TinyMCE, затем открываем
+          const waitForEditor = () => {
+            if (state.editorReady) {
+              openFile(match);
+            } else {
+              setTimeout(waitForEditor, 50);
+            }
+          };
+          waitForEditor();
+        }
+      }
+    } catch {
+      setStatus('Нажмите "Открыть папку" для включения сохранения.');
+    }
+  }
+  autoRestore();
+
+  try {
+    initSourceEditor();
+  } catch (error) {
+    console.error(error);
+    setStatus('Source-редактор отключен из-за ошибки, визуальный режим работает', 'error');
+  }
+  initTinyEditor();
+})();
+</script>
+</body>
+</html>
