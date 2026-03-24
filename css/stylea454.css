@@ -7079,3 +7079,7 @@ header.home {
     gap: 2rem;
   }
 }
+
+.h3-lg {
+    background-color: lightgray !important;
+}

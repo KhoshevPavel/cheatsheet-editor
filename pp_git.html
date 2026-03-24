@@ -1,0 +1,413 @@
+<header class="relative z-10">
+    <div class="max-container z-20 relative">&nbsp;</div>
+</header>
+
+<style>
+</style>
+
+<div class="mx-auto flex flex-wrap md:py-5 flex-col md:flex-row items-center">
+    <div class="flex flex-col w-full mx-auto items-center text-center my-8">
+        <div class="max-container w-full">
+            <h1 class="text-5xl mb-4"><span class="text-slate-700 dark:text-slate-300 font-light">Git</span> <span class="text-slate-400 dark:text-slate-5050 font-extralight hidden md:inline">cheatsheet</span></h1>
+            <div class="lg:w-3/5 mx-auto intro leading-relaxed text-slate-600">
+                <p>
+                    Шпаргалка по основным командам Git для повседневной работы от
+                    <strong>
+                        <a href="https://stepik.org/users/612208117/teach">
+                            Pragmatic Programmer
+                        </a>
+                    </strong></strong>
+                    .
+                </p>
+            </div>
+            <div class="pt-5" id="carbon_container"></div>
+        </div>
+    </div>
+    <div class="mdLayout w-full max-container" id="mdLayout">
+        <div class="h2-wrap">
+            <h2 id="setup-and-config"><a class="h-anchor" href="#setup-and-config">#</a>1. Настройка и конфигурация</h2>
+            <div class="h3-wrap-list">
+                <div class="h3-wrap h3-lg h3-lg col-span-2">
+                    <h3 id="global-config"><a class="h-anchor" href="#global-config">#</a>Базовая конфигурация Git</h3>
+                    <div class="section">
+                        <table class="shortcuts">
+                            <thead>
+                                <tr>
+                                    <th>Команда</th>
+                                    <th>Описание</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>git config --global user.name "Имя"</code></td><td>Установить имя пользователя</td></tr>
+                                <tr><td><code>git config --global user.email "email"</code></td><td>Установить email пользователя</td></tr>
+                                <tr><td><code>git config --list</code></td><td>Показать все настройки</td></tr>
+                                <tr><td><code>git config --global core.editor "editor"</code></td><td>Установить редактор по умолчанию</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="h2-wrap">
+            <h2 id="create-and-clone"><a class="h-anchor" href="#create-and-clone">#</a>2. Создание и клонирование репозиториев</h2>
+            <div class="h3-wrap-list">
+                <div class="h3-wrap h3-lg h3-lg col-span-2">
+                    <h3 id="repository-init"><a class="h-anchor" href="#repository-init">#</a>Инициализация и подключение remote</h3>
+                    <div class="section">
+                        <table class="shortcuts">
+                            <thead>
+                                <tr>
+                                    <th>Команда</th>
+                                    <th>Описание</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>git init</code></td><td>Создать новый локальный репозиторий</td></tr>
+                                <tr><td><code>git clone &lt;url&gt;</code></td><td>Склонировать удаленный репозиторий</td></tr>
+                                <tr><td><code>git remote add origin &lt;url&gt;</code></td><td>Добавить удаленный репозиторий</td></tr>
+                                <tr><td><code>git remote -v</code></td><td>Показать список удаленных репозиториев</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="h2-wrap">
+            <h2 id="workflow"><a class="h-anchor" href="#workflow">#</a>3. Основной workflow</h2>
+            <div class="h3-wrap-list">
+                <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="changes"><a class="h-anchor" href="#changes">#</a>Работа с изменениями</h3>
+                    <div class="section">
+                        <table class="shortcuts">
+                            <thead>
+                                <tr>
+                                    <th>Команда</th>
+                                    <th>Описание</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>git status</code></td><td>Показать состояние рабочей директории</td></tr>
+                                <tr><td><code>git add &lt;file&gt;</code></td><td>Добавить файл в индекс</td></tr>
+                                <tr><td><code>git add .</code></td><td>Добавить все изменения в индекс</td></tr>
+                                <tr><td><code>git commit -m "Сообщение"</code></td><td>Создать коммит</td></tr>
+                                <tr><td><code>git commit --amend</code></td><td>Исправить последний коммит</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="history"><a class="h-anchor" href="#history">#</a>Просмотр истории</h3>
+                    <div class="section">
+                        <table class="shortcuts">
+                            <thead>
+                                <tr>
+                                    <th>Команда</th>
+                                    <th>Описание</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>git log</code></td><td>Показать историю коммитов</td></tr>
+                                <tr><td><code>git log --oneline</code></td><td>Краткая история коммитов</td></tr>
+                                <tr><td><code>git log --graph</code></td><td>История с визуализацией веток</td></tr>
+                                <tr><td><code>git show &lt;commit&gt;</code></td><td>Показать изменения в коммите</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="h2-wrap">
+            <h2 id="branches"><a class="h-anchor" href="#branches">#</a>4. Ветки (Branches)</h2>
+            <div class="h3-wrap-list">
+                <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="branch-create-switch"><a class="h-anchor" href="#branch-create-switch">#</a>Создание и переключение</h3>
+                    <div class="section">
+                        <table class="shortcuts">
+                            <thead>
+                                <tr>
+                                    <th>Команда</th>
+                                    <th>Описание</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>git branch</code></td><td>Показать список веток</td></tr>
+                                <tr><td><code>git branch &lt;name&gt;</code></td><td>Создать новую ветку</td></tr>
+                                <tr><td><code>git checkout &lt;branch&gt;</code></td><td>Переключиться на ветку</td></tr>
+                                <tr><td><code>git checkout -b &lt;branch&gt;</code></td><td>Создать и переключиться на ветку</td></tr>
+                                <tr><td><code>git switch &lt;branch&gt;</code></td><td>Переключиться на ветку (новый вариант)</td></tr>
+                                <tr><td><code>git switch -c &lt;branch&gt;</code></td><td>Создать и переключиться (новый вариант)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="branch-merge-delete"><a class="h-anchor" href="#branch-merge-delete">#</a>Слияние и удаление</h3>
+                    <div class="section">
+                        <table class="shortcuts">
+                            <thead>
+                                <tr>
+                                    <th>Команда</th>
+                                    <th>Описание</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>git merge &lt;branch&gt;</code></td><td>Слить ветку в текущую</td></tr>
+                                <tr><td><code>git merge --abort</code></td><td>Отменить слияние</td></tr>
+                                <tr><td><code>git branch -d &lt;branch&gt;</code></td><td>Удалить ветку</td></tr>
+                                <tr><td><code>git branch -D &lt;branch&gt;</code></td><td>Принудительно удалить ветку</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="h2-wrap">
+            <h2 id="remotes"><a class="h-anchor" href="#remotes">#</a>5. Работа с удаленными репозиториями</h2>
+            <div class="h3-wrap-list">
+                <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="remote-sync"><a class="h-anchor" href="#remote-sync">#</a>Синхронизация с удалённым репозиторием</h3>
+                    <div class="section">
+                        <table class="shortcuts">
+                            <thead>
+                                <tr>
+                                    <th>Команда</th>
+                                    <th>Описание</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>git fetch</code></td><td>Загрузить изменения с удаленного репозитория</td></tr>
+                                <tr><td><code>git pull</code></td><td>Загрузить и слить изменения</td></tr>
+                                <tr><td><code>git push</code></td><td>Отправить изменения на удаленный репозиторий</td></tr>
+                                <tr><td><code>git push -u origin &lt;branch&gt;</code></td><td>Отправить и установить отслеживание</td></tr>
+                                <tr><td><code>git push --force</code></td><td>Принудительная отправка (осторожно!)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="h2-wrap">
+            <h2 id="undo"><a class="h-anchor" href="#undo">#</a>6. Отмена изменений</h2>
+            <div class="h3-wrap-list">
+                <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="undo-commands"><a class="h-anchor" href="#undo-commands">#</a>Команды для отмены изменений</h3>
+                    <div class="section">
+                        <table class="shortcuts">
+                            <thead>
+                                <tr>
+                                    <th>Команда</th>
+                                    <th>Описание</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>git restore &lt;file&gt;</code></td><td>Отменить изменения в файле</td></tr>
+                                <tr><td><code>git restore --staged &lt;file&gt;</code></td><td>Убрать файл из индекса</td></tr>
+                                <tr><td><code>git reset --soft &lt;commit&gt;</code></td><td>Отменить коммиты, сохранив изменения</td></tr>
+                                <tr><td><code>git reset --hard &lt;commit&gt;</code></td><td>Полностью отменить коммиты</td></tr>
+                                <tr><td><code>git revert &lt;commit&gt;</code></td><td>Создать коммит, отменяющий изменения</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="h2-wrap">
+            <h2 id="stash"><a class="h-anchor" href="#stash">#</a>7. Временное сохранение изменений</h2>
+            <div class="h3-wrap-list">
+                <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="stash-commands"><a class="h-anchor" href="#stash-commands">#</a>Команды stash</h3>
+                    <div class="section">
+                        <table class="shortcuts">
+                            <thead>
+                                <tr>
+                                    <th>Команда</th>
+                                    <th>Описание</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>git stash</code></td><td>Временно сохранить изменения</td></tr>
+                                <tr><td><code>git stash list</code></td><td>Показать список сохраненных изменений</td></tr>
+                                <tr><td><code>git stash pop</code></td><td>Восстановить последние изменения</td></tr>
+                                <tr><td><code>git stash apply</code></td><td>Применить изменения без удаления</td></tr>
+                                <tr><td><code>git stash drop</code></td><td>Удалить сохраненные изменения</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="h2-wrap">
+            <h2 id="inspection"><a class="h-anchor" href="#inspection">#</a>8. Инспекция и сравнение</h2>
+            <div class="h3-wrap-list">
+                <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="inspect-commands"><a class="h-anchor" href="#inspect-commands">#</a>Команды для анализа изменений</h3>
+                    <div class="section">
+                        <table class="shortcuts">
+                            <thead>
+                                <tr>
+                                    <th>Команда</th>
+                                    <th>Описание</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>git diff</code></td><td>Показать незакоммиченные изменения</td></tr>
+                                <tr><td><code>git diff --staged</code></td><td>Показать изменения в индексе</td></tr>
+                                <tr><td><code>git diff &lt;commit1&gt; &lt;commit2&gt;</code></td><td>Сравнить два коммита</td></tr>
+                                <tr><td><code>git blame &lt;file&gt;</code></td><td>Показать автора каждой строки файла</td></tr>
+                                <tr><td><code>git grep "текст"</code></td><td>Поиск текста в файлах репозитория</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="h2-wrap">
+            <h2 id="history-tricks"><a class="h-anchor" href="#history-tricks">#</a>9. Полезные команды для истории</h2>
+            <div class="h3-wrap-list">
+                <div class="h3-wrap h3-lg col-span-2">
+                    <div class="section">
+                        <table class="shortcuts">
+                            <thead>
+                                <tr>
+                                    <th>Команда</th>
+                                    <th>Описание</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>git log --follow &lt;file&gt;</code></td><td>История изменений файла с учетом переименований</td></tr>
+                                <tr><td><code>git log -S "текст"</code></td><td>Найти коммиты, где добавлялась/удалялась строка</td></tr>
+                                <tr><td><code>git log --author=&lt;pattern&gt;</code></td><td>Фильтр истории по автору</td></tr>
+                                <tr><td><code>git log --grep=&lt;pattern&gt;</code></td><td>Поиск коммитов по сообщению</td></tr>
+                                <tr><td><code>git log --graph --decorate --all</code></td><td>Полный граф веток и коммитов</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="h2-wrap">
+            <h2 id="rewrite-history"><a class="h-anchor" href="#rewrite-history">#</a>10. Перезапись истории и полезная диагностика</h2>
+            <div class="h3-wrap-list">
+                <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="rewrite-last"><a class="h-anchor" href="#rewrite-last">#</a>Последние коммиты</h3>
+                    <div class="section">
+                        <table class="shortcuts">
+                            <thead>
+                                <tr>
+                                    <th>Команда</th>
+                                    <th>Описание</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>git commit --amend --no-edit</code></td><td>Обновить последний коммит без изменения сообщения</td></tr>
+                                <tr><td><code>git commit --amend -m "текст"</code></td><td>Изменить сообщение последнего коммита</td></tr>
+                                <tr><td><code>git reset --mixed HEAD~1</code></td><td>Убрать последний коммит, оставив изменения в файлах</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="reflog-recovery"><a class="h-anchor" href="#reflog-recovery">#</a>Восстановление через reflog</h3>
+                    <div class="section">
+                        <table class="shortcuts">
+                            <thead>
+                                <tr>
+                                    <th>Команда</th>
+                                    <th>Описание</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>git reflog</code></td><td>Показать историю перемещений HEAD</td></tr>
+                                <tr><td><code>git reset --hard HEAD@{1}</code></td><td>Откатиться к предыдущему состоянию HEAD</td></tr>
+                                <tr><td><code>git show HEAD@{1}</code></td><td>Посмотреть, что было в предыдущем состоянии</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="h2-wrap">
+            <h2 id="productivity"><a class="h-anchor" href="#productivity">#</a>11. Ускорение работы (aliases и файлы)</h2>
+            <div class="h3-wrap-list">
+                <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="aliases"><a class="h-anchor" href="#aliases">#</a>Полезные алиасы</h3>
+                    <div class="section">
+                        <table class="shortcuts">
+                            <thead>
+                                <tr>
+                                    <th>Команда</th>
+                                    <th>Описание</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>git config --global alias.st status</code></td><td>Короткая команда для статуса</td></tr>
+                                <tr><td><code>git config --global alias.co checkout</code></td><td>Короткая команда для checkout</td></tr>
+                                <tr><td><code>git config --global alias.br branch</code></td><td>Короткая команда для branch</td></tr>
+                                <tr><td><code>git config --global alias.ci commit</code></td><td>Короткая команда для commit</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="path-changes"><a class="h-anchor" href="#path-changes">#</a>Изменения файлов и путей</h3>
+                    <div class="section">
+                        <table class="shortcuts">
+                            <thead>
+                                <tr>
+                                    <th>Команда</th>
+                                    <th>Описание</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>git rm &lt;file&gt;</code></td><td>Удалить файл и добавить удаление в индекс</td></tr>
+                                <tr><td><code>git mv &lt;old-path&gt; &lt;new-path&gt;</code></td><td>Переименовать или переместить файл</td></tr>
+                                <tr><td><code>git log --stat -M</code></td><td>Показать историю с распознаванием переименований</td></tr>
+                                <tr><td><code>git restore &lt;file&gt;</code></td><td>Вернуть файл к состоянию последнего коммита</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="h2-wrap">
+            <h2 id="tips"><a class="h-anchor" href="#tips">#</a>Советы по использованию</h2>
+            <div class="h3-wrap-list">
+                <div class="h3-wrap">
+                    <h3 id="before-commit"><a class="h-anchor" href="#before-commit">#</a>Перед коммитом</h3>
+                    <div class="section">
+                        <ul>
+                            <li><p>Всегда проверяйте <code>git status</code> перед коммитом.</p></li>
+                            <li><p>Используйте <code>git diff</code> для просмотра изменений.</p></li>
+                            <li><p>Делайте частые и атомарные коммиты.</p></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="h3-wrap">
+                    <h3 id="good-habits"><a class="h-anchor" href="#good-habits">#</a>Хорошие привычки</h3>
+                    <div class="section">
+                        <ul>
+                            <li><p>Пишите осмысленные сообщения коммитов.</p></li>
+                            <li><p>Перед слиянием всегда обновляйте свою ветку.</p></li>
+                            <li><p>Держите историю чистой и понятной для команды.</p></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
