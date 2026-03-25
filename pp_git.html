@@ -8,7 +8,7 @@
 <div class="mx-auto flex flex-wrap md:py-5 flex-col md:flex-row items-center">
     <div class="flex flex-col w-full mx-auto items-center text-center my-8">
         <div class="max-container w-full">
-            <h1 class="text-5xl mb-4"><span class="text-slate-700 dark:text-slate-300 font-light">Git</span> <span class="text-slate-400 dark:text-slate-5050 font-extralight hidden md:inline">cheatsheet</span></h1>
+            <h1 class="text-5xl mb-4"><span class="text-slate-700 dark:text-slate-300 font-light">Git + GitHub</span> <span class="text-slate-400 dark:text-slate-5050 font-extralight hidden md:inline">cheatsheet</span></h1>
             <div class="lg:w-3/5 mx-auto intro leading-relaxed text-slate-600">
                 <p>
                     Шпаргалка по основным командам Git для повседневной работы от
@@ -16,7 +16,7 @@
                         <a href="https://stepik.org/users/612208117/teach">
                             Pragmatic Programmer
                         </a>
-                    </strong></strong>
+                    </strong>
                     .
                 </p>
             </div>
@@ -53,7 +53,7 @@
             <h2 id="create-and-clone"><a class="h-anchor" href="#create-and-clone">#</a>2. Создание и клонирование репозиториев</h2>
             <div class="h3-wrap-list">
                 <div class="h3-wrap h3-lg h3-lg col-span-2">
-                    <h3 id="repository-init"><a class="h-anchor" href="#repository-init">#</a>Инициализация и подключение remote</h3>
+                    <h3 id="repository-init"><a class="h-anchor" href="#repository-init">#</a>Инициализация и клонирование</h3>
                     <div class="section">
                         <table class="shortcuts">
                             <thead>
@@ -64,9 +64,9 @@
                             </thead>
                             <tbody>
                                 <tr><td><code>git init</code></td><td>Создать новый локальный репозиторий</td></tr>
+                                <tr><td><code>git init --bare</code></td><td>Создать bare-репозиторий (без рабочей директории)</td></tr>
                                 <tr><td><code>git clone &lt;url&gt;</code></td><td>Склонировать удаленный репозиторий</td></tr>
-                                <tr><td><code>git remote add origin &lt;url&gt;</code></td><td>Добавить удаленный репозиторий</td></tr>
-                                <tr><td><code>git remote -v</code></td><td>Показать список удаленных репозиториев</td></tr>
+                                <tr><td><code>git clone &lt;url&gt; &lt;dir&gt;</code></td><td>Склонировать репозиторий в указанную папку</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -269,11 +269,86 @@
             </div>
         </div>
 
-
         <div class="h2-wrap">
-            <h2 id="history-tricks"><a class="h-anchor" href="#history-tricks">#</a>9. Полезные команды для истории</h2>
+            <h2 id="github-workflow"><a class="h-anchor" href="#github-workflow">#</a>9. Работа с GitHub</h2>
             <div class="h3-wrap-list">
                 <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="github-remotes"><a class="h-anchor" href="#github-remotes">#</a>Управление удалёнными репозиториями</h3>
+                    <div class="section">
+                        <table class="shortcuts">
+                            <thead>
+                                <tr>
+                                    <th>Команда / действие</th>
+                                    <th>Описание</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>git remote -v</code></td><td>Показать адреса удалённых репозиториев (fetch/push)</td></tr>
+                                <tr><td><code>git remote add &lt;name&gt; &lt;url&gt;</code></td><td>Добавить новый remote (обычно <code>origin</code>)</td></tr>
+                                <tr><td><code>git remote set-url origin &lt;new_url&gt;</code></td><td>Изменить URL удалённого репозитория</td></tr>
+                                <tr><td><code>git remote remove &lt;name&gt;</code></td><td>Удалить привязку к remote</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="github-pr"><a class="h-anchor" href="#github-pr">#</a>Pull Request / Merge Request workflow</h3>
+                    <div class="section">
+                        <table class="shortcuts">
+                            <thead>
+                                <tr>
+                                    <th>Концепция / команда</th>
+                                    <th>Описание</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>Fork</code></td><td>Копия чужого репозитория в вашем аккаунте GitHub</td></tr>
+                                <tr><td><code>git clone &lt;url_fork&gt;</code></td><td>Клонировать свой форк локально</td></tr>
+                                <tr><td><code>git remote add upstream &lt;url_original&gt;</code></td><td>Добавить ссылку на оригинальный репозиторий</td></tr>
+                                <tr><td><code>git fetch upstream</code></td><td>Получить изменения из оригинала</td></tr>
+                                <tr><td><code>git merge upstream/main</code></td><td>Синхронизировать свою ветку с оригиналом</td></tr>
+                                <tr><td><code>Pull Request</code></td><td>Запрос на вливание изменений через веб-интерфейс GitHub</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="github-security"><a class="h-anchor" href="#github-security">#</a>Доступ и безопасность</h3>
+                    <div class="section">
+                        <table class="shortcuts">
+                            <thead>
+                                <tr>
+                                    <th>Команда / действие</th>
+                                    <th>Описание</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>gh auth login</code></td><td>Авторизация в GitHub CLI</td></tr>
+                                <tr><td><code>git push --delete origin &lt;branch&gt;</code></td><td>Удалить ветку в удалённом репозитории</td></tr>
+                                <tr><td><code>ssh -T git@github.com</code></td><td>Проверить SSH-доступ к GitHub</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="h3-wrap col-span-2">
+                    <h3 id="github-tips"><a class="h-anchor" href="#github-tips">#</a>Практические советы по GitHub</h3>
+                    <div class="section">
+                        <ul>
+                            <li><p>Перед новой задачей синхронизуйте <code>main</code>: <code>git pull origin main</code>.</p></li>
+                            <li><p>Используйте понятные имена веток: <code>feature/...</code>, <code>bugfix/...</code>.</p></li>
+                            <li><p>Связывайте коммиты с задачами: <code>Fix #42</code> в сообщении коммита.</p></li>
+                            <li><p>Включайте защиту веток и требуйте прохождение CI перед merge.</p></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="h2-wrap">
+            <h2 id="history-tricks"><a class="h-anchor" href="#history-tricks">#</a>10. Полезные команды для истории</h2>
+            <div class="h3-wrap-list">
+                <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="history-advanced"><a class="h-anchor" href="#history-advanced">#</a>Расширенный поиск по истории</h3>
                     <div class="section">
                         <table class="shortcuts">
                             <thead>
@@ -296,7 +371,7 @@
         </div>
 
         <div class="h2-wrap">
-            <h2 id="rewrite-history"><a class="h-anchor" href="#rewrite-history">#</a>10. Перезапись истории и полезная диагностика</h2>
+            <h2 id="rewrite-history"><a class="h-anchor" href="#rewrite-history">#</a>11. Перезапись истории и полезная диагностика</h2>
             <div class="h3-wrap-list">
                 <div class="h3-wrap h3-lg col-span-2">
                     <h3 id="rewrite-last"><a class="h-anchor" href="#rewrite-last">#</a>Последние коммиты</h3>
@@ -328,8 +403,8 @@
                             </thead>
                             <tbody>
                                 <tr><td><code>git reflog</code></td><td>Показать историю перемещений HEAD</td></tr>
-                                <tr><td><code>git reset --hard HEAD@{1}</code></td><td>Откатиться к предыдущему состоянию HEAD</td></tr>
-                                <tr><td><code>git show HEAD@{1}</code></td><td>Посмотреть, что было в предыдущем состоянии</td></tr>
+                                <tr><td><code>git reset --hard "HEAD@{1}"</code></td><td>Откатиться к предыдущему состоянию HEAD</td></tr>
+                                <tr><td><code>git show "HEAD@{1}"</code></td><td>Посмотреть, что было в предыдущем состоянии</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -338,7 +413,7 @@
         </div>
 
         <div class="h2-wrap">
-            <h2 id="productivity"><a class="h-anchor" href="#productivity">#</a>11. Ускорение работы (aliases и файлы)</h2>
+            <h2 id="productivity"><a class="h-anchor" href="#productivity">#</a>12. Ускорение работы (aliases и файлы)</h2>
             <div class="h3-wrap-list">
                 <div class="h3-wrap h3-lg col-span-2">
                     <h3 id="aliases"><a class="h-anchor" href="#aliases">#</a>Полезные алиасы</h3>
