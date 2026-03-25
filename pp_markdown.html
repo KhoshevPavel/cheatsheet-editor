@@ -1,0 +1,503 @@
+<header class="relative z-10">
+    <div class="max-container z-20 relative">&nbsp;</div>
+</header>
+
+<style>
+</style>
+
+<div class="mx-auto flex flex-wrap md:py-5 flex-col md:flex-row items-center">
+    <div class="flex flex-col w-full mx-auto items-center text-center my-8">
+        <div class="max-container w-full">
+            <h1 class="text-5xl mb-4"><span class="text-slate-700 dark:text-slate-300 font-light">Markdown</span> <span class="text-slate-400 dark:text-slate-500 font-extralight hidden md:inline">cheatsheet</span></h1>
+            <div class="lg:w-3/5 mx-auto intro leading-relaxed text-slate-600">
+                <p>
+                    Шпаргалка по Markdown-синтаксису для повседневной работы от
+                    <strong>
+                        <a href="https://stepik.org/users/612208117/teach">
+                            Pragmatic Programmer
+                        </a>
+                    </strong>
+                    .
+                </p>
+            </div>
+            <div class="pt-5" id="carbon_container"></div>
+        </div>
+    </div>
+
+    <div class="mdLayout w-full max-container" id="mdLayout">
+        <div class="h2-wrap">
+            <h2 id="text-sections"><a class="h-anchor" href="#text-sections">#</a>1. Текст и разделы</h2>
+            <div class="h3-wrap-list">
+                <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="headings"><a class="h-anchor" href="#headings">#</a>Заголовки и абзацы</h3>
+                    <div class="section">
+                        <table class="shortcuts">
+                            <thead><tr><th>Элемент</th><th>Синтаксис</th></tr></thead>
+                            <tbody>
+                                <tr><td>Заголовок первого уровня</td><td><code># Заголовок первого уровня</code></td></tr>
+                                <tr><td>Заголовок второго уровня</td><td><code>## Заголовок второго уровня</code></td></tr>
+                                <tr><td>Заголовок третьего уровня</td><td><code>### Заголовок третьего уровня</code></td></tr>
+                                <tr><td>Заголовок четвертого уровня</td><td><code>#### Заголовок четвертого уровня</code></td></tr>
+                                <tr><td>Заголовок пятого уровня</td><td><code>##### Заголовок пятого уровня</code></td></tr>
+                                <tr><td>Заголовок шестого уровня</td><td><code>###### Заголовок шестого уровня</code></td></tr>
+                                <tr><td>Альтернативный H1</td><td><code>Заголовок\n===</code></td></tr>
+                                <tr><td>Альтернативный H2</td><td><code>Заголовок\n---</code></td></tr>
+                                <tr><td>Абзац</td><td><code>Пустая строка между абзацами</code></td></tr>
+                                <tr><td>Разделитель</td><td><code>***</code> или <code>---</code> или <code>___</code></td></tr>
+                                <tr><td>Перенос строки</td><td><code>2 пробела в конце строки</code></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="emphasis"><a class="h-anchor" href="#emphasis">#</a>Выделение текста</h3>
+                    <div class="section">
+                        <table class="shortcuts">
+                            <thead><tr><th>Элемент</th><th>Синтаксис</th></tr></thead>
+                            <tbody>
+                                <tr><td>Жирный</td><td><code>**Текст**</code> или <code>__Текст__</code></td></tr>
+                                <tr><td>Курсив</td><td><code>*Текст*</code> или <code>_Текст_</code></td></tr>
+                                <tr><td>Жирный курсив</td><td><code>***Текст***</code></td></tr>
+                                <tr><td>Зачеркнутый</td><td><code>~~Текст~~</code></td></tr>
+                                <tr><td>Моноширинный</td><td><code>`код`</code></td></tr>
+                                <tr><td>Подстрочный</td><td><code>H~2~O</code></td></tr>
+                                <tr><td>Надстрочный</td><td><code>X^2^</code></td></tr>
+                                <tr><td>Подсветка (в некоторых движках)</td><td><code>==Выделено==</code></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="h2-wrap">
+            <h2 id="lists"><a class="h-anchor" href="#lists">#</a>2. Списки</h2>
+            <div class="h3-wrap-list">
+                <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="list-types"><a class="h-anchor" href="#list-types">#</a>Маркированные, нумерованные, задачи</h3>
+                    <div class="section">
+                        <table class="shortcuts">
+                            <thead><tr><th>Тип</th><th>Синтаксис</th></tr></thead>
+                            <tbody>
+                                <tr><td>Маркированный</td><td><code>- Пункт</code> или <code>* Пункт</code></td></tr>
+                                <tr><td>Нумерованный</td><td><code>1. Пункт</code></td></tr>
+                                <tr><td>Вложенный</td><td><code>4 пробела/таб + - Пункт</code></td></tr>
+                                <tr><td>Список задач</td><td><code>- [ ] Задача</code>, <code>- [x] Сделано</code></td></tr>
+                                <tr><td>Смешанный</td><td><code>1. Пункт</code> + <code>- Подпункт</code></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="h2-wrap">
+            <h2 id="links-images"><a class="h-anchor" href="#links-images">#</a>3. Ссылки и изображения</h2>
+            <div class="h3-wrap-list">
+                <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="links"><a class="h-anchor" href="#links">#</a>Ссылки</h3>
+                    <div class="section">
+                        <table class="shortcuts">
+                            <thead><tr><th>Элемент</th><th>Синтаксис</th></tr></thead>
+                            <tbody>
+                                <tr><td>Простая ссылка</td><td><code>[Google](https://google.com)</code></td></tr>
+                                <tr><td>С title</td><td><code>[Сайт](https://site.com "Описание")</code></td></tr>
+                                <tr><td>Reference-style</td><td><code>[Яндекс][y]</code> + <code>[y]: https://ya.ru</code></td></tr>
+                                <tr><td>Автоссылка</td><td><code>&lt;https://example.com&gt;</code></td></tr>
+                                <tr><td>Email</td><td><code>&lt;test@mail.ru&gt;</code></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="images"><a class="h-anchor" href="#images">#</a>Изображения</h3>
+                    <div class="section">
+                        <table class="shortcuts">
+                            <thead><tr><th>Элемент</th><th>Синтаксис</th></tr></thead>
+                            <tbody>
+                                <tr><td>Изображение</td><td><code>![Alt](logo.png)</code></td></tr>
+                                <tr><td>Изображение с title</td><td><code>![Кот](cat.jpg "Мурзик")</code></td></tr>
+                                <tr><td>Reference image</td><td><code>![Иконка][icon]</code> + <code>[icon]: icon.png</code></td></tr>
+                                <tr><td>Ссылка-изображение</td><td><code>[![Лого](logo.png)](https://site.com)</code></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="h2-wrap">
+            <h2 id="code-quotes"><a class="h-anchor" href="#code-quotes">#</a>4. Блоки кода и цитаты</h2>
+            <div class="h3-wrap-list">
+                <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="code"><a class="h-anchor" href="#code">#</a>Код</h3>
+                    <div class="section">
+<pre><code class="hljs hljs language-markdown">`строчный код`
+
+```python
+def hello_world():
+    print("Hello, world!")
+```
+
+```javascript
+function helloWorld() {
+  console.log("Hello, world!");
+}
+```
+</code></pre>
+                    </div>
+                </div>
+
+                <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="quotes"><a class="h-anchor" href="#quotes">#</a>Цитаты</h3>
+                    <div class="section">
+<pre><code class="hljs hljs language-markdown">&gt; Это цитата
+
+&gt; Цитата
+&gt; &gt; Вложенная цитата
+</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="h2-wrap">
+            <h2 id="tables"><a class="h-anchor" href="#tables">#</a>5. Таблицы</h2>
+            <div class="h3-wrap-list">
+                <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="table-basic"><a class="h-anchor" href="#table-basic">#</a>Базовая таблица</h3>
+                    <div class="section">
+<pre><code class="hljs hljs language-markdown">| Имя   | Возраст | Город           |
+|-------|---------|-----------------|
+| Алиса | 25      | Москва          |
+| Боб   | 30      | Санкт-Петербург |
+| Иван  | 35      | Новосибирск     |
+</code></pre>
+                    </div>
+                </div>
+
+                <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="table-align"><a class="h-anchor" href="#table-align">#</a>Выравнивание в таблицах</h3>
+                    <div class="section">
+<pre><code class="hljs hljs language-markdown">| Левый | Центр | Правый |
+| :---  | :---: | ---:   |
+| текст | текст | текст  |
+</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="h2-wrap">
+            <h2 id="extras"><a class="h-anchor" href="#extras">#</a>6. Дополнительные элементы</h2>
+            <div class="h3-wrap-list">
+                <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="extra-syntax"><a class="h-anchor" href="#extra-syntax">#</a>Emoji, HTML, экранирование</h3>
+                    <div class="section">
+                        <table class="shortcuts">
+                            <thead><tr><th>Элемент</th><th>Синтаксис</th></tr></thead>
+                            <tbody>
+                                <tr><td>Emoji</td><td><code>:smile:</code></td></tr>
+                                <tr><td>HTML внутри Markdown</td><td><code>&lt;span style="color:red"&gt;Текст&lt;/span&gt;</code></td></tr>
+                                <tr><td>Комментарий</td><td><code>&lt;!-- Не видно --&gt;</code></td></tr>
+                                <tr><td>Экранирование</td><td><code>\*Не курсив\*</code></td></tr>
+                                <tr><td>Спецсимволы</td><td><code>\[ \] \( \) \# \*</code></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="h2-wrap">
+            <h2 id="readme-example"><a class="h-anchor" href="#readme-example">#</a>7. Мини-пример README.md</h2>
+            <div class="h3-wrap-list">
+                <div class="h3-wrap h3-lg col-span-2">
+                    <h3 id="readme-block"><a class="h-anchor" href="#readme-block">#</a>Пример структуры README</h3>
+                    <div class="section">
+<pre><code class="hljs hljs language-markdown"># Пример файла README.md
+
+## Введение
+Добро пожаловать в пример файла README.md!
+
+### Основные элементы
+- **Жирный**
+- *Курсив*
+- ***Жирный курсив***
+
+### Список задач
+- [x] Задача 1
+- [ ] Задача 2
+
+### Ссылка
+[Google](https://www.google.com)
+
+### Изображение
+![Пример изображения](https://via.placeholder.com/150)
+
+---
+</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="h2-wrap">
+            <h2 id="backslash-escapes"><a class="h-anchor" href="#backslash-escapes">#</a>Экранирование обратной косой чертой</h2>
+            <div class="section">
+                <table class="show-header">
+                    <thead>
+                        <tr>
+                            <th>Символы</th>
+                            <th>Экранирование</th>
+                            <th style="text-align:left">Описание</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>\</code></td>
+                            <td><code>\\</code></td>
+                            <td style="text-align:left">Обратная косая черта</td>
+                        </tr>
+                        <tr>
+                            <td><code>`</code></td>
+                            <td><code>\`</code></td>
+                            <td style="text-align:left">Обратная кавычка</td>
+                        </tr>
+                        <tr>
+                            <td><code>*</code></td>
+                            <td><code>\*</code></td>
+                            <td style="text-align:left">Звёздочка</td>
+                        </tr>
+                        <tr>
+                            <td><code>_</code></td>
+                            <td><code>\_</code></td>
+                            <td style="text-align:left">Подчёркивание</td>
+                        </tr>
+                        <tr>
+                            <td><code>{}</code></td>
+                            <td><code>\{\}</code></td>
+                            <td style="text-align:left">Фигурные скобки</td>
+                        </tr>
+                        <tr>
+                            <td><code>[]</code></td>
+                            <td><code>\[\]</code></td>
+                            <td style="text-align:left">Квадратные скобки</td>
+                        </tr>
+                        <tr>
+                            <td><code>()</code></td>
+                            <td><code>\(\)</code></td>
+                            <td style="text-align:left">Круглые скобки</td>
+                        </tr>
+                        <tr>
+                            <td><code>#</code></td>
+                            <td><code>\#</code></td>
+                            <td style="text-align:left">Решётка</td>
+                        </tr>
+                        <tr>
+                            <td><code>+</code></td>
+                            <td><code>\+</code></td>
+                            <td style="text-align:left">Знак плюс</td>
+                        </tr>
+                        <tr>
+                            <td><code>-</code></td>
+                            <td><code>\-</code></td>
+                            <td style="text-align:left">Знак минус (дефис)</td>
+                        </tr>
+                        <tr>
+                            <td><code>.</code></td>
+                            <td><code>\.</code></td>
+                            <td style="text-align:left">Точка</td>
+                        </tr>
+                        <tr>
+                            <td><code>!</code></td>
+                            <td><code>\!</code></td>
+                            <td style="text-align:left">Восклицательный знак</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="h2-wrap">
+            <h2 id="tips"><a class="h-anchor" href="#tips">#</a>8. Полезные советы</h2>
+            <div class="h3-wrap-list">
+                <div class="h3-wrap">
+                    <h3 id="readability"><a class="h-anchor" href="#readability">#</a>Читаемость</h3>
+                    <div class="section">
+                        <ul>
+                            <li><p>Разбивайте длинные строки и крупные блоки на логические секции.</p></li>
+                            <li><p>Используйте заголовки по уровням: <code>#</code> → <code>##</code> → <code>###</code>.</p></li>
+                            <li><p>Оставляйте пустые строки между абзацами и блоками.</p></li>
+                            <li><p>Для длинных README добавляйте оглавление с якорными ссылками.</p></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="h3-wrap">
+                    <h3 id="best-practices"><a class="h-anchor" href="#best-practices">#</a>Практика оформления</h3>
+                    <div class="section">
+                        <ul>
+                            <li><p>Один стиль маркеров на документ: либо <code>-</code>, либо <code>*</code>.</p></li>
+                            <li><p>В кодовых блоках всегда указывайте язык: <code>```bash</code>, <code>```json</code>, <code>```csharp</code>.</p></li>
+                            <li><p>Изображениям задавайте понятный alt-текст для доступности.</p></li>
+                            <li><p>Ссылкам давайте осмысленные подписи вместо «кликните здесь».</p></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="h3-wrap">
+                    <h3 id="quick-memory"><a class="h-anchor" href="#quick-memory">#</a>Краткая памятка</h3>
+                    <div class="section">
+<pre><code class="hljs hljs language-markdown"># Заголовок
+## Подзаголовок
+**Жирный** *Курсив*
+[Ссылка](url)
+![Изображение](url.jpg)
+- Список
+1. Нумерованный
+&gt; Цитата
+`Код`
+
+| Таблица |
+| --- |
+</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
